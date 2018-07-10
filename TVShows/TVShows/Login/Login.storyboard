@@ -10,31 +10,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="ROy-PD-pw3">
             <objects>
-                <viewController id="XJC-Hs-4ph" customClass="ViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XJC-Hs-4ph" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EWl-fg-Uyg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTc-4q-7cK">
-                                <rect key="frame" x="147" y="468.5" width="81" height="30"/>
-                                <state key="normal" title="MOJ GUMB"/>
+                                <rect key="frame" x="164.5" y="468.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="buttonTapAction:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="4ex-na-gAR"/>
                                     <action selector="tapped:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="vRW-mX-Hxs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nU-Zl-LEU">
-                                <rect key="frame" x="166" y="129" width="42" height="21"/>
+                                <rect key="frame" x="166" y="99" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.83432897962824859" green="1" blue="0.37288613590734687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99489872964123527" green="1" blue="0.98310806286931951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XTc-4q-7cK" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="T57-mm-4bW"/>
                             <constraint firstItem="XTc-4q-7cK" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" constant="150" id="n5A-Op-pIp"/>
