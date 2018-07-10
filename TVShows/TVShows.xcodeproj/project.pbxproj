@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		1BE35CA731340611FA1B1FFF /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D7EE2BBB736D42E733AF38 /* Pods_TVShows.framework */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
-		5C40339E20EE6F2A008A0C2F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339D20EE6F2A008A0C2F /* LoginViewController.swift */; };
 		5C4033A320EE6F2D008A0C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A220EE6F2D008A0C2F /* Assets.xcassets */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 		5C4033AE20EE8308008A0C2F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033AD20EE8308008A0C2F /* Login.storyboard */; };
+		5CB7EB1120F566DB00B8639D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7EB1020F566DB00B8639D /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		07D7EE2BBB736D42E733AF38 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5C40339D20EE6F2A008A0C2F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C4033A520EE6F2D008A0C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4033A720EE6F2D008A0C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C4033AD20EE8308008A0C2F /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		5CB7EB1020F566DB00B8639D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AC52B5A2C4F7DE974BAACABE /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		F864CA3977A13802785154CB /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,8 +81,8 @@
 		5CDE1DC820F51D7C005D9295 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				5C40339D20EE6F2A008A0C2F /* LoginViewController.swift */,
 				5C4033AD20EE8308008A0C2F /* Login.storyboard */,
+				5CB7EB1020F566DB00B8639D /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -208,7 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C40339E20EE6F2A008A0C2F /* LoginViewController.swift in Sources */,
+				5CB7EB1120F566DB00B8639D /* LoginViewController.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

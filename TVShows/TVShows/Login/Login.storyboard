@@ -13,23 +13,24 @@
         <!--Login View Controller-->
         <scene sceneID="ROy-PD-pw3">
             <objects>
-                <viewController id="XJC-Hs-4ph" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="XJC-Hs-4ph" customClass="LoginViewController" customModule="TVShows" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EWl-fg-Uyg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTc-4q-7cK">
-                                <rect key="frame" x="164.5" y="468.5" width="46" height="30"/>
+                                <rect key="frame" x="144.5" y="459.5" width="86" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="buttonTapAction:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="4ex-na-gAR"/>
-                                    <action selector="tapped:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="vRW-mX-Hxs"/>
+                                    <action selector="buttonPressed:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="vxA-v5-7RW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nU-Zl-LEU">
-                                <rect key="frame" x="166" y="99" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Taps: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nU-Zl-LEU">
+                                <rect key="frame" x="103" y="72" width="168" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -41,6 +42,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fuh-hA-Ob3"/>
                     </view>
+                    <connections>
+                        <outlet property="loginLabel" destination="7nU-Zl-LEU" id="Mzm-eC-WOn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fD2-UD-RJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

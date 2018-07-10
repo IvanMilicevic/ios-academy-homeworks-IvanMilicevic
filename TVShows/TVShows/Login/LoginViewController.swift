@@ -1,26 +1,23 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  TVShows
 //
-//  Created by Infinum Student Academy on 05/07/2018.
+//  Created by Infinum Student Academy on 11/07/2018.
 //  Copyright © 2018 Ivan Milicevic. All rights reserved.
 //
 
 import UIKit
-import SVProgressHUD
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
+
+    var tapCounter:Int = 0
     
-    @IBAction func tapped(_ sender: Any) {
-        
-    }
+    @IBOutlet weak var loginLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-      
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,8 +25,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+    @IBAction func buttonPressed(_ sender: Any) {
+        tapCounter+=1
+        loginLabel.text = "Taps: " + String(tapCounter)
+    }
     
 
-    
 }
-
