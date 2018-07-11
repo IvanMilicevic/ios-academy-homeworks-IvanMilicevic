@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XJC-Hs-4ph">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,34 +16,53 @@
             <objects>
                 <viewController id="XJC-Hs-4ph" customClass="LoginViewController" customModule="TVShows" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EWl-fg-Uyg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTc-4q-7cK">
-                                <rect key="frame" x="144.5" y="459.5" width="86" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="144" y="596" width="126" height="59"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="45"/>
+                                <inset key="contentEdgeInsets" minX="25" minY="4" maxX="25" maxY="1"/>
+                                <state key="normal" title="Dab">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonPressed:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="vxA-v5-7RW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Taps: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nU-Zl-LEU">
-                                <rect key="frame" x="103" y="72" width="168" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dabs: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nU-Zl-LEU">
+                                <rect key="frame" x="158" y="92.333333333333329" width="98" height="35.999999999999986"/>
                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dab1" translatesAutoresizingMaskIntoConstraints="NO" id="IeK-Qf-A04">
+                                <rect key="frame" x="107" y="268" width="200" height="200"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.99489872964123527" green="1" blue="0.98310806286931951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="XTc-4q-7cK" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="T57-mm-4bW"/>
-                            <constraint firstItem="XTc-4q-7cK" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" constant="150" id="n5A-Op-pIp"/>
+                            <constraint firstItem="IeK-Qf-A04" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" id="5AC-mD-MN3"/>
+                            <constraint firstItem="7nU-Zl-LEU" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" multiplier="0.3" id="ASo-3X-ghD"/>
+                            <constraint firstItem="XTc-4q-7cK" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" multiplier="1.7" id="AoN-ic-7OZ"/>
+                            <constraint firstItem="7nU-Zl-LEU" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="Ikh-gV-ucL"/>
+                            <constraint firstItem="IeK-Qf-A04" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="YUX-sS-aDY"/>
+                            <constraint firstItem="XTc-4q-7cK" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="e8G-K5-b7A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fuh-hA-Ob3"/>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="IeK-Qf-A04" id="vsy-3l-LFX"/>
+                        <outlet property="loginButton" destination="XTc-4q-7cK" id="mEf-KW-vQ6"/>
                         <outlet property="loginLabel" destination="7nU-Zl-LEU" id="Mzm-eC-WOn"/>
                     </connections>
                 </viewController>
@@ -51,4 +71,7 @@
             <point key="canvasLocation" x="-39.200000000000003" y="81.409295352323838"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Dab1" width="200" height="200"/>
+    </resources>
 </document>
