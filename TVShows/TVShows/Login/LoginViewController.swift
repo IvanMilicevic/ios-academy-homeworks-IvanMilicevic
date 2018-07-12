@@ -10,61 +10,48 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    var tapCounter:Int = 0
-    let labelText:String = "Dabs: "
-    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
-    
     @IBOutlet weak var loginLabel: UILabel!
-    
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var loginButton: UIButton!
     
-    
+    // MARK: - Private
+    private var tapCounter: Int = 0
+    private let labelText: String = "Dabs: "
+    private var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.isHidden=true
-        loginButton.isEnabled=false
+        imageView.isHidden = true
+        loginButton.isEnabled = false
         
-        activityIndicator.center = self.view.center
+        activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        activityIndicator.activityIndicatorViewStyle = .white
         view.addSubview(activityIndicator)
         
         activityIndicator.startAnimating()
         
-        DispatchQueue.main.async {
-           sleep(3)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.activityIndicator.stopAnimating()
-            
             self.imageView.isHidden=false
             self.loginButton.isEnabled=true
         }
-        
-        
-
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     @IBAction func buttonPressed(_ sender: Any) {
         tapCounter+=1
         loginLabel.text = labelText + String(tapCounter)
         
-        if(tapCounter % 2 == 0){
+        if tapCounter % 2 == 0 {
             imageView.image = UIImage(named: "Dab1")
-        }else{
+        } else {
             imageView.image = UIImage(named: "Dab2")
         }
         
-        
     }
-    
+
+
 
 }
