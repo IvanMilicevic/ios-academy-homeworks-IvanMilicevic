@@ -10,8 +10,8 @@
 		1BE35CA731340611FA1B1FFF /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D7EE2BBB736D42E733AF38 /* Pods_TVShows.framework */; };
 		5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C08372320FA4A3B00AEBE07 /* LoginViewController.swift */; };
 		5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C08372720FA4AF900AEBE07 /* Login.storyboard */; };
+		5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A220EE6F2D008A0C2F /* Assets.xcassets */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
-		5C4033A320EE6F2D008A0C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A220EE6F2D008A0C2F /* Assets.xcassets */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -157,7 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */,
-				5C4033A320EE6F2D008A0C2F /* Assets.xcassets in Resources */,
+				5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */,
 				5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
