@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  TVShows
 //
-//  Created by Infinum Student Academy on 11/07/2018.
+//  Created by Infinum Student Academy on 14/07/2018.
 //  Copyright © 2018 Ivan Milicevic. All rights reserved.
 //
 
@@ -10,48 +10,26 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var loginButton: UIButton!
-    
-    // MARK: - Private
-    private var tapCounter: Int = 0
-    private let labelText: String = "Dabs: "
-    private var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-
-    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imageView.isHidden = true
-        loginButton.isEnabled = false
-        
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .white
-        view.addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.activityIndicator.stopAnimating()
-            self.imageView.isHidden=false
-            self.loginButton.isEnabled=true
-        }
+
+        // Do any additional setup after loading the view.
     }
 
-    @IBAction func buttonPressed(_ sender: Any) {
-        tapCounter+=1
-        loginLabel.text = labelText + String(tapCounter)
-        
-        if tapCounter % 2 == 0 {
-            imageView.image = UIImage(named: "Dab1")
-        } else {
-            imageView.image = UIImage(named: "Dab2")
-        }
-        
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
+    
 
+    /*
+    // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

@@ -1,77 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XJC-Hs-4ph">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HRb-NE-MnK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
-        <scene sceneID="ROy-PD-pw3">
+        <scene sceneID="yWj-sa-O0s">
             <objects>
-                <viewController id="XJC-Hs-4ph" customClass="LoginViewController" customModule="TVShows" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EWl-fg-Uyg">
+                <viewController id="HRb-NE-MnK" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0ea-uR-eU4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTc-4q-7cK">
-                                <rect key="frame" x="124.5" y="537.5" width="126" height="59"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="45"/>
-                                <inset key="contentEdgeInsets" minX="25" minY="4" maxX="25" maxY="1"/>
-                                <state key="normal" title="Dab">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="XJC-Hs-4ph" eventType="touchUpInside" id="vxA-v5-7RW"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dabs: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nU-Zl-LEU">
-                                <rect key="frame" x="138.5" y="82" width="98" height="36"/>
-                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dab1" translatesAutoresizingMaskIntoConstraints="NO" id="IeK-Qf-A04">
-                                <rect key="frame" x="87.5" y="233.5" width="200" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Npn-yb-TQ0">
+                                <rect key="frame" x="67" y="83" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="IeK-Qf-A04" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" id="5AC-mD-MN3"/>
-                            <constraint firstItem="7nU-Zl-LEU" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" multiplier="0.3" id="ASo-3X-ghD"/>
-                            <constraint firstItem="XTc-4q-7cK" firstAttribute="centerY" secondItem="EWl-fg-Uyg" secondAttribute="centerY" multiplier="1.7" id="AoN-ic-7OZ"/>
-                            <constraint firstItem="7nU-Zl-LEU" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="Ikh-gV-ucL"/>
-                            <constraint firstItem="IeK-Qf-A04" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="YUX-sS-aDY"/>
-                            <constraint firstItem="XTc-4q-7cK" firstAttribute="centerX" secondItem="EWl-fg-Uyg" secondAttribute="centerX" id="e8G-K5-b7A"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="fuh-hA-Ob3"/>
+                        <color key="backgroundColor" red="0.83432897959999996" green="1" blue="0.37288613590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="OL3-58-k33"/>
                     </view>
-                    <connections>
-                        <outlet property="imageView" destination="IeK-Qf-A04" id="vsy-3l-LFX"/>
-                        <outlet property="loginButton" destination="XTc-4q-7cK" id="mEf-KW-vQ6"/>
-                        <outlet property="loginLabel" destination="7nU-Zl-LEU" id="Mzm-eC-WOn"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fD2-UD-RJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YpA-ey-Gpd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-39.200000000000003" y="81.409295352323838"/>
+            <point key="canvasLocation" x="-48" y="95"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Dab1" width="200" height="200"/>
-    </resources>
 </document>
