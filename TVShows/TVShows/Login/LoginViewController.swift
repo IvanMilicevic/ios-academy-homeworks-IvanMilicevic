@@ -10,26 +10,55 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    // MARK: - Private
+    private var rememberState: Bool = false
+    private var loginCornerRadius: CGFloat = 10
+    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        loginButton.layer.cornerRadius = loginCornerRadius
+        usernameTextField.setBottomBorder()
+        passwordTextField.setBottomBorder()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - IBActions
+    @IBAction func rememberMeButtonPressed(_ sender: Any) {
+        rememberState=(!rememberState)
+        
+        if rememberState {
+            rememberMeButton.setImage( UIImage.init(named: "ic-checkbox-filled"), for: .normal)
+        } else {
+            rememberMeButton.setImage( UIImage.init(named: "ic-checkbox-empty"), for: .normal)
+        }
     }
-    */
+    
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        //Handle logging in
+    }
+    
+    @IBAction func createAnAccountButtonPressed(_ sender: Any) {
+        //Handle creating of new account
+    }
+    
+}
 
+extension UITextField {
+    func setBottomBorder() {
+        self.borderStyle = .none
+        self.layer.backgroundColor = UIColor.white.cgColor
+        
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+    }
 }
