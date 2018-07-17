@@ -11,10 +11,12 @@ import UIKit
 class LoginViewController: UIViewController {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var rememberMeButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     
     // MARK: - Private
     private var rememberState: Bool = false
@@ -27,7 +29,11 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = loginCornerRadius
         usernameTextField.setBottomBorder()
         passwordTextField.setBottomBorder()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    
     
     // MARK: - IBActions
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
@@ -38,14 +44,34 @@ class LoginViewController: UIViewController {
         } else {
             rememberMeButton.setImage( UIImage.init(named: "ic-checkbox-empty"), for: .normal)
         }
+
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        print ("Clicked")
         //Handle logging in
     }
-    
+
     @IBAction func createAnAccountButtonPressed(_ sender: Any) {
         //Handle creating of new account
+    }
+    
+    
+    
+    @objc func keyboardWillShow(notification:NSNotification){
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        scrollView.contentInset = contentInset
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification){
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
     
 }
