@@ -11,6 +11,8 @@
 		5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C08372320FA4A3B00AEBE07 /* LoginViewController.swift */; };
 		5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C08372720FA4AF900AEBE07 /* Login.storyboard */; };
 		5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A220EE6F2D008A0C2F /* Assets.xcassets */; };
+		5C19049420FF464B00260FA2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19049320FF464B00260FA2 /* HomeViewController.swift */; };
+		5C19049620FF473F00260FA2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C19049520FF473F00260FA2 /* Home.storyboard */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -19,6 +21,8 @@
 		07D7EE2BBB736D42E733AF38 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C08372320FA4A3B00AEBE07 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C08372720FA4AF900AEBE07 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		5C19049320FF464B00260FA2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5C19049520FF473F00260FA2 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,6 +52,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5C19049220FF45E500260FA2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5C19049320FF464B00260FA2 /* HomeViewController.swift */,
+				5C19049520FF473F00260FA2 /* Home.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		5C40338F20EE6F2A008A0C2F = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +82,7 @@
 		5C40339A20EE6F2A008A0C2F /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				5C19049220FF45E500260FA2 /* Home */,
 				5CDE1DC820F51D7C005D9295 /* Login */,
 				5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */,
 				5C4033A220EE6F2D008A0C2F /* Assets.xcassets */,
@@ -159,6 +173,7 @@
 				5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */,
 				5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */,
 				5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */,
+				5C19049620FF473F00260FA2 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +225,7 @@
 			files = (
 				5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
+				5C19049420FF464B00260FA2 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

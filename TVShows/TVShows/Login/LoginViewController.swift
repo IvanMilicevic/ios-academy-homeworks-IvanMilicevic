@@ -41,11 +41,17 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        //Handle logging in
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+        
+        navigationController?.pushViewController(viewControllerD, animated: true)
     }
     
     @IBAction func createAnAccountButtonPressed(_ sender: Any) {
-        //Handle creating of new account
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+        
+        navigationController?.pushViewController(viewControllerD, animated: true)
     }
     
 }
