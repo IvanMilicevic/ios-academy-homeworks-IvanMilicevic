@@ -11,19 +11,27 @@
 		5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C08372320FA4A3B00AEBE07 /* LoginViewController.swift */; };
 		5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C08372720FA4AF900AEBE07 /* Login.storyboard */; };
 		5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A220EE6F2D008A0C2F /* Assets.xcassets */; };
+		5C19049420FF464B00260FA2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19049320FF464B00260FA2 /* HomeViewController.swift */; };
+		5C19049620FF473F00260FA2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C19049520FF473F00260FA2 /* Home.storyboard */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
+		5CD3ABDD210092ED006A0E88 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3ABDC210092ED006A0E88 /* User.swift */; };
+		5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		07D7EE2BBB736D42E733AF38 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C08372320FA4A3B00AEBE07 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C08372720FA4AF900AEBE07 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		5C19049320FF464B00260FA2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5C19049520FF473F00260FA2 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C4033A520EE6F2D008A0C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4033A720EE6F2D008A0C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CD3ABDC210092ED006A0E88 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Border.swift"; sourceTree = "<group>"; };
 		AC52B5A2C4F7DE974BAACABE /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		F864CA3977A13802785154CB /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +56,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5C19049220FF45E500260FA2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5C19049320FF464B00260FA2 /* HomeViewController.swift */,
+				5C19049520FF473F00260FA2 /* Home.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		5C40338F20EE6F2A008A0C2F = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +86,8 @@
 		5C40339A20EE6F2A008A0C2F /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				5CD3AC022101EBC0006A0E88 /* Common */,
+				5C19049220FF45E500260FA2 /* Home */,
 				5CDE1DC820F51D7C005D9295 /* Login */,
 				5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */,
 				5C4033A220EE6F2D008A0C2F /* Assets.xcassets */,
@@ -78,11 +97,20 @@
 			path = TVShows;
 			sourceTree = "<group>";
 		};
+		5CD3AC022101EBC0006A0E88 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		5CDE1DC820F51D7C005D9295 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				5C08372320FA4A3B00AEBE07 /* LoginViewController.swift */,
 				5C08372720FA4AF900AEBE07 /* Login.storyboard */,
+				5CD3ABDC210092ED006A0E88 /* User.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -159,6 +187,7 @@
 				5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */,
 				5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */,
 				5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */,
+				5C19049620FF473F00260FA2 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,10 +201,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TVShows/Pods-TVShows-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,8 +241,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */,
+				5CD3ABDD210092ED006A0E88 /* User.swift in Sources */,
 				5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
+				5C19049420FF464B00260FA2 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
