@@ -2,56 +2,187 @@
 //  LoginViewController.swift
 //  TVShows
 //
-//  Created by Infinum Student Academy on 11/07/2018.
+//  Created by Infinum Student Academy on 14/07/2018.
 //  Copyright © 2018 Ivan Milicevic. All rights reserved.
 //
 
 import UIKit
+import SVProgressHUD
+import Alamofire
+import CodableAlamofire
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    // MARK: - IBOutlets
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     
     // MARK: - Private
-    private var tapCounter: Int = 0
-    private let labelText: String = "Dabs: "
-    private var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-
+    private var rememberState: Bool = false
+    private let loginCornerRadius: CGFloat = 10
+    private var user: User?
+    private var loginData: LoginData?
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setDefaultMaskType(.black)
         
-        imageView.isHidden = true
-        loginButton.isEnabled = false
+        loginButton.layer.cornerRadius = loginCornerRadius
         
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .white
-        view.addSubview(activityIndicator)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
         
-        activityIndicator.startAnimating()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.activityIndicator.stopAnimating()
-            self.imageView.isHidden=false
-            self.loginButton.isEnabled=true
-        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+        usernameTextField.setBottomBorderDefault()
+        passwordTextField.setBottomBorderDefault()
     }
-
-    @IBAction func buttonPressed(_ sender: Any) {
-        tapCounter+=1
-        loginLabel.text = labelText + String(tapCounter)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    
+    // MARK: - IBActions
+    @IBAction func rememberMeButtonPressed(_ sender: Any) {
+        rememberState = !rememberState
         
-        if tapCounter % 2 == 0 {
-            imageView.image = UIImage(named: "Dab1")
+        if rememberState {
+            rememberMeButton.setImage(UIImage(named: "ic-checkbox-filled"), for: .normal)
         } else {
-            imageView.image = UIImage(named: "Dab2")
+            rememberMeButton.setImage(UIImage(named: "ic-checkbox-empty"), for: .normal)
+        }
+
+    }
+    
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        let email : String = usernameTextField.text!
+        let password : String = passwordTextField.text!
+        
+        if !isLoginOk(email: email, password: password){
+            return
         }
         
+        SVProgressHUD.show()
+        loginUserWith(email: email, password: password)
     }
 
+    @IBAction func createAnAccountButtonPressed(_ sender: Any) {
+        guard
+            let email = usernameTextField.text,
+            let password = passwordTextField.text,
+            isLoginOk(email: email, password: password)
+        else {
+                return
+        }
+        
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire
+            .request("https://api.infinum.academy/api/users",
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<User>) in
+                
+                guard let `self` = self else {
+                    return
+                }
+                
+                switch response.result {
+                    case .success(let user):
+                        self.user = user
+                        print("Success: \(user)")
+                        self.loginUserWith(email: email, password: password)
+                    case .failure(let error):
+                        SVProgressHUD.showError(withStatus: "Error")
+                        print("API failure: \(error)")
+                }
+            }
+    }
+    
+    
+    
+    @objc func keyboardWillShow(notification:NSNotification){
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        scrollView.contentInset = contentInset
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification){
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+    }
+    
+    // MARK: - Private Functions
+    private func isLoginOk(email: String, password : String) -> Bool {
+        var loginIsOk = true;
+        if email.isEmpty {
+            usernameTextField.setBottomBorderRed()
+            loginIsOk = false
+        } else {
+            usernameTextField.setBottomBorderDefault()
+        }
+        if password.isEmpty {
+            passwordTextField.setBottomBorderRed()
+            loginIsOk = false
+        } else {
+            passwordTextField.setBottomBorderDefault()
+        }
+        
+        return loginIsOk
+    }
+    
+    private func loginUserWith(email: String, password : String) {
 
-
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire
+            .request("https://api.infinum.academy/api/users/sessions",
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
+                (response: DataResponse<LoginData>) in
+                switch response.result {
+                case .success(let loginData):
+                    self.loginData = loginData
+                    print("Success: \(loginData)")
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                    
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+                    self.navigationController?.pushViewController(viewControllerD, animated: true)
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Error")
+                    print("Failure: \(error)")
+                }
+            }
+    }
 }
