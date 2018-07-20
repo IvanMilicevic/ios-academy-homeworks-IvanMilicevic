@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Private
     private var rememberState: Bool = false
-    private var loginCornerRadius: CGFloat = 10
+    private let loginCornerRadius: CGFloat = 10
     private var user: User?
     private var loginData: LoginData?
     
@@ -35,15 +35,19 @@ class LoginViewController: UIViewController {
         passwordTextField.setBottomBorderDefault()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     // MARK: - IBActions
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
-        rememberState=(!rememberState)
+        rememberState = !rememberState
         
         if rememberState {
-            rememberMeButton.setImage( UIImage.init(named: "ic-checkbox-filled"), for: .normal)
+            rememberMeButton.setImage(UIImage(named: "ic-checkbox-filled"), for: .normal)
         } else {
-            rememberMeButton.setImage( UIImage.init(named: "ic-checkbox-empty"), for: .normal)
+            rememberMeButton.setImage(UIImage(named: "ic-checkbox-empty"), for: .normal)
         }
     }
     
@@ -60,11 +64,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createAnAccountButtonPressed(_ sender: Any) {
-        let email : String = usernameTextField.text!
-        let password : String = passwordTextField.text!
-        
-        if !isLoginOk(email: email, password: password){
-            return
+        guard
+            let email = usernameTextField.text,
+            let password = passwordTextField.text,
+            isLoginOk(email: email, password: password)
+        else {
+                return
         }
         
         SVProgressHUD.show()
@@ -80,11 +85,15 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<User>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<User>) in
+                
+                guard let `self` = self else {
+                    return
+                }
+                
                 switch response.result {
                     case .success(let user):
-                        self.user=user
+                        self.user = user
                         print("Success: \(user)")
                         self.loginUserWith(email: email, password: password)
                     case .failure(let error):
@@ -96,18 +105,18 @@ class LoginViewController: UIViewController {
     
     
     // MARK: - Private Functions
-    private func isLoginOk(email: String, password : String) -> Bool{
+    private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
-        if(email.isEmpty){
+        if email.isEmpty {
             usernameTextField.setBottomBorderRed()
-            loginIsOk=false
-        }else{
+            loginIsOk = false
+        } else {
             usernameTextField.setBottomBorderDefault()
         }
-        if(password.isEmpty){
+        if password.isEmpty {
             passwordTextField.setBottomBorderRed()
-            loginIsOk=false
-        }else{
+            loginIsOk = false
+        } else {
             passwordTextField.setBottomBorderDefault()
         }
         
@@ -115,8 +124,7 @@ class LoginViewController: UIViewController {
     }
     
     private func loginUserWith(email: String, password : String) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+
         
         let parameters: [String: String] = [
             "email": email,
@@ -133,9 +141,12 @@ class LoginViewController: UIViewController {
                 (response: DataResponse<LoginData>) in
                 switch response.result {
                 case .success(let loginData):
-                    self.loginData=loginData
+                    self.loginData = loginData
                     print("Success: \(loginData)")
                     SVProgressHUD.showSuccess(withStatus: "Success")
+                    
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     self.navigationController?.pushViewController(viewControllerD, animated: true)
                 case .failure(let error):
                     SVProgressHUD.showError(withStatus: "Error")
@@ -143,32 +154,4 @@ class LoginViewController: UIViewController {
                 }
             }
     }
-    
-    
-    
-}
-
-extension UITextField {
-    func setBottomBorderDefault() {
-        self.borderStyle = .none
-        self.layer.backgroundColor = UIColor.white.cgColor
-        
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 0.0
-    }
-    
-    func setBottomBorderRed() {
-        self.borderStyle = .none
-        self.layer.backgroundColor = UIColor.white.cgColor
-        
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.red.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 0.0
-    }
-    
 }

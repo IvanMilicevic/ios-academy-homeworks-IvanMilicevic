@@ -16,6 +16,7 @@
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 		5CD3ABDD210092ED006A0E88 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3ABDC210092ED006A0E88 /* User.swift */; };
+		5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5C4033A520EE6F2D008A0C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4033A720EE6F2D008A0C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CD3ABDC210092ED006A0E88 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Border.swift"; sourceTree = "<group>"; };
 		AC52B5A2C4F7DE974BAACABE /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		F864CA3977A13802785154CB /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +86,7 @@
 		5C40339A20EE6F2A008A0C2F /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				5CD3AC022101EBC0006A0E88 /* Common */,
 				5C19049220FF45E500260FA2 /* Home */,
 				5CDE1DC820F51D7C005D9295 /* Login */,
 				5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */,
@@ -92,6 +95,14 @@
 				5C4033A720EE6F2D008A0C2F /* Info.plist */,
 			);
 			path = TVShows;
+			sourceTree = "<group>";
+		};
+		5CD3AC022101EBC0006A0E88 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		5CDE1DC820F51D7C005D9295 /* Login */ = {
@@ -230,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */,
 				5CD3ABDD210092ED006A0E88 /* User.swift in Sources */,
 				5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
