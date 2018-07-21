@@ -14,7 +14,7 @@ import CodableAlamofire
 class LoginViewController: UIViewController {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var rememberMeButton: UIButton!
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
                                                selector: #selector(keyboardWillHide),
                                                name:NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
-        usernameTextField.setBottomBorderDefault()
+        emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
     }
     
@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        let email : String = usernameTextField.text!
+        let email : String = emailTextField.text!
         let password : String = passwordTextField.text!
         
         if !isLoginOk(email: email, password: password){
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func createAnAccountButtonPressed(_ sender: Any) {
         guard
-            let email = usernameTextField.text,
+            let email = emailTextField.text,
             let password = passwordTextField.text,
             isLoginOk(email: email, password: password)
         else {
@@ -138,10 +138,10 @@ class LoginViewController: UIViewController {
     private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
         if email.isEmpty {
-            usernameTextField.setBottomBorderRed()
+            emailTextField.setBottomBorderRed()
             loginIsOk = false
         } else {
-            usernameTextField.setBottomBorderDefault()
+            emailTextField.setBottomBorderDefault()
         }
         if password.isEmpty {
             passwordTextField.setBottomBorderRed()
