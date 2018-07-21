@@ -118,7 +118,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    
+    // MARK: - Private Functions
     @objc func keyboardWillShow(notification:NSNotification){
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
@@ -135,7 +135,6 @@ class LoginViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
     
-    // MARK: - Private Functions
     private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
         if email.isEmpty {
@@ -180,8 +179,18 @@ class LoginViewController: UIViewController {
                     let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     self.navigationController?.pushViewController(viewControllerD, animated: true)
                 case .failure(let error):
-                    SVProgressHUD.showError(withStatus: "Error")
-                    print("Failure: \(error)")
+                    SVProgressHUD.dismiss()
+                    
+                    let alertController = UIAlertController(title: "Login Problem",
+                                                            message: "Wrong username or password.",
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+                        (action:UIAlertAction) in
+                        print("Problem with logging in occured.")
+                    })
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    print("Login Error: \(error)")
                 }
             }
     }
