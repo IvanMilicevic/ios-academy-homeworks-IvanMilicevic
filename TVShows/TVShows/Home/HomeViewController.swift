@@ -14,7 +14,13 @@ import CodableAlamofire
 class HomeViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var testOutlet: UITextView!
+    @IBOutlet weak var homeTableView: UITableView! {
+        didSet {
+            homeTableView.dataSource=self
+            homeTableView.delegate=self
+            homeTableView.estimatedRowHeight=44
+        }
+    }
     
     // MARK: - Public
     weak var loginDelegate: LoginDataExchanger?
@@ -22,6 +28,7 @@ class HomeViewController: UIViewController {
     // MARK: - Private
     private var loginData: LoginData?
     private var showsArray: [Show]?
+    
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -60,6 +67,7 @@ class HomeViewController: UIViewController {
                             SVProgressHUD.dismiss()
                             print("Shows fetched: \(shows)")
                             self.showsArray = shows
+                            self.homeTableView.reloadData()
                         case .failure(let error):
                             SVProgressHUD.dismiss()
                             print("Fetching shows went wrong: \(error)")
@@ -84,3 +92,40 @@ class HomeViewController: UIViewController {
     }
 
 }
+
+extension HomeViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let numberOfRows = showsArray?.count else {
+            return 0
+        }
+        return numberOfRows
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = homeTableView.dequeueReusableCell(
+            withIdentifier: "TVShowsCell",
+            for: indexPath
+        ) as! TVShowsCell
+
+        guard let showsArray = self.showsArray else {
+            return cell
+        }
+        
+        cell.configure(with: showsArray[indexPath.row])
+        return cell
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate {
+    
+}
+
+
+
+
