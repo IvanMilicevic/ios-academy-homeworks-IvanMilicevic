@@ -9,16 +9,17 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var testOutlet: UITextView!
+    
+    // MARK: - Public
+    weak var delegate: LoginDataExchanger?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        testOutlet.text=delegate?.getLoginData()?.token
     }
     
     override func viewWillAppear(_ animated: Bool) {

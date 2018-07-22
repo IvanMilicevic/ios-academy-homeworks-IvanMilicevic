@@ -11,6 +11,10 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
+protocol LoginDataExchanger: class {
+    func getLoginData()->LoginData?
+}
+
 class LoginViewController: UIViewController {
 
     // MARK: - IBOutlets
@@ -31,7 +35,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
-        
         loginButton.layer.cornerRadius = loginCornerRadius
         
         NotificationCenter.default.addObserver(self,
@@ -43,6 +46,7 @@ class LoginViewController: UIViewController {
                                                selector: #selector(keyboardWillHide),
                                                name:NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+        
         emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
     }
@@ -176,8 +180,10 @@ class LoginViewController: UIViewController {
                     SVProgressHUD.showSuccess(withStatus: "Success")
                     
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                    let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
-                    self.navigationController?.pushViewController(viewControllerD, animated: true)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+                    as! HomeViewController
+                    viewController.delegate=self
+                    self.navigationController?.pushViewController(viewController, animated: true)
                 case .failure(let error):
                     SVProgressHUD.dismiss()
                     
@@ -195,3 +201,11 @@ class LoginViewController: UIViewController {
             }
     }
 }
+
+extension LoginViewController: LoginDataExchanger {
+    func getLoginData() -> LoginData? {
+        return loginData
+    }
+    
+}
+
