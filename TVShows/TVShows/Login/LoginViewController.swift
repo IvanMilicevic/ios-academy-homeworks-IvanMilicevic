@@ -158,7 +158,6 @@ class LoginViewController: UIViewController {
     }
     
     private func loginUserWith(email: String, password : String) {
-
         
         let parameters: [String: String] = [
             "email": email,
@@ -182,7 +181,7 @@ class LoginViewController: UIViewController {
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
-                    viewController.delegate=self
+                    viewController.loginDelegate=self
                     self.navigationController?.pushViewController(viewController, animated: true)
                 case .failure(let error):
                     SVProgressHUD.dismiss()
