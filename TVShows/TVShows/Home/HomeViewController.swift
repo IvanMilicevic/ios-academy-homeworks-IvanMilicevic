@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title="Shows"
         loginData=loginDelegate?.getLoginData()
         
         fetchShowsArray()
@@ -40,7 +41,8 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationItem.hidesBackButton = true
     }
     
      // MARK: - Private Functions
