@@ -16,7 +16,8 @@ class ShowDetailsViewController: UIViewController {
         didSet {
             showDetailsTableView.dataSource=self
             showDetailsTableView.delegate=self
-            showDetailsTableView.rowHeight=CGFloat(150)
+            showDetailsTableView.estimatedRowHeight=100
+            showDetailsTableView.rowHeight=UITableViewAutomaticDimension
         }
     }
     
