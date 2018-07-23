@@ -95,10 +95,10 @@
 		5C40339A20EE6F2A008A0C2F /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
-				5C6416C52105E2B1008E0AC9 /* ShowDetails */,
 				5CD3AC022101EBC0006A0E88 /* Common */,
-				5C19049220FF45E500260FA2 /* Home */,
 				5CDE1DC820F51D7C005D9295 /* Login */,
+				5C19049220FF45E500260FA2 /* Home */,
+				5C6416C52105E2B1008E0AC9 /* ShowDetails */,
 				5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */,
 				5C4033A220EE6F2D008A0C2F /* Assets.xcassets */,
 				5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */,

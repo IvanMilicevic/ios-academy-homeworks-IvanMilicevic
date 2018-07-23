@@ -136,6 +136,17 @@ extension HomeViewController: UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
+            as! ShowDetailsViewController
+        
+        viewController.loginData=loginData
+        viewController.showID=showsArray?[indexPath.row].id
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
 
 }
 
