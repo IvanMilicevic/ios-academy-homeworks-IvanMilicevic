@@ -25,7 +25,7 @@ class TVShowsCell: UITableViewCell {
         cellLabel.text=nil
     }
     
-    // MARK: - Private Functions
+    // MARK: - Functions
     func configure(with item: Show){
         cellLabel.text=item.title
     }

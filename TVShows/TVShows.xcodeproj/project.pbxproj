@@ -118,9 +118,9 @@
 			children = (
 				5C6416C62105E30B008E0AC9 /* ShowDetailsViewController.swift */,
 				5C6416C82105E444008E0AC9 /* ShowDetails.storyboard */,
-				5C6416EE21067AED008E0AC9 /* TVShowsEpisodeCell.swift */,
 				5C6416F021067B00008E0AC9 /* TVShowsImageCell.swift */,
 				5C6416F221067B20008E0AC9 /* TVShowsDescriptionCell.swift */,
+				5C6416EE21067AED008E0AC9 /* TVShowsEpisodeCell.swift */,
 			);
 			path = ShowDetails;
 			sourceTree = "<group>";

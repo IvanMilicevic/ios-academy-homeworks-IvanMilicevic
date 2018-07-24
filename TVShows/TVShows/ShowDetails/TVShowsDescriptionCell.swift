@@ -9,16 +9,31 @@
 import UIKit
 
 class TVShowsDescriptionCell: UITableViewCell {
-
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var showTitle: UILabel!
+    @IBOutlet weak var showDescription: UITextView!
+    @IBOutlet weak var numberOfEpisodes: UILabel!
+    
+    // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //TODO find default image
+        showTitle.text=""
+        showDescription.text=""
+        numberOfEpisodes.text="0"
     }
 
+    // MARK: - Functions
+    func configure(with item: ShowDetails, count: Int){
+        showTitle.text=item.title
+        showDescription.text=item.description
+        numberOfEpisodes.text=String(count)
+    }
+    
 }

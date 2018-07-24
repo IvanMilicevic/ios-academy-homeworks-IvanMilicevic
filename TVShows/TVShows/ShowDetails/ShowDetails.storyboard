@@ -43,6 +43,9 @@
                                                 <constraint firstItem="4Ak-Yg-jfN" firstAttribute="top" secondItem="JQ3-la-c0e" secondAttribute="top" id="qfS-fA-z6y"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="showImage" destination="4Ak-Yg-jfN" id="2Az-tI-aRk"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TVShowsDescriptionCell" rowHeight="157" id="uOl-ZF-UAC" customClass="TVShowsDescriptionCell" customModule="TVShows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="228" width="375" height="157"/>
@@ -98,6 +101,11 @@
                                                 <constraint firstAttribute="trailing" secondItem="IvU-XR-9w3" secondAttribute="trailing" constant="10" id="gUY-Ad-JXe"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="numberOfEpisodes" destination="gTe-pI-V7T" id="HEp-pW-ilv"/>
+                                            <outlet property="showDescription" destination="Q73-UU-p6G" id="iiN-Nm-KSl"/>
+                                            <outlet property="showTitle" destination="IvU-XR-9w3" id="xay-FN-CEn"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TVShowsEpisodeCell" rowHeight="57" id="Yrr-dW-e7T" customClass="TVShowsEpisodeCell" customModule="TVShows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="385" width="375" height="57"/>
@@ -134,6 +142,10 @@
                                                 <constraint firstItem="vsa-ZC-9M2" firstAttribute="top" secondItem="kL3-3t-9oa" secondAttribute="top" constant="17" id="rlj-hm-Fok"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="episodeTitle" destination="1z0-EC-lY3" id="RJF-qt-GoQ"/>
+                                            <outlet property="seasonEpisode" destination="vsa-ZC-9M2" id="RIM-Md-t0K"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

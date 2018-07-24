@@ -9,16 +9,28 @@
 import UIKit
 
 class TVShowsEpisodeCell: UITableViewCell {
-
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var seasonEpisode: UILabel!
+    @IBOutlet weak var episodeTitle: UILabel!
+    
+    // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        seasonEpisode.text=""
+        episodeTitle.text=""
+    }
+    
+    // MARK: - Functions
+    func configure(with item: ShowEpisode){
+        seasonEpisode.text="S2 Ep2"
+        episodeTitle.text=item.title
     }
 
 }

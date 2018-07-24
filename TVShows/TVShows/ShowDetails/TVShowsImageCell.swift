@@ -10,15 +10,24 @@ import UIKit
 
 class TVShowsImageCell: UITableViewCell {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var showImage: UIImageView!
+    
+    // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //TODO find default image
+        showImage.image=nil
+    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    // MARK: - Functions
+    func configure(with item: UIImage){
+        showImage.image=item
     }
 
 }
