@@ -156,8 +156,12 @@ class ShowDetailsViewController: UIViewController {
         view.addSubview(btn)
     }
     
-    @objc func buttonTapped(){
-        navigationController?.popViewController(animated: true)
+    @objc func buttonTapped() {
+        let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
+        let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
+        
+        let navigationController = UINavigationController.init(rootViewController: addEpViewController)
+        present(navigationController, animated: true, completion: nil)
     }
     
 
