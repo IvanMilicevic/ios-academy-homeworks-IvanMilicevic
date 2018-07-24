@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
             homeTableView.dataSource=self
             homeTableView.delegate=self
             homeTableView.estimatedRowHeight=44
+            homeTableView.separatorStyle = .none
         }
     }
     

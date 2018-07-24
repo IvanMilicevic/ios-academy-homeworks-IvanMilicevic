@@ -21,6 +21,7 @@ class ShowDetailsViewController: UIViewController {
             showDetailsTableView.delegate=self
             showDetailsTableView.estimatedRowHeight=100
             showDetailsTableView.rowHeight=UITableViewAutomaticDimension
+            showDetailsTableView.separatorStyle = .none
         }
     }
     
