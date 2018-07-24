@@ -53,3 +53,24 @@ struct ShowEpisode: Codable {
         
     }
 }
+
+struct AddShowEpisode: Codable {
+    let showId: String
+    let mediaId: String?
+    let title: String
+    let description: String
+    let episodeNumber: String?
+    let season: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case showId
+        case mediaId
+        case title
+        case description
+        case episodeNumber
+        case season
+        
+    }
+}
+
+
