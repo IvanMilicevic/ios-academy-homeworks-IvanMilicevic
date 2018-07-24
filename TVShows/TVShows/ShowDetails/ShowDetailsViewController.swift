@@ -30,6 +30,7 @@ class ShowDetailsViewController: UIViewController {
     
     // MARK: - Private
     private var showDetails: ShowDetails?
+    private var episodesArray: [ShowEpisode]?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -61,10 +62,9 @@ class ShowDetailsViewController: UIViewController {
                 (response: DataResponse<ShowDetails>) in
                 switch response.result {
                 case .success(let details):
-                    SVProgressHUD.dismiss()
-                    print("Show Details fetched: \(details)")
                     self.showDetails=details
-//                    self.homeTableView.reloadData()
+                    print("Show Details fetched: \(details)")
+                    self.fetchShowEpisodes()
                 case .failure(let error):
                     SVProgressHUD.dismiss()
                     print("Fetching show details went wrong: \(error)")
@@ -79,6 +79,44 @@ class ShowDetailsViewController: UIViewController {
                     
                 }
         }
+    }
+    private func fetchShowEpisodes() {
+        guard
+            let token=loginData?.token
+            else {
+                return
+        }
+        let headers = ["Authorization": token]
+        
+        Alamofire
+            .request("https://api.infinum.academy/api/shows/\(showID!)/episodes",
+                method: .get,
+                encoding: JSONEncoding.default,
+                headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
+                (response: DataResponse<[ShowEpisode]>) in
+                switch response.result {
+                case .success(let episodes):
+                    self.episodesArray=episodes
+                    print("Show episodes fetched: \(episodes)")
+                    SVProgressHUD.dismiss()
+                    self.showDetailsTableView.reloadData()
+                case .failure(let error):
+                    SVProgressHUD.dismiss()
+                    print("Fetching episodes went wrong: \(error)")
+                    let alertController = UIAlertController(title: "Error",
+                                                            message: error.localizedDescription,
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+                        (action:UIAlertAction) in
+                        self.returnToHomeScreen()
+                    })
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }
+        }
+        
     }
     
     private func returnToHomeScreen(){
@@ -96,36 +134,44 @@ extension ShowDetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        guard let numberOfRows = showsArray?.count else {
-//            return 0
-//        }
-//        return numberOfRows
-        return 3
+        guard let numberOfRows = episodesArray?.count else {
+            return 2
+        }
+        return 2 + numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: UITableViewCell
         switch indexPath.row {
         case 0:
-            cell = showDetailsTableView.dequeueReusableCell(
+            let cell = showDetailsTableView.dequeueReusableCell(
                 withIdentifier: "TVShowsImageCell",
                 for: indexPath
-            )
+            ) as! TVShowsImageCell
+//            cell.configure(with: <#T##UIImage#>)
+            return cell
         case 1:
-            cell = showDetailsTableView.dequeueReusableCell(
+            let cell = showDetailsTableView.dequeueReusableCell(
                 withIdentifier: "TVShowsDescriptionCell",
                 for: indexPath
-            )
+            ) as! TVShowsDescriptionCell
             
+            if showDetails != nil {
+                cell.configure(with: showDetails!, count: episodesArray != nil ? episodesArray!.count : 0)
+            } else {
+                //do nothing
+            }
+            
+            return cell
         default:
-            cell = showDetailsTableView.dequeueReusableCell(
+            let cell = showDetailsTableView.dequeueReusableCell(
                 withIdentifier: "TVShowsEpisodeCell",
                 for: indexPath
-            )
+            ) as! TVShowsEpisodeCell
+            cell.configure(with: episodesArray![indexPath.row-2])
+            return cell
         }
 
-        return cell
     }
     
 }
