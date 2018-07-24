@@ -43,9 +43,8 @@ class ShowDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.isTranslucent = true
-        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+
         customizeBackButton()
         floatingButton()
         
@@ -129,16 +128,19 @@ class ShowDetailsViewController: UIViewController {
         
     }
     private func customizeBackButton() {
-        var imgBack = UIImage(named: "ic-navigate-back")
-        imgBack = imgBack?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        navigationController?.navigationBar.backIndicatorImage = imgBack
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBack
         
-        navigationItem.leftItemsSupplementBackButton = true
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        let btn = UIButton(type: .custom)
+        let btnImg = UIImage(named: "ic-navigate-back")
+        btn.frame = CGRect(x: 0, y: 5, width: 70, height: 70)
+        btn.clipsToBounds = true
+        btn.layer.cornerRadius = 35
+        btn.setImage(btnImg, for: .normal)
+        btn.addTarget(self,action: #selector(ShowDetailsViewController.returnToHomeScreen), for: UIControlEvents.touchUpInside)
+        view.addSubview(btn)
+        
     }
     
-    private func returnToHomeScreen(){
+    @objc private func returnToHomeScreen(){
         navigationController?.popViewController(animated: true)
     }
     
