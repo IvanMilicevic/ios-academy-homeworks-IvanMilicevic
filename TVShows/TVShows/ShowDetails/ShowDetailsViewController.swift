@@ -47,6 +47,7 @@ class ShowDetailsViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         
         customizeBackButton()
+        floatingButton()
         
     }
     
@@ -140,6 +141,23 @@ class ShowDetailsViewController: UIViewController {
     private func returnToHomeScreen(){
         navigationController?.popViewController(animated: true)
     }
+    
+    func floatingButton(){
+        
+        let btn = UIButton(type: .custom)
+        let btnImg = UIImage(named: "ic-fab-button")
+        btn.frame = CGRect(x: self.view!.bounds.width - 80, y: self.view!.bounds.height - 80, width: 70, height: 70)
+        btn.clipsToBounds = true
+        btn.layer.cornerRadius = 35
+        btn.setImage(btnImg, for: .normal)
+        btn.addTarget(self,action: #selector(ShowDetailsViewController.buttonTapped), for: UIControlEvents.touchUpInside)
+        view.addSubview(btn)
+    }
+    
+    @objc func buttonTapped(){
+        navigationController?.popViewController(animated: true)
+    }
+    
 
 }
 
