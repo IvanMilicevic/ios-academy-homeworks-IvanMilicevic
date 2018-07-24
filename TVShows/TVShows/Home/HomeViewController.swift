@@ -89,9 +89,7 @@ class HomeViewController: UIViewController {
     }
     
     private func returnToLoginScreen(){
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Login")
-        self.navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }

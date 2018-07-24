@@ -41,6 +41,13 @@ class ShowDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+//        navigationController?.popViewController(animated: true)
+        
+//        self.navigationItem.hidesBackButton = true
+    }
     
     // MARK: - Private Functions
     private func fetchShowDetails() {
@@ -121,9 +128,7 @@ class ShowDetailsViewController: UIViewController {
     }
     
     private func returnToHomeScreen(){
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Login")
-        self.navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }
