@@ -23,7 +23,7 @@ class TVShowsImageCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         //TODO find default image
-        showImage.image=nil
+        showImage.image=UIImage(named: "login-logo")
     }
 
     // MARK: - Functions
