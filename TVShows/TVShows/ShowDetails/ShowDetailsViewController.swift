@@ -43,10 +43,11 @@ class ShowDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-//        navigationController?.popViewController(animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.isTranslucent = true
         
-//        self.navigationItem.hidesBackButton = true
+        customizeBackButton()
+        
     }
     
     // MARK: - Private Functions
@@ -125,6 +126,15 @@ class ShowDetailsViewController: UIViewController {
                 }
         }
         
+    }
+    private func customizeBackButton() {
+        var imgBack = UIImage(named: "ic-navigate-back")
+        imgBack = imgBack?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        navigationController?.navigationBar.backIndicatorImage = imgBack
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBack
+        
+        navigationItem.leftItemsSupplementBackButton = true
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
     private func returnToHomeScreen(){

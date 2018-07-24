@@ -43,6 +43,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationItem.hidesBackButton = true
     }
     
