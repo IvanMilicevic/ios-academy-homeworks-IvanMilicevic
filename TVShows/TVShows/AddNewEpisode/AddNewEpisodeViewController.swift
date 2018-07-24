@@ -16,6 +16,8 @@ class AddNewEpisodeViewController: UIViewController {
     @IBOutlet weak var episodeN: UITextField!
     @IBOutlet weak var episodeDescription: UITextField!
     
+    var loginData: LoginData?
+    var showID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,13 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
     @objc func didSelectCancel() {
-        // Add show API call
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
+        as! ShowDetailsViewController
+        viewController.loginData=loginData
+        viewController.showID=showID
+        let navigationController = UINavigationController.init(rootViewController: viewController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     @objc func didSelectAdd() {
@@ -44,6 +52,14 @@ class AddNewEpisodeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func uploadPhoto(_ sender: Any) {
+        let alertController = UIAlertController(title: "Oops",
+                                                message: "This feature is not implemented yet.",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+            (action:UIAlertAction) in
+            print("Api sucks...")
+        })
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func configureNavigationBar() {

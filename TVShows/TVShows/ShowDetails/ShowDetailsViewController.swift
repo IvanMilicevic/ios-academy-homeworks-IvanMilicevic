@@ -14,7 +14,6 @@ import CodableAlamofire
 class ShowDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
-   
     @IBOutlet weak var showDetailsTableView: UITableView! {
         didSet {
             showDetailsTableView.dataSource=self
@@ -159,7 +158,9 @@ class ShowDetailsViewController: UIViewController {
     @objc func buttonTapped() {
         let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
-        
+        as! AddNewEpisodeViewController
+        addEpViewController.showID=showID
+        addEpViewController.loginData=loginData
         let navigationController = UINavigationController.init(rootViewController: addEpViewController)
         present(navigationController, animated: true, completion: nil)
     }
