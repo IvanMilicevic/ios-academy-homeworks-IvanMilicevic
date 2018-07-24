@@ -10,10 +10,24 @@ import UIKit
 
 class AddNewEpisodeViewController: UIViewController {
 
+    
+    @IBOutlet weak var episodeTitle: UITextField!
+    @IBOutlet weak var seasonN: UITextField!
+    @IBOutlet weak var episodeN: UITextField!
+    @IBOutlet weak var episodeDescription: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        episodeTitle.setBottomBorderDefault()
+        seasonN.setBottomBorderDefault()
+        episodeN.setBottomBorderDefault()
+        episodeDescription.setBottomBorderDefault()
     }
     
     @objc func didSelectCancel() {
@@ -28,6 +42,8 @@ class AddNewEpisodeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func uploadPhoto(_ sender: Any) {
     }
     
     private func configureNavigationBar() {
