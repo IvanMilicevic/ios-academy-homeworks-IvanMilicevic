@@ -11,9 +11,6 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
-protocol LoginDataExchanger: class {
-    func getLoginData()->LoginData?
-}
 
 class LoginViewController: UIViewController {
 
@@ -181,7 +178,7 @@ class LoginViewController: UIViewController {
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
-                    viewController.loginDelegate=self
+                    viewController.loginData=self.loginData
                     self.navigationController?.pushViewController(viewController, animated: true)
                 case .failure(let error):
                     SVProgressHUD.dismiss()
@@ -199,12 +196,5 @@ class LoginViewController: UIViewController {
                 }
             }
     }
-}
-
-extension LoginViewController: LoginDataExchanger {
-    func getLoginData() -> LoginData? {
-        return loginData
-    }
-    
 }
 

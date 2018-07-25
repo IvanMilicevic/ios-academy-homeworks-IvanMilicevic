@@ -24,10 +24,9 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Public
-    weak var loginDelegate: LoginDataExchanger?
+    var loginData: LoginData?
     
     // MARK: - Private
-    private var loginData: LoginData?
     private var showsArray: [Show]?
     
 
@@ -35,7 +34,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title="Shows"
-        loginData=loginDelegate?.getLoginData()
         
         fetchShowsArray()
     }
