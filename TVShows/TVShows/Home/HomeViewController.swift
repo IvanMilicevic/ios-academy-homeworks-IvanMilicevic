@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     var loginData: LoginData?
     
     // MARK: - Private
-    private var showsArray: [Show]?
+    private var showsArray: [Show] = []
     
 
     // MARK: - View Lifecycle
@@ -102,10 +102,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRows = showsArray?.count else {
-            return 0
-        }
-        return numberOfRows
+        return showsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,10 +110,6 @@ extension HomeViewController: UITableViewDataSource {
             withIdentifier: "TVShowsCell",
             for: indexPath
         ) as! TVShowsCell
-
-        guard let showsArray = self.showsArray else {
-            return cell
-        }
         
         cell.configure(with: showsArray[indexPath.row])
         return cell
@@ -132,7 +125,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete){
-            showsArray?.remove(at: indexPath.item)
+            showsArray.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -142,7 +135,7 @@ extension HomeViewController: UITableViewDelegate {
         let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
             as! ShowDetailsViewController
         
-        viewController.configure(id: showsArray![indexPath.row].id, login: loginData!)
+        viewController.configure(id: showsArray[indexPath.row].id, login: loginData!)
         
         self.navigationController?.pushViewController(viewController, animated: true)
     }
