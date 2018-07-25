@@ -87,8 +87,10 @@ class AddNewEpisodeViewController: UIViewController {
                           encoding: JSONEncoding.default,
                           headers: headers)
             .validate()
-            .responseJSON { dataResponse in
+            .responseJSON {  [weak self]  dataResponse in
                 SVProgressHUD.dismiss()
+                
+                guard let `self` = self else { return }
                 
                 switch dataResponse.result {
                     

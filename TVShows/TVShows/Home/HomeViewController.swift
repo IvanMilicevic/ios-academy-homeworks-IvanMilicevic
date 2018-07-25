@@ -29,7 +29,6 @@ class HomeViewController: UIViewController {
     // MARK: - Private
     private var showsArray: [Show] = []
     
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,18 +61,20 @@ class HomeViewController: UIViewController {
                      encoding: JSONEncoding.default,
                      headers: headers)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<[Show]>) in
-                    switch response.result {
-                        case .success(let shows):
-                            SVProgressHUD.dismiss()
-                            print("Shows fetched: \(shows)")
-                            self.showsArray = shows
-                            self.homeTableView.reloadData()
-                        case .failure(let error):
-                            SVProgressHUD.dismiss()
-                            print("Fetching shows went wrong: \(error)")
-                            self.callAlertControler(error: error)
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[Show]>) in
+            
+               guard let `self` = self else { return }
+            
+                switch response.result {
+                    case .success(let shows):
+                        SVProgressHUD.dismiss()
+                        print("Shows fetched: \(shows)")
+                        self.showsArray = shows
+                        self.homeTableView.reloadData()
+                    case .failure(let error):
+                        SVProgressHUD.dismiss()
+                        print("Fetching shows went wrong: \(error)")
+                        self.callAlertControler(error: error)
                 }
         }
     }

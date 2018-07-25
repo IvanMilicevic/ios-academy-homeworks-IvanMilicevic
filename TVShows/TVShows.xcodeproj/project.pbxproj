@@ -133,8 +133,8 @@
 		5C6416F62107B340008E0AC9 /* AddNewEpisode */ = {
 			isa = PBXGroup;
 			children = (
-				5C6416F72107B373008E0AC9 /* AddNewEpisode.storyboard */,
 				5C6416F92107B39D008E0AC9 /* AddNewEpisodeViewController.swift */,
+				5C6416F72107B373008E0AC9 /* AddNewEpisode.storyboard */,
 			);
 			path = AddNewEpisode;
 			sourceTree = "<group>";

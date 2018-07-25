@@ -27,14 +27,11 @@ class ShowDetailsViewController: UIViewController {
     @IBOutlet weak var addNewEpisodeButton: UIButton!
     @IBOutlet weak var navigateBackButton: UIButton!
     
-    
-    // MARK: - Public
+    // MARK: - Private
     private var loginData: LoginData!
     private var showID: String!
-    
-    // MARK: - Private
     private var showDetails: ShowDetails?
-    private var episodesArray: [ShowEpisode]?
+    private var episodesArray: [ShowEpisode] = []
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -118,8 +115,10 @@ class ShowDetailsViewController: UIViewController {
                 encoding: JSONEncoding.default,
                 headers: headers)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<[ShowEpisode]>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[ShowEpisode]>) in
+                
+                guard let `self` = self else { return }
+                
                 switch response.result {
                     case .success(let episodes):
                         self.episodesArray = episodes
@@ -168,10 +167,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRows = episodesArray?.count else {
-            return 2
-        }
-        return 2 + numberOfRows
+        return 2 + episodesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -190,7 +186,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                 ) as! TVShowsDescriptionCell
             
                 if showDetails != nil {
-                    cell.configure(with: showDetails!, count: episodesArray != nil ? episodesArray!.count : 0)
+                    cell.configure(with: showDetails!, count: episodesArray.count )
                     return cell
                 } else {
                     return cell
@@ -200,7 +196,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                     withIdentifier: "TVShowsEpisodeCell",
                     for: indexPath
                 ) as! TVShowsEpisodeCell
-                cell.configure(with: episodesArray![indexPath.row-2])
+                cell.configure(with: episodesArray[indexPath.row-2])
                 return cell
         }
 

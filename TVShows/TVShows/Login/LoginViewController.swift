@@ -70,7 +70,7 @@ class LoginViewController: UIViewController {
         let email : String = emailTextField.text!
         let password : String = passwordTextField.text!
         
-        if !isLoginOk(email: email, password: password){
+        if !isLoginOk(email: email, password: password) {
             return
         }
         
@@ -167,8 +167,10 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<LoginData>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
+                
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(let loginData):
                     self.loginData = loginData
