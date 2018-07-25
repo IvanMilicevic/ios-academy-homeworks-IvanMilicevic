@@ -11,10 +11,14 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
+protocol LoginDataExchanger: class {
+    func getLoginData()->LoginData?
+}
+
 class LoginViewController: UIViewController {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var rememberMeButton: UIButton!
@@ -31,7 +35,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
-        
         loginButton.layer.cornerRadius = loginCornerRadius
         
         NotificationCenter.default.addObserver(self,
@@ -43,7 +46,8 @@ class LoginViewController: UIViewController {
                                                selector: #selector(keyboardWillHide),
                                                name:NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
-        usernameTextField.setBottomBorderDefault()
+        
+        emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
     }
     
@@ -66,7 +70,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        let email : String = usernameTextField.text!
+        let email : String = emailTextField.text!
         let password : String = passwordTextField.text!
         
         if !isLoginOk(email: email, password: password){
@@ -79,7 +83,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func createAnAccountButtonPressed(_ sender: Any) {
         guard
-            let email = usernameTextField.text,
+            let email = emailTextField.text,
             let password = passwordTextField.text,
             isLoginOk(email: email, password: password)
         else {
@@ -118,7 +122,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    
+    // MARK: - Private Functions
     @objc func keyboardWillShow(notification:NSNotification){
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
@@ -135,14 +139,13 @@ class LoginViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
     
-    // MARK: - Private Functions
     private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
         if email.isEmpty {
-            usernameTextField.setBottomBorderRed()
+            emailTextField.setBottomBorderRed()
             loginIsOk = false
         } else {
-            usernameTextField.setBottomBorderDefault()
+            emailTextField.setBottomBorderDefault()
         }
         if password.isEmpty {
             passwordTextField.setBottomBorderRed()
@@ -155,7 +158,6 @@ class LoginViewController: UIViewController {
     }
     
     private func loginUserWith(email: String, password : String) {
-
         
         let parameters: [String: String] = [
             "email": email,
@@ -177,12 +179,32 @@ class LoginViewController: UIViewController {
                     SVProgressHUD.showSuccess(withStatus: "Success")
                     
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                    let viewControllerD = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
-                    self.navigationController?.pushViewController(viewControllerD, animated: true)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+                    as! HomeViewController
+                    viewController.loginDelegate=self
+                    self.navigationController?.pushViewController(viewController, animated: true)
                 case .failure(let error):
-                    SVProgressHUD.showError(withStatus: "Error")
-                    print("Failure: \(error)")
+                    SVProgressHUD.dismiss()
+                    
+                    let alertController = UIAlertController(title: "Login Problem",
+                                                            message: "Wrong username or password.",
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+                        (action:UIAlertAction) in
+                        print("Problem with logging in occured.")
+                    })
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    print("Login Error: \(error)")
                 }
             }
     }
 }
+
+extension LoginViewController: LoginDataExchanger {
+    func getLoginData() -> LoginData? {
+        return loginData
+    }
+    
+}
+

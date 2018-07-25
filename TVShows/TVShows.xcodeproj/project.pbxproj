@@ -15,6 +15,8 @@
 		5C19049620FF473F00260FA2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C19049520FF473F00260FA2 /* Home.storyboard */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
+		5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416C121049E55008E0AC9 /* CodableStorage.swift */; };
+		5C6416C421051128008E0AC9 /* TVShowsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416C321051128008E0AC9 /* TVShowsCell.swift */; };
 		5CD3ABDD210092ED006A0E88 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3ABDC210092ED006A0E88 /* User.swift */; };
 		5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C4033A520EE6F2D008A0C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4033A720EE6F2D008A0C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C6416C121049E55008E0AC9 /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
+		5C6416C321051128008E0AC9 /* TVShowsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsCell.swift; sourceTree = "<group>"; };
 		5CD3ABDC210092ED006A0E88 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Border.swift"; sourceTree = "<group>"; };
 		AC52B5A2C4F7DE974BAACABE /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
@@ -61,6 +65,7 @@
 			children = (
 				5C19049320FF464B00260FA2 /* HomeViewController.swift */,
 				5C19049520FF473F00260FA2 /* Home.storyboard */,
+				5C6416C321051128008E0AC9 /* TVShowsCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */,
+				5C6416C121049E55008E0AC9 /* CodableStorage.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -244,7 +250,9 @@
 				5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */,
 				5CD3ABDD210092ED006A0E88 /* User.swift in Sources */,
 				5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */,
+				5C6416C421051128008E0AC9 /* TVShowsCell.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
+				5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */,
 				5C19049420FF464B00260FA2 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
