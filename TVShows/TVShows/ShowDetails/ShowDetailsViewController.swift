@@ -97,23 +97,15 @@ class ShowDetailsViewController: UIViewController {
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
                 (response: DataResponse<[ShowEpisode]>) in
                 switch response.result {
-                case .success(let episodes):
-                    self.episodesArray=episodes
-                    print("Show episodes fetched: \(episodes)")
-                    SVProgressHUD.dismiss()
-                    self.showDetailsTableView.reloadData()
-                case .failure(let error):
-                    SVProgressHUD.dismiss()
-                    print("Fetching episodes went wrong: \(error)")
-                    let alertController = UIAlertController(title: "Error",
-                                                            message: error.localizedDescription,
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
-                        (action:UIAlertAction) in
-                        self.returnToHomeScreen()
-                    })
-                    self.present(alertController, animated: true, completion: nil)
-                    
+                    case .success(let episodes):
+                        self.episodesArray=episodes
+                        print("Show episodes fetched: \(episodes)")
+                        SVProgressHUD.dismiss()
+                        self.showDetailsTableView.reloadData()
+                    case .failure(let error):
+                        SVProgressHUD.dismiss()
+                        print("Fetching episodes went wrong: \(error)")
+                        self.callAlertControler(error: error)
                 }
         }
         

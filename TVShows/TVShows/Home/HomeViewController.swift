@@ -73,18 +73,20 @@ class HomeViewController: UIViewController {
                         case .failure(let error):
                             SVProgressHUD.dismiss()
                             print("Fetching shows went wrong: \(error)")
-                            let alertController = UIAlertController(title: "Error",
-                                                                    message: error.localizedDescription,
-                                                                    preferredStyle: .alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
-                                (action:UIAlertAction) in
-                                self.returnToLoginScreen()
-                            })
-                            self.present(alertController, animated: true, completion: nil)
-                    
-                    
+                            self.callAlertControler(error: error)
                 }
         }
+    }
+    
+    private func callAlertControler (error: Error) {
+        let alertController = UIAlertController(title: "Error",
+                                                message: error.localizedDescription,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+            (action:UIAlertAction) in
+            self.returnToLoginScreen()
+        })
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func returnToLoginScreen(){
