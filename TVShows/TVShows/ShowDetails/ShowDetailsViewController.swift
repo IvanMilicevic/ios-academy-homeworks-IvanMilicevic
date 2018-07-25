@@ -161,6 +161,7 @@ class ShowDetailsViewController: UIViewController {
         
         addEpViewController.showID=showID
         addEpViewController.loginData=loginData
+        addEpViewController.delegate=self
         
         let navigationController = UINavigationController.init(rootViewController: addEpViewController)
         present(navigationController, animated: true, completion: nil)
@@ -217,4 +218,10 @@ extension ShowDetailsViewController: UITableViewDataSource {
 
 extension ShowDetailsViewController: UITableViewDelegate {
     
+}
+
+extension ShowDetailsViewController: TVShowDetails_Delegate {
+    func reloadEpisodes() {
+        self.fetchShowDetails()
+    }
 }

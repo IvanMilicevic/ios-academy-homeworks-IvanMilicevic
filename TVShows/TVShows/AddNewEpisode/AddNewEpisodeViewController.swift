@@ -11,6 +11,10 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
+protocol TVShowDetails_Delegate: class {
+    func reloadEpisodes()
+}
+
 class AddNewEpisodeViewController: UIViewController {
 
     // MARK: - IBOutlets
@@ -22,6 +26,7 @@ class AddNewEpisodeViewController: UIViewController {
     // MARK: - Public
     var loginData: LoginData?
     var showID: String?
+    weak var delegate: TVShowDetails_Delegate?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -52,7 +57,7 @@ class AddNewEpisodeViewController: UIViewController {
     
     // MARK: - objC Functions
     @objc func didSelectCancel() {
-        returnToShowDetails()
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func didSelectAdd() {
@@ -89,7 +94,8 @@ class AddNewEpisodeViewController: UIViewController {
                     
                     case .success(let response):
                         print ("Sucess \(response)")
-                        self.returnToShowDetails()
+                        self.dismiss(animated: true, completion: nil)
+                        self.delegate?.reloadEpisodes()
                     case .failure(let error):
                         print("Adding episode went wrong: \(error)")
                 }
@@ -109,18 +115,6 @@ class AddNewEpisodeViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(didSelectAdd))
-    }
-    
-    private func returnToShowDetails() {
-        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
-            as! ShowDetailsViewController
-        
-        viewController.loginData=loginData
-        viewController.showID=showID
-        
-        let navigationController = UINavigationController.init(rootViewController: viewController)
-        present(navigationController, animated: true, completion: nil)
     }
     
     private func allFieldsAreOk() -> Bool {
