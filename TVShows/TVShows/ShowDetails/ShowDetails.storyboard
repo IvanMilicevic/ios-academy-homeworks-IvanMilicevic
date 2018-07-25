@@ -64,7 +64,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Qxu-cV-6EA">
-                                                    <rect key="frame" x="15" y="123.5" width="108" height="23"/>
+                                                    <rect key="frame" x="15" y="123.5" width="142.5" height="23"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Episodes  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKK-GH-wwn">
                                                             <rect key="frame" x="0.0" y="0.0" width="87.5" height="23"/>
@@ -73,7 +73,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTe-pI-V7T">
-                                                            <rect key="frame" x="92.5" y="0.0" width="15.5" height="23"/>
+                                                            <rect key="frame" x="92.5" y="0.0" width="50" height="23"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -90,7 +90,7 @@
                                                 <constraint firstItem="Q73-UU-p6G" firstAttribute="top" secondItem="IvU-XR-9w3" secondAttribute="bottom" constant="7.5" id="BTj-ye-KgE"/>
                                                 <constraint firstItem="Q73-UU-p6G" firstAttribute="leading" secondItem="Ihl-Ie-3aj" secondAttribute="leading" constant="15" id="DtJ-MB-Up1"/>
                                                 <constraint firstItem="IvU-XR-9w3" firstAttribute="top" secondItem="Ihl-Ie-3aj" secondAttribute="top" constant="10" id="KQu-j8-RDf"/>
-                                                <constraint firstAttribute="trailing" secondItem="Qxu-cV-6EA" secondAttribute="trailing" constant="252" id="VI1-GF-FNa"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qxu-cV-6EA" secondAttribute="trailing" constant="20" id="VI1-GF-FNa"/>
                                                 <constraint firstItem="Qxu-cV-6EA" firstAttribute="leading" secondItem="Ihl-Ie-3aj" secondAttribute="leading" constant="15" id="VYr-yR-SLr"/>
                                                 <constraint firstItem="Qxu-cV-6EA" firstAttribute="top" secondItem="Q73-UU-p6G" secondAttribute="bottom" constant="6" id="abW-JJ-7mj"/>
                                                 <constraint firstAttribute="trailing" secondItem="Q73-UU-p6G" secondAttribute="trailing" constant="23" id="b82-pp-C7N"/>
@@ -145,17 +145,37 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Si-6K-qUN">
+                                <rect key="frame" x="287" y="583" width="68" height="74"/>
+                                <state key="normal" image="ic-fab-button"/>
+                                <connections>
+                                    <action selector="addNewEpisode:" destination="BNJ-Ua-W3V" eventType="touchUpInside" id="Wgx-Yd-10O"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXX-WY-uAh">
+                                <rect key="frame" x="20" y="40" width="32" height="32"/>
+                                <state key="normal" image="ic-navigate-back"/>
+                                <connections>
+                                    <action selector="navigateBack:" destination="BNJ-Ua-W3V" eventType="touchUpInside" id="CQA-K0-SRH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gkw-8s-aoB" firstAttribute="bottom" secondItem="M2u-bE-GTL" secondAttribute="bottom" id="0wc-mw-STf"/>
                             <constraint firstItem="M2u-bE-GTL" firstAttribute="top" secondItem="9sR-GR-bRJ" secondAttribute="top" constant="-20" id="6rg-OH-0hT"/>
+                            <constraint firstItem="wXX-WY-uAh" firstAttribute="top" secondItem="gkw-8s-aoB" secondAttribute="top" constant="20" id="UKO-YI-xEZ"/>
                             <constraint firstItem="gkw-8s-aoB" firstAttribute="trailing" secondItem="M2u-bE-GTL" secondAttribute="trailing" id="Wdl-gU-jZM"/>
+                            <constraint firstItem="gkw-8s-aoB" firstAttribute="bottom" secondItem="1Si-6K-qUN" secondAttribute="bottom" constant="10" id="aRz-fT-Lg1"/>
+                            <constraint firstItem="wXX-WY-uAh" firstAttribute="leading" secondItem="gkw-8s-aoB" secondAttribute="leading" constant="20" id="kkw-re-Vl9"/>
+                            <constraint firstItem="gkw-8s-aoB" firstAttribute="trailing" secondItem="1Si-6K-qUN" secondAttribute="trailing" constant="20" id="x6y-lj-s23"/>
                             <constraint firstItem="M2u-bE-GTL" firstAttribute="leading" secondItem="gkw-8s-aoB" secondAttribute="leading" id="zdM-o5-Mui"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gkw-8s-aoB"/>
                     </view>
                     <connections>
+                        <outlet property="addNewEpisodeButton" destination="1Si-6K-qUN" id="sGA-5v-OmR"/>
+                        <outlet property="navigateBackButton" destination="wXX-WY-uAh" id="4BW-3N-loP"/>
                         <outlet property="showDetailsTableView" destination="M2u-bE-GTL" id="6bC-zp-wKG"/>
                     </connections>
                 </viewController>
@@ -165,6 +185,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic-fab-button" width="68" height="74"/>
+        <image name="ic-navigate-back" width="32" height="32"/>
         <image name="ic-navigation-chevron-right-medium" width="24" height="24"/>
     </resources>
 </document>

@@ -142,8 +142,7 @@ extension HomeViewController: UITableViewDelegate {
         let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
             as! ShowDetailsViewController
         
-        viewController.loginData=loginData
-        viewController.showID=showsArray?[indexPath.row].id
+        viewController.configure(id: showsArray![indexPath.row].id, login: loginData!)
         
         self.navigationController?.pushViewController(viewController, animated: true)
     }

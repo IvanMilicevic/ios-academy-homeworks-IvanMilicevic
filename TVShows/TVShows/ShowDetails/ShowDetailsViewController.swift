@@ -21,12 +21,16 @@ class ShowDetailsViewController: UIViewController {
             showDetailsTableView.estimatedRowHeight=100
             showDetailsTableView.rowHeight=UITableViewAutomaticDimension
             showDetailsTableView.separatorStyle = .none
+            showDetailsTableView.contentInset=UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
         }
     }
+    @IBOutlet weak var addNewEpisodeButton: UIButton!
+    @IBOutlet weak var navigateBackButton: UIButton!
+    
     
     // MARK: - Public
-    var loginData: LoginData?
-    var showID: String?
+    private var loginData: LoginData!
+    private var showID: String!
     
     // MARK: - Private
     private var showDetails: ShowDetails?
@@ -42,9 +46,27 @@ class ShowDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
-
-        insertBackButton()
-        insertAddEpisodeButton()
+    }
+    
+    func configure(id: String, login: LoginData) {
+        loginData=login
+        showID=id
+    }
+    // MARK: - IBActions
+    @IBAction func navigateBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    @IBAction func addNewEpisode(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
+        let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
+            as! AddNewEpisodeViewController
+        
+        addEpViewController.showID=showID
+        addEpViewController.loginData=loginData
+        addEpViewController.delegate=self
+        
+        let navigationController = UINavigationController.init(rootViewController: addEpViewController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: - Private Functions
@@ -64,9 +86,10 @@ class ShowDetailsViewController: UIViewController {
                      encoding: JSONEncoding.default,
                      headers: headers)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<ShowDetails>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<ShowDetails>) in
                 
+                guard let `self` = self else { return }
+            
                 switch response.result {
                     case .success(let details):
                         self.showDetails=details
@@ -117,23 +140,9 @@ class ShowDetailsViewController: UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
             (action:UIAlertAction) in
-            self.returnToHomeScreen()
+            self.navigationController?.popViewController(animated: true)
         })
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    private func insertBackButton () {
-        addFloatingActionButton(image: UIImage(named: "ic-navigate-back")!,
-                                x: 0,
-                                y: 0,
-                                selector: #selector(ShowDetailsViewController.returnToHomeScreen))
-    }
-    
-    private func insertAddEpisodeButton () {
-        addFloatingActionButton(image: UIImage(named: "ic-fab-button")!,
-                                x: Int(self.view!.bounds.width - 80),
-                                y: Int(self.view!.bounds.height - 80),
-                                selector: #selector(ShowDetailsViewController.addNewEpisode))
+        present(alertController, animated: true, completion: nil)
     }
     
     private func addFloatingActionButton (image: UIImage, x: Int, y: Int, selector : Selector) {
@@ -149,24 +158,6 @@ class ShowDetailsViewController: UIViewController {
         view.addSubview(btn)
     }
 
-    // MARK: - objc functions
-    @objc private func returnToHomeScreen () {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func addNewEpisode () {
-        let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
-        let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
-        as! AddNewEpisodeViewController
-        
-        addEpViewController.showID=showID
-        addEpViewController.loginData=loginData
-        addEpViewController.delegate=self
-        
-        let navigationController = UINavigationController.init(rootViewController: addEpViewController)
-        present(navigationController, animated: true, completion: nil)
-    }
-    
 }
 
 extension ShowDetailsViewController: UITableViewDataSource {
