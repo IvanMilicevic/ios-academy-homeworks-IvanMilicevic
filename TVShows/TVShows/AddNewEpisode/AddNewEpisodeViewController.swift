@@ -13,15 +13,17 @@ import CodableAlamofire
 
 class AddNewEpisodeViewController: UIViewController {
 
-    
+    // MARK: - IBOutlets
     @IBOutlet weak var episodeTitle: UITextField!
     @IBOutlet weak var seasonN: UITextField!
     @IBOutlet weak var episodeN: UITextField!
     @IBOutlet weak var episodeDescription: UITextField!
     
+    // MARK: - Public
     var loginData: LoginData?
     var showID: String?
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +37,20 @@ class AddNewEpisodeViewController: UIViewController {
         episodeDescription.setBottomBorderDefault()
     }
     
+    
+    // MARK: - IBActions
+    @IBAction func uploadPhoto(_ sender: Any) {
+        let alertController = UIAlertController(title: "Oops",
+                                                message: "This feature is not implemented yet.",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
+            (action:UIAlertAction) in
+            print("Api sucks...")
+        })
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - objC Functions
     @objc func didSelectCancel() {
         returnToShowDetails()
     }
@@ -49,9 +65,8 @@ class AddNewEpisodeViewController: UIViewController {
             else {
                 return
         }
-        let headers = ["Authorization": token]
         
-        SVProgressHUD.show()
+        let headers = ["Authorization": token]
         let parameters = ["showId": showID!,
                           "mediaId": "mediaID",
                           "title": episodeTitle.text!,
@@ -60,6 +75,7 @@ class AddNewEpisodeViewController: UIViewController {
                           "season": seasonN.text!
         ]
         
+        SVProgressHUD.show()
         Alamofire.request("https://api.infinum.academy/api/episodes",
                           method: .post,
                           parameters: parameters,
@@ -70,6 +86,7 @@ class AddNewEpisodeViewController: UIViewController {
                 SVProgressHUD.dismiss()
                 
                 switch dataResponse.result {
+                    
                     case .success(let response):
                         print ("Sucess \(response)")
                         self.returnToShowDetails()
@@ -80,65 +97,51 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    @IBAction func uploadPhoto(_ sender: Any) {
-        let alertController = UIAlertController(title: "Oops",
-                                                message: "This feature is not implemented yet.",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
-            (action:UIAlertAction) in
-            print("Api sucks...")
-        })
-        self.present(alertController, animated: true, completion: nil)
-    }
     
+    // MARK: - Private functions
     private func configureNavigationBar() {
         self.title="Add Episode"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didSelectCancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(didSelectAdd))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didSelectCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(didSelectAdd))
     }
     
     private func returnToShowDetails() {
         let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
             as! ShowDetailsViewController
+        
         viewController.loginData=loginData
         viewController.showID=showID
+        
         let navigationController = UINavigationController.init(rootViewController: viewController)
         present(navigationController, animated: true, completion: nil)
     }
     
     private func allFieldsAreOk() -> Bool {
         var fieldsAreOk = true;
-        if episodeTitle.text!.isEmpty {
-            episodeTitle.setBottomBorderRed()
-            fieldsAreOk = false
-        } else {
-            episodeTitle.setBottomBorderDefault()
-        }
-        if seasonN.text!.isEmpty {
-            seasonN.setBottomBorderRed()
-            fieldsAreOk = false
-        } else {
-            seasonN.setBottomBorderDefault()
-        }
-        if episodeN.text!.isEmpty {
-            episodeN.setBottomBorderRed()
-            fieldsAreOk = false
-        } else {
-            episodeN.setBottomBorderDefault()
-        }
-        if episodeDescription.text!.isEmpty {
-            episodeDescription.setBottomBorderRed()
-            fieldsAreOk = false
-        } else {
-            episodeDescription.setBottomBorderDefault()
-        }
-
+        
+        fieldsAreOk = checkField(field: episodeTitle) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: seasonN) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeN) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeDescription) ? fieldsAreOk : false
+        
         return fieldsAreOk
+    }
+    
+    private func checkField (field: UITextField!) -> Bool {
+        if field.text!.isEmpty {
+            field.setBottomBorderRed()
+            return false
+        } else {
+            field.setBottomBorderDefault()
+            return true
+        }
     }
     
 
