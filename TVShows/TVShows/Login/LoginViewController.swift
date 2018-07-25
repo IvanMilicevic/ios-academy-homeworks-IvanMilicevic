@@ -109,11 +109,11 @@ class LoginViewController: UIViewController {
                 switch response.result {
                     case .success(let user):
                         self.user = user
-                        print("Success: \(user)")
+                        SwiftyLog.info("Success: \(user)")
                         self.loginUserWith(email: email, password: password)
                     case .failure(let error):
                         SVProgressHUD.showError(withStatus: "Error")
-                        print("API failure: \(error)")
+                        SwiftyLog.error("API failure - \(error)")
                 }
             }
     }
@@ -174,7 +174,7 @@ class LoginViewController: UIViewController {
                 switch response.result {
                 case .success(let loginData):
                     self.loginData = loginData
-                    print("Success: \(loginData)")
+                    SwiftyLog.info("Success: \(loginData)")
                     SVProgressHUD.showSuccess(withStatus: "Success")
                     
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
@@ -190,11 +190,11 @@ class LoginViewController: UIViewController {
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
                         (action:UIAlertAction) in
-                        print("Problem with logging in occured.")
+                        SwiftyLog.warning("Problem with logging in occured.")
                     })
                     self.present(alertController, animated: true, completion: nil)
                     
-                    print("Login Error: \(error)")
+                    SwiftyLog.error("\(error)")
                 }
             }
     }

@@ -50,7 +50,7 @@ class AddNewEpisodeViewController: UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
             (action:UIAlertAction) in
-            print("Api sucks...")
+            SwiftyLog.warning("Api sucks...")
         })
         self.present(alertController, animated: true, completion: nil)
     }
@@ -95,11 +95,11 @@ class AddNewEpisodeViewController: UIViewController {
                 switch dataResponse.result {
                     
                     case .success(let response):
-                        print ("Sucess \(response)")
+                        SwiftyLog.info("Sucess \(response)")
                         self.dismiss(animated: true, completion: nil)
                         self.delegate?.reloadEpisodes()
                     case .failure(let error):
-                        print("Adding episode went wrong: \(error)")
+                        SwiftyLog.error("Adding episode went wrong - \(error)")
                 }
         }
     }

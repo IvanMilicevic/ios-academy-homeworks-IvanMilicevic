@@ -15,7 +15,7 @@ public enum SwiftyState: Int {
 
 class SwiftyLog {
     
-    private static var swiftyFlag: SwiftyState = SwiftyState.development
+    private static var swiftyFlag: SwiftyState = SwiftyState.relase
     
     static func debug(_ items: Any) {
         if (SwiftyLog.swiftyFlag == SwiftyState.development){

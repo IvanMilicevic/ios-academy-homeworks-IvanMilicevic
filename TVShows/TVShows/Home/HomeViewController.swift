@@ -68,12 +68,12 @@ class HomeViewController: UIViewController {
                 switch response.result {
                     case .success(let shows):
                         SVProgressHUD.dismiss()
-                        print("Shows fetched: \(shows)")
+                        SwiftyLog.info("Shows fetched: \(shows)")
                         self.showsArray = shows
                         self.homeTableView.reloadData()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
-                        print("Fetching shows went wrong: \(error)")
+                        SwiftyLog.error("Fetching shows went wrong - \(error)")
                         self.callAlertControler(error: error)
                 }
         }

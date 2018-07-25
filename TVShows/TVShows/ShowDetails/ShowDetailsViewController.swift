@@ -91,11 +91,11 @@ class ShowDetailsViewController: UIViewController {
                 switch response.result {
                     case .success(let details):
                         self.showDetails=details
-                        print("Show Details fetched: \(details)")
+                        SwiftyLog.info("Show Details fetched - \(details)")
                         self.fetchShowEpisodes()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
-                        print("Fetching show details went wrong: \(error)")
+                        SwiftyLog.error("Fetching show details went wrong - \(error)")
                         self.callAlertControler(error: error)
                 }
         }
@@ -122,12 +122,12 @@ class ShowDetailsViewController: UIViewController {
                 switch response.result {
                     case .success(let episodes):
                         self.episodesArray = episodes
-                        print("Show episodes fetched: \(episodes)")
+                        SwiftyLog.info("Show episodes fetched - \(episodes)")
                         SVProgressHUD.dismiss()
                         self.showDetailsTableView.reloadData()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
-                        print("Fetching episodes went wrong: \(error)")
+                        SwiftyLog.error("Fetching episodes went wrong - \(error)")
                         self.callAlertControler(error: error)
                 }
         }
