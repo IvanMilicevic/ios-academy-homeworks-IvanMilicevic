@@ -66,7 +66,7 @@ class AddNewEpisodeViewController: UIViewController {
         }
         
         guard
-            let token=loginData?.token
+            let token = loginData?.token
             else {
                 return
         }
@@ -106,7 +106,7 @@ class AddNewEpisodeViewController: UIViewController {
     
     // MARK: - Private functions
     private func configureNavigationBar() {
-        self.title="Add Episode"
+        self.title = "Add Episode"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
                                                            target: self,

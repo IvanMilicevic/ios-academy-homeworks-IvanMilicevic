@@ -16,9 +16,9 @@ class HomeViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var homeTableView: UITableView! {
         didSet {
-            homeTableView.dataSource=self
-            homeTableView.delegate=self
-            homeTableView.estimatedRowHeight=44
+            homeTableView.dataSource = self
+            homeTableView.delegate = self
+            homeTableView.estimatedRowHeight = 44
             homeTableView.separatorStyle = .none
         }
     }
@@ -48,7 +48,7 @@ class HomeViewController: UIViewController {
      // MARK: - Private Functions
     private func fetchShowsArray() {
         guard
-            let token=loginData?.token
+            let token = loginData?.token
             else {
                 self.returnToLoginScreen()
                 return

@@ -16,7 +16,7 @@ class TVShowsImageCell: UITableViewCell {
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle=UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         // Initialization code
     }
     
@@ -24,12 +24,12 @@ class TVShowsImageCell: UITableViewCell {
         super.prepareForReuse()
         //TODO find default image
 //        showImage.image=UIImage(named: "login-logo")
-        showImage.image=UIImage(named: "resizer.php")
+        showImage.image = UIImage(named: "resizer.php")
     }
 
     // MARK: - Functions
-    func configure(with item: UIImage){
-        showImage.image=item
+    func configure(with item: UIImage) {
+        showImage.image = item
     }
 
 }

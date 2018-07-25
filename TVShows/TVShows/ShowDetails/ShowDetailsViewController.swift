@@ -16,12 +16,12 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var showDetailsTableView: UITableView! {
         didSet {
-            showDetailsTableView.dataSource=self
-            showDetailsTableView.delegate=self
-            showDetailsTableView.estimatedRowHeight=100
-            showDetailsTableView.rowHeight=UITableViewAutomaticDimension
+            showDetailsTableView.dataSource = self
+            showDetailsTableView.delegate = self
+            showDetailsTableView.estimatedRowHeight = 100
+            showDetailsTableView.rowHeight = UITableViewAutomaticDimension
             showDetailsTableView.separatorStyle = .none
-            showDetailsTableView.contentInset=UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
+            showDetailsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
         }
     }
     @IBOutlet weak var addNewEpisodeButton: UIButton!
@@ -49,9 +49,10 @@ class ShowDetailsViewController: UIViewController {
     }
     
     func configure(id: String, login: LoginData) {
-        loginData=login
-        showID=id
+        loginData =  login
+        showID = id
     }
+    
     // MARK: - IBActions
     @IBAction func navigateBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -61,9 +62,9 @@ class ShowDetailsViewController: UIViewController {
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
             as! AddNewEpisodeViewController
         
-        addEpViewController.showID=showID
-        addEpViewController.loginData=loginData
-        addEpViewController.delegate=self
+        addEpViewController.showID = showID
+        addEpViewController.loginData = loginData
+        addEpViewController.delegate = self
         
         let navigationController = UINavigationController.init(rootViewController: addEpViewController)
         present(navigationController, animated: true, completion: nil)
@@ -105,7 +106,7 @@ class ShowDetailsViewController: UIViewController {
     
     private func fetchShowEpisodes () {
         guard
-            let token=loginData?.token
+            let token = loginData?.token
             else {
                 return
         }
@@ -121,7 +122,7 @@ class ShowDetailsViewController: UIViewController {
                 (response: DataResponse<[ShowEpisode]>) in
                 switch response.result {
                     case .success(let episodes):
-                        self.episodesArray=episodes
+                        self.episodesArray = episodes
                         print("Show episodes fetched: \(episodes)")
                         SVProgressHUD.dismiss()
                         self.showDetailsTableView.reloadData()

@@ -25,16 +25,16 @@ class TVShowsDescriptionCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         //TODO find default image
-        showTitle.text=""
-        showDescription.text=""
-        numberOfEpisodes.text="0"
+        showTitle.text = ""
+        showDescription.text = ""
+        numberOfEpisodes.text = "0"
     }
 
     // MARK: - Functions
-    func configure(with item: ShowDetails, count: Int){
-        showTitle.text=item.title
-        showDescription.text=item.description
-        numberOfEpisodes.text=String(count)
+    func configure(with item: ShowDetails, count: Int) {
+        showTitle.text = item.title
+        showDescription.text = item.description
+        numberOfEpisodes.text = String(count)
     }
     
 }

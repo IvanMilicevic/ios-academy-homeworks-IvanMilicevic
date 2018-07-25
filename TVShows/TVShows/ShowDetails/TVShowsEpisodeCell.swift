@@ -18,14 +18,14 @@ class TVShowsEpisodeCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        seasonEpisode.text=""
-        episodeTitle.text=""
+        seasonEpisode.text = ""
+        episodeTitle.text = ""
     }
     
     // MARK: - Functions
-    func configure(with item: ShowEpisode){
-        seasonEpisode.text="S2 Ep2"
-        episodeTitle.text=item.title
+    func configure(with item: ShowEpisode) {
+        seasonEpisode.text = "S2 Ep2"
+        episodeTitle.text = item.title
     }
 
 }

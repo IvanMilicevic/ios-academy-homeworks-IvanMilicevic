@@ -178,7 +178,7 @@ class LoginViewController: UIViewController {
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
-                    viewController.loginData=self.loginData
+                    viewController.loginData = self.loginData
                     self.navigationController?.pushViewController(viewController, animated: true)
                 case .failure(let error):
                     SVProgressHUD.dismiss()
