@@ -15,11 +15,6 @@ class TVShowsEpisodeCell: UITableViewCell {
     @IBOutlet weak var episodeTitle: UILabel!
     
     // MARK: - View Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
         
