@@ -96,8 +96,8 @@ class AddNewEpisodeViewController: UIViewController {
                     
                     case .success(let response):
                         SwiftyLog.info("Sucess \(response)")
-                        self.dismiss(animated: true, completion: nil)
                         self.delegate?.reloadEpisodes()
+                        self.dismiss(animated: true, completion: nil)
                     case .failure(let error):
                         SwiftyLog.error("Adding episode went wrong - \(error)")
                 }
