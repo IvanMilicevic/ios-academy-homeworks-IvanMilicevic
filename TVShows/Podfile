@@ -11,4 +11,6 @@ target 'TVShows' do
   pod 'Alamofire', '~> 4.7'
   # Coder and decoder for json
   pod 'CodableAlamofire', '~> 1.1'
+  # library for downloading and caching images from the web
+  pod 'Kingfisher', '~> 4.8'
 end
