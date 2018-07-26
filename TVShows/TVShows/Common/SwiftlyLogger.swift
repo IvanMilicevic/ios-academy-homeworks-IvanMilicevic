@@ -9,8 +9,8 @@
 import Foundation
 
 public enum SwiftyState: Int {
-    case relase = 0
-    case development = 1
+    case relase
+    case development
 }
 
 class SwiftyLog {
