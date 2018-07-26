@@ -120,7 +120,7 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
     private func allFieldsAreOk() -> Bool {
-        var fieldsAreOk = true;
+        var fieldsAreOk = true
         
         fieldsAreOk = checkField(field: episodeTitle) ? fieldsAreOk : false
         fieldsAreOk = checkField(field: seasonN) ? fieldsAreOk : false
