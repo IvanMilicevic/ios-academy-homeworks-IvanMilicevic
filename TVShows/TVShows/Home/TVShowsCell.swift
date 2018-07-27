@@ -22,12 +22,12 @@ class TVShowsCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        cellLabel.text=nil
+        cellLabel.text = nil
     }
     
-    // MARK: - Private Functions
+    // MARK: - Functions
     func configure(with item: Show){
-        cellLabel.text=item.title
+        cellLabel.text = item.title
     }
 
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add New Episode View Controller-->
+        <scene sceneID="fna-ga-8ar">
+            <objects>
+                <viewController storyboardIdentifier="ViewController_AddNewEpisode" id="jO1-8B-z7F" customClass="AddNewEpisodeViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3tE-oQ-6Jw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-camera" translatesAutoresizingMaskIntoConstraints="NO" id="XdE-MV-skr">
+                                <rect key="frame" x="148" y="87.5" width="24" height="24"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G1j-0a-Nvr">
+                                <rect key="frame" x="30" y="219" width="260" height="158"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZGW-ho-p0M">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Season n." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcT-uz-bBz">
+                                        <rect key="frame" x="0.0" y="47" width="260" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode n." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCm-6n-3oa">
+                                        <rect key="frame" x="0.0" y="94" width="260" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssv-A0-fOM">
+                                        <rect key="frame" x="0.0" y="141" width="260" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-Fi-0u2">
+                                <rect key="frame" x="113.5" y="119" width="93" height="30"/>
+                                <state key="normal" title="Upload photo">
+                                    <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadPhoto:" destination="jO1-8B-z7F" eventType="touchUpInside" id="ijN-jy-Aqf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="G1j-0a-Nvr" firstAttribute="top" secondItem="fbl-Fi-0u2" secondAttribute="bottom" constant="70" id="0dc-ja-n2o"/>
+                            <constraint firstItem="G1j-0a-Nvr" firstAttribute="leading" secondItem="xBF-Xl-pyJ" secondAttribute="leading" constant="30" id="Skh-a4-t5s"/>
+                            <constraint firstItem="fbl-Fi-0u2" firstAttribute="centerX" secondItem="3tE-oQ-6Jw" secondAttribute="centerX" id="Ug9-3w-BtF"/>
+                            <constraint firstItem="fbl-Fi-0u2" firstAttribute="top" secondItem="XdE-MV-skr" secondAttribute="bottom" constant="7.5" id="dfc-92-im7"/>
+                            <constraint firstItem="xBF-Xl-pyJ" firstAttribute="trailing" secondItem="G1j-0a-Nvr" secondAttribute="trailing" constant="30" id="gx8-qr-I6w"/>
+                            <constraint firstItem="XdE-MV-skr" firstAttribute="centerX" secondItem="3tE-oQ-6Jw" secondAttribute="centerX" id="qFO-tW-Six"/>
+                            <constraint firstItem="XdE-MV-skr" firstAttribute="centerY" secondItem="3tE-oQ-6Jw" secondAttribute="centerY" multiplier="0.35" id="qQI-G7-U8l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xBF-Xl-pyJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="episodeDescription" destination="ssv-A0-fOM" id="zb4-iJ-xVk"/>
+                        <outlet property="episodeN" destination="QCm-6n-3oa" id="evT-8E-umd"/>
+                        <outlet property="episodeTitle" destination="ZGW-ho-p0M" id="tVZ-VP-FYy"/>
+                        <outlet property="seasonN" destination="qcT-uz-bBz" id="xmf-O1-E9N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lga-aO-H0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96.799999999999997" y="142.57871064467767"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic-camera" width="24" height="24"/>
+    </resources>
+</document>

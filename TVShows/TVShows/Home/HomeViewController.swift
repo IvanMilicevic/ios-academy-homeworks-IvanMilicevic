@@ -16,25 +16,23 @@ class HomeViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var homeTableView: UITableView! {
         didSet {
-            homeTableView.dataSource=self
-            homeTableView.delegate=self
-            homeTableView.estimatedRowHeight=44
+            homeTableView.dataSource = self
+            homeTableView.delegate = self
+            homeTableView.estimatedRowHeight = 44
+            homeTableView.separatorStyle = .none
         }
     }
     
     // MARK: - Public
-    weak var loginDelegate: LoginDataExchanger?
+    var loginData: LoginData?
     
     // MARK: - Private
-    private var loginData: LoginData?
-    private var showsArray: [Show]?
+    private var showsArray: [Show] = []
     
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title="Shows"
-        loginData=loginDelegate?.getLoginData()
         
         fetchShowsArray()
     }
@@ -42,13 +40,14 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationItem.hidesBackButton = true
     }
     
      // MARK: - Private Functions
     private func fetchShowsArray() {
         guard
-            let token=loginData?.token
+            let token = loginData?.token
             else {
                 self.returnToLoginScreen()
                 return
@@ -62,35 +61,37 @@ class HomeViewController: UIViewController {
                      encoding: JSONEncoding.default,
                      headers: headers)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
-                (response: DataResponse<[Show]>) in
-                    switch response.result {
-                        case .success(let shows):
-                            SVProgressHUD.dismiss()
-                            print("Shows fetched: \(shows)")
-                            self.showsArray = shows
-                            self.homeTableView.reloadData()
-                        case .failure(let error):
-                            SVProgressHUD.dismiss()
-                            print("Fetching shows went wrong: \(error)")
-                            let alertController = UIAlertController(title: "Error",
-                                                                    message: error.localizedDescription,
-                                                                    preferredStyle: .alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
-                                (action:UIAlertAction) in
-                                self.returnToLoginScreen()
-                            })
-                            self.present(alertController, animated: true, completion: nil)
-                    
-                    
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[Show]>) in
+            
+               guard let `self` = self else { return }
+            
+                switch response.result {
+                    case .success(let shows):
+                        SVProgressHUD.dismiss()
+                        SwiftyLog.info("Shows fetched: \(shows)")
+                        self.showsArray = shows
+                        self.homeTableView.reloadData()
+                    case .failure(let error):
+                        SVProgressHUD.dismiss()
+                        SwiftyLog.error("Fetching shows went wrong - \(error)")
+                        self.callAlertControler(error: error)
                 }
         }
     }
     
+    private func callAlertControler (error: Error) {
+        let alertController = UIAlertController(title: "Error",
+                                                message: error.localizedDescription,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+            (action:UIAlertAction) in
+            self.returnToLoginScreen()
+        })
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     private func returnToLoginScreen(){
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Login")
-        self.navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }
@@ -102,10 +103,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRows = showsArray?.count else {
-            return 0
-        }
-        return numberOfRows
+        return showsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,10 +111,6 @@ extension HomeViewController: UITableViewDataSource {
             withIdentifier: "TVShowsCell",
             for: indexPath
         ) as! TVShowsCell
-
-        guard let showsArray = self.showsArray else {
-            return cell
-        }
         
         cell.configure(with: showsArray[indexPath.row])
         return cell
@@ -132,9 +126,19 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete){
-            showsArray?.remove(at: indexPath.item)
+            showsArray.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_ShowDetails")
+            as! ShowDetailsViewController
+        
+        viewController.configure(id: showsArray[indexPath.row].id, login: loginData!)
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
 }

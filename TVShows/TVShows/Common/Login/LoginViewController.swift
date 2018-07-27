@@ -11,6 +11,9 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
+protocol LoginDataExchanger: class {
+    func getLoginData()->LoginData?
+}
 
 class LoginViewController: UIViewController {
 
@@ -70,7 +73,7 @@ class LoginViewController: UIViewController {
         let email : String = emailTextField.text!
         let password : String = passwordTextField.text!
         
-        if !isLoginOk(email: email, password: password) {
+        if !isLoginOk(email: email, password: password){
             return
         }
         
@@ -109,11 +112,11 @@ class LoginViewController: UIViewController {
                 switch response.result {
                     case .success(let user):
                         self.user = user
-                        SwiftyLog.info("Success: \(user)")
+                        print("Success: \(user)")
                         self.loginUserWith(email: email, password: password)
                     case .failure(let error):
                         SVProgressHUD.showError(withStatus: "Error")
-                        SwiftyLog.error("API failure - \(error)")
+                        print("API failure: \(error)")
                 }
             }
     }
@@ -167,20 +170,18 @@ class LoginViewController: UIViewController {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
-                
-                guard let `self` = self else { return }
-                
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {
+                (response: DataResponse<LoginData>) in
                 switch response.result {
                 case .success(let loginData):
                     self.loginData = loginData
-                    SwiftyLog.info("Success: \(loginData)")
+                    print("Success: \(loginData)")
                     SVProgressHUD.showSuccess(withStatus: "Success")
                     
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
-                    viewController.loginData = self.loginData
+                    viewController.loginDelegate=self
                     self.navigationController?.pushViewController(viewController, animated: true)
                 case .failure(let error):
                     SVProgressHUD.dismiss()
@@ -190,13 +191,20 @@ class LoginViewController: UIViewController {
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
                         (action:UIAlertAction) in
-                        SwiftyLog.warning("Problem with logging in occured.")
+                        print("Problem with logging in occured.")
                     })
                     self.present(alertController, animated: true, completion: nil)
                     
-                    SwiftyLog.error("\(error)")
+                    print("Login Error: \(error)")
                 }
             }
     }
+}
+
+extension LoginViewController: LoginDataExchanger {
+    func getLoginData() -> LoginData? {
+        return loginData
+    }
+    
 }
 
