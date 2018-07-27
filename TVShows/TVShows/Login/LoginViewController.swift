@@ -23,8 +23,9 @@ class LoginViewController: UIViewController {
     
     
     // MARK: - Private
-    private var rememberState: Bool = false
     private let loginCornerRadius: CGFloat = 10
+    private var rememberState: Bool = false
+    private var animateToHome: Bool = true
     private var user: User?
     private var loginData: LoginData?
     
@@ -46,6 +47,14 @@ class LoginViewController: UIViewController {
         
         emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
+//
+        if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
+            animateToHome=false
+            loginUserWith(email: UserDefaults.standard.string(forKey: TVShowsUserDefaultsKeys.email.rawValue)!,
+                          password: UserDefaults.standard.string(forKey: TVShowsUserDefaultsKeys.password.rawValue)!)
+
+        }
+//
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -171,30 +180,33 @@ class LoginViewController: UIViewController {
                 
                 guard let `self` = self else { return }
                 
+                SVProgressHUD.dismiss()
                 switch response.result {
                 case .success(let loginData):
                     self.loginData = loginData
                     SwiftyLog.info("Success: \(loginData)")
-                    SVProgressHUD.showSuccess(withStatus: "Success")
                     
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
                     viewController.loginData = self.loginData
-                    self.navigationController?.pushViewController(viewController, animated: true)
+//
+                    if (self.rememberState){
+                        UserDefaults.standard.set(true, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
+                        UserDefaults.standard.set(email, forKey: TVShowsUserDefaultsKeys.email.rawValue)
+                        UserDefaults.standard.set(password, forKey: TVShowsUserDefaultsKeys.password.rawValue)
+                    }
+//
+                    self.navigationController?.pushViewController(viewController, animated: self.animateToHome)
                 case .failure(let error):
-                    SVProgressHUD.dismiss()
-                    
                     let alertController = UIAlertController(title: "Login Problem",
-                                                            message: "Wrong username or password.",
+                                                            message: "Wrong username or password",
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
                         (action:UIAlertAction) in
-                        SwiftyLog.warning("Problem with logging in occured.")
+                        SwiftyLog.warning("Problem with logging in occured: \(error.localizedDescription)")
                     })
                     self.present(alertController, animated: true, completion: nil)
-                    
-                    SwiftyLog.error("\(error)")
                 }
             }
     }
