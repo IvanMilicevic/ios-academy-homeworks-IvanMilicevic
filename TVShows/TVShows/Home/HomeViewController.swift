@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
         self.title="Shows"
         
         fetchShowsArray()
+        configureNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +93,22 @@ class HomeViewController: UIViewController {
     }
     
     private func returnToLoginScreen(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func configureNavigationBar() {
+        let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didLogout))
+    }
+    
+    // MARK: - objC Functions
+    @objc func didLogout() {
+        UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
+        UserDefaults.standard.set(nil, forKey: TVShowsUserDefaultsKeys.email.rawValue)
+        UserDefaults.standard.set(nil, forKey: TVShowsUserDefaultsKeys.password.rawValue)
         navigationController?.popViewController(animated: true)
     }
 
