@@ -18,8 +18,8 @@ class TVShowsEpisodeCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        seasonEpisode.text = ""
-        episodeTitle.text = ""
+        seasonEpisode.text = nil
+        episodeTitle.text = nil
     }
     
     // MARK: - Functions

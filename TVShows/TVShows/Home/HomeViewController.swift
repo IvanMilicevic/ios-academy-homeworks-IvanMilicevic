@@ -138,8 +138,8 @@ extension HomeViewController: UITableViewDelegate {
             as! ShowDetailsViewController
         
         viewController.configure(id: showsArray[indexPath.row].id, login: loginData!)
-        
-        self.navigationController?.pushViewController(viewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
 }
