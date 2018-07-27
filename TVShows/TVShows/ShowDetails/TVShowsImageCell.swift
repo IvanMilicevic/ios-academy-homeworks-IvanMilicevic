@@ -36,7 +36,7 @@ class TVShowsImageCell: UITableViewCell {
         
         guard let item: ShowDetails = item else { return }
         
-//        let url = URL(string: "https://rzzy0b736k-flywheel.netdna-ssl.com/wp-content/uploads/2016/02/XFiles_01_cvr-MOCKONLY.jpg")
+        let url = URL(string: "https://rzzy0b736k-flywheel.netdna-ssl.com/wp-content/uploads/2016/02/XFiles_01_cvr-MOCKONLY.jpg")
         
 //        let url = URL(string: "https://api.infinum.academy/api\(item.imageUrl)");
         
