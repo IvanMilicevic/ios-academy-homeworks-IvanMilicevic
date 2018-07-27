@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
-
+import KeychainAccess
 
 class LoginViewController: UIViewController {
 
@@ -191,6 +191,8 @@ class LoginViewController: UIViewController {
                     as! HomeViewController
                     viewController.loginData = self.loginData
 //
+//                    let keychaing = Keychain(
+                    
                     if (self.rememberState){
                         UserDefaults.standard.set(true, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
                         UserDefaults.standard.set(email, forKey: TVShowsUserDefaultsKeys.email.rawValue)
