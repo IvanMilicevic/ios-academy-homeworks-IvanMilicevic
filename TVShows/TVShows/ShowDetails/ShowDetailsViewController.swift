@@ -208,7 +208,7 @@ extension ShowDetailsViewController: UITableViewDelegate {
     
 }
 
-extension ShowDetailsViewController: TVShowDetails_Delegate {
+extension ShowDetailsViewController: TVShowDetailsDelegate {
     func reloadEpisodes() {
         self.fetchShowDetails()
     }

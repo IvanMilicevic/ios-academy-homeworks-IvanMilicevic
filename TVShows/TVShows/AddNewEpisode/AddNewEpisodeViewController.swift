@@ -11,7 +11,7 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
-protocol TVShowDetails_Delegate: class {
+protocol TVShowDetailsDelegate: class {
     func reloadEpisodes()
 }
 
@@ -26,7 +26,7 @@ class AddNewEpisodeViewController: UIViewController {
     // MARK: - Public
     var loginData: LoginData?
     var showID: String?
-    weak var delegate: TVShowDetails_Delegate?
+    weak var delegate: TVShowDetailsDelegate?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
