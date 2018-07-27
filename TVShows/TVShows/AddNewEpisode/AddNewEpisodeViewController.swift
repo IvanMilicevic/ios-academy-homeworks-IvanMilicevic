@@ -18,10 +18,10 @@ protocol TVShowDetailsDelegate: class {
 class AddNewEpisodeViewController: UIViewController {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var episodeTitle: UITextField!
-    @IBOutlet weak var seasonN: UITextField!
-    @IBOutlet weak var episodeN: UITextField!
-    @IBOutlet weak var episodeDescription: UITextField!
+    @IBOutlet weak var episodeTitleTextField: UITextField!
+    @IBOutlet weak var seasonNumberTextField: UITextField!
+    @IBOutlet weak var episodeNumberTextField: UITextField!
+    @IBOutlet weak var episodeDescriptionTextField: UITextField!
     
     // MARK: - Public
     var loginData: LoginData?
@@ -33,15 +33,8 @@ class AddNewEpisodeViewController: UIViewController {
         super.viewDidLoad()
         
         configureNavigationBar()
+        configureTextFieldBorders()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        episodeTitle.setBottomBorderDefault()
-        seasonN.setBottomBorderDefault()
-        episodeN.setBottomBorderDefault()
-        episodeDescription.setBottomBorderDefault()
-    }
-    
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
@@ -74,10 +67,10 @@ class AddNewEpisodeViewController: UIViewController {
         let headers = ["Authorization": token]
         let parameters = ["showId": showID!,
                           "mediaId": "mediaID",
-                          "title": episodeTitle.text!,
-                          "description": episodeDescription.text!,
-                          "episodeNumber": episodeN.text!,
-                          "season": seasonN.text!
+                          "title": episodeTitleTextField.text!,
+                          "description": episodeDescriptionTextField.text!,
+                          "episodeNumber": episodeNumberTextField.text!,
+                          "season": seasonNumberTextField.text!
         ]
         
         SVProgressHUD.show()
@@ -119,13 +112,20 @@ class AddNewEpisodeViewController: UIViewController {
                                                             action: #selector(didSelectAdd))
     }
     
+    private func configureTextFieldBorders() {
+        episodeTitleTextField.setBottomBorderDefault()
+        seasonNumberTextField.setBottomBorderDefault()
+        episodeNumberTextField.setBottomBorderDefault()
+        episodeDescriptionTextField.setBottomBorderDefault()
+    }
+    
     private func allFieldsAreOk() -> Bool {
         var fieldsAreOk = true
         
-        fieldsAreOk = checkField(field: episodeTitle) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: seasonN) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: episodeN) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: episodeDescription) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeTitleTextField) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: seasonNumberTextField) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeNumberTextField) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeDescriptionTextField) ? fieldsAreOk : false
         
         return fieldsAreOk
     }
