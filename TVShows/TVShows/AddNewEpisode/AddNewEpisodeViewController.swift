@@ -49,23 +49,28 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
     @objc func didSelectAdd() {
+        guard
+            let showID = showID,
+            let token = loginData?.token,
+            let episodeTitle = episodeTitleTextField.text,
+            let seasonNumber = seasonNumberTextField.text,
+            let episodeNumber = episodeNumberTextField.text,
+            let episodeDescription = episodeDescriptionTextField.text
+        else {
+            return
+        }
+        
         if !allFieldsAreOk() {
             return
         }
         
-        guard
-            let token = loginData?.token
-            else {
-                return
-        }
-        
         let headers = ["Authorization": token]
-        let parameters = ["showId": showID!,
+        let parameters = ["showId": showID,
                           "mediaId": "mediaID",
-                          "title": episodeTitleTextField.text!,
-                          "description": episodeDescriptionTextField.text!,
-                          "episodeNumber": episodeNumberTextField.text!,
-                          "season": seasonNumberTextField.text!
+                          "title": episodeTitle,
+                          "description": episodeDescription,
+                          "episodeNumber": episodeNumber,
+                          "season": seasonNumber
         ]
         
         SVProgressHUD.show()
