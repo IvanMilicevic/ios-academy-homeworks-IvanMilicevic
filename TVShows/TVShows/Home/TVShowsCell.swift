@@ -37,7 +37,9 @@ class TVShowsCell: UITableViewCell {
         
         //Big image
         //let url = URL(string: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg")
-        let url = URL(string: "https://upload.wikimedia.org/wikipedia/hr/a/a0/Simpsoni.png")
+        //let url = URL(string: "https://upload.wikimedia.org/wikipedia/hr/a/a0/Simpsoni.png")
+        let url = URL(string: "https://rzzy0b736k-flywheel.netdna-ssl.com/wp-content/uploads/2016/02/XFiles_01_cvr-MOCKONLY.jpg")
+        
         
 
         cellImage.kf.setImage(with: url, placeholder: placeholderImg)
