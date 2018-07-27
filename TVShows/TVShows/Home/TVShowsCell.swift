@@ -15,7 +15,7 @@ class TVShowsCell: UITableViewCell {
     @IBOutlet private weak var cellLabel: UILabel!
     @IBOutlet private weak var cellImage: UIImageView!
     
-//    // MARK: - Private
+    // MARK: - Private
     private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
     
     // MARK: - View Lifecycle

@@ -181,6 +181,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                     withIdentifier: "TVShowsImageCell",
                     for: indexPath
                 ) as! TVShowsImageCell
+                cell.configure(with: showDetails, auth: loginData)
                 return cell
             case 1:
                 let cell = showDetailsTableView.dequeueReusableCell(
