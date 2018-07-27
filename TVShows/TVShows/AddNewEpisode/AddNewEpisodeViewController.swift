@@ -38,14 +38,9 @@ class AddNewEpisodeViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
-        let alertController = UIAlertController(title: "Oops",
-                                                message: "This feature is not implemented yet.",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
-            (action:UIAlertAction) in
-            SwiftyLog.warning("Api sucks...")
-        })
-        self.present(alertController, animated: true, completion: nil)
+        alertUser(title: "Oops",
+                  message: "This feature is not implemented yet.",
+                  warning: "Api sucks...")
     }
     
     // MARK: - objC Functions
@@ -92,7 +87,9 @@ class AddNewEpisodeViewController: UIViewController {
                         self.delegate?.reloadEpisodes()
                         self.dismiss(animated: true, completion: nil)
                     case .failure(let error):
-                        SwiftyLog.error("Adding episode went wrong - \(error)")
+                        self.alertUser(title: "Error",
+                                       message: "Episode is not added: \(error.localizedDescription)",
+                                       warning: "Failed to add episode")
                 }
         }
     }
@@ -118,6 +115,18 @@ class AddNewEpisodeViewController: UIViewController {
         episodeNumberTextField.setBottomBorderDefault()
         episodeDescriptionTextField.setBottomBorderDefault()
     }
+    
+    private func alertUser(title: String, message: String, warning: String) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
+            (action:UIAlertAction) in
+            SwiftyLog.warning(warning)
+        })
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
     private func allFieldsAreOk() -> Bool {
         var fieldsAreOk = true
