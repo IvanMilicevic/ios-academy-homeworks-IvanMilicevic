@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
     // MARK: - Private
     private let loginCornerRadius: CGFloat = 10
     private var rememberState: Bool = false
-    private var animateToHome: Bool = true
     private var user: User?
     private var loginData: LoginData?
     
@@ -47,14 +46,7 @@ class LoginViewController: UIViewController {
         
         emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
-//
-        if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
-            animateToHome=false
-            loginUserWith(email: UserDefaults.standard.string(forKey: TVShowsUserDefaultsKeys.email.rawValue)!,
-                          password: UserDefaults.standard.string(forKey: TVShowsUserDefaultsKeys.password.rawValue)!)
-
-        }
-//
+        checkIfUserLoggedIn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +76,7 @@ class LoginViewController: UIViewController {
         }
         
         SVProgressHUD.show()
-        loginUserWith(email: email, password: password)
+        loginUserWith(email: email, password: password, animate: true)
     }
 
     @IBAction func createAnAccountButtonPressed(_ sender: Any) {
@@ -119,7 +111,7 @@ class LoginViewController: UIViewController {
                     case .success(let user):
                         self.user = user
                         SwiftyLog.info("Success: \(user)")
-                        self.loginUserWith(email: email, password: password)
+                        self.loginUserWith(email: email, password: password, animate: true)
                     case .failure(let error):
                         SVProgressHUD.showError(withStatus: "Error")
                         SwiftyLog.error("API failure - \(error)")
@@ -128,7 +120,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    // MARK: - Private Functions
+    // MARK: - objc functions
     @objc func keyboardWillShow(notification:NSNotification){
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
@@ -145,6 +137,7 @@ class LoginViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
     
+    // MARK: - Private functions
     private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
         if email.isEmpty {
@@ -163,7 +156,7 @@ class LoginViewController: UIViewController {
         return loginIsOk
     }
     
-    private func loginUserWith(email: String, password : String) {
+    private func loginUserWith(email: String, password: String, animate: Bool) {
         
         let parameters: [String: String] = [
             "email": email,
@@ -190,16 +183,12 @@ class LoginViewController: UIViewController {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
                     viewController.loginData = self.loginData
-//
-//                    let keychaing = Keychain(
-                    
+
                     if (self.rememberState){
-                        UserDefaults.standard.set(true, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
-                        UserDefaults.standard.set(email, forKey: TVShowsUserDefaultsKeys.email.rawValue)
-                        UserDefaults.standard.set(password, forKey: TVShowsUserDefaultsKeys.password.rawValue)
+                        self.storeDataForLoggingIn(email: email, password: password)
                     }
-//
-                    self.navigationController?.pushViewController(viewController, animated: self.animateToHome)
+                    
+                    self.navigationController?.pushViewController(viewController, animated: animate)
                 case .failure(let error):
                     let alertController = UIAlertController(title: "Login Problem",
                                                             message: "Wrong username or password",
@@ -212,5 +201,29 @@ class LoginViewController: UIViewController {
                 }
             }
     }
+    
+    private func checkIfUserLoggedIn() {
+        if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
+            let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
+            guard
+                let email = keychain[TVShowsKeyChain.email.rawValue],
+                let password = keychain[TVShowsKeyChain.password.rawValue]
+                else { return }
+            
+            loginUserWith(email: email,
+                          password: password,
+                          animate: false)
+        }
+    }
+    
+    private func storeDataForLoggingIn(email: String, password: String) {
+        UserDefaults.standard.set(true, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
+        
+        let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
+        keychain[TVShowsKeyChain.email.rawValue] = email
+        keychain[TVShowsKeyChain.password.rawValue] = password
+        
+    }
+    
 }
 

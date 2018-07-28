@@ -9,7 +9,5 @@
 import Foundation
 
 public enum TVShowsUserDefaultsKeys: String {
-    case email = "userEmail"
-    case password = "userPassword"
     case loggedIn = "isUserLoggedIn"
 }

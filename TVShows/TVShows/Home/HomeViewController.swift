@@ -107,8 +107,6 @@ class HomeViewController: UIViewController {
     // MARK: - objC Functions
     @objc func didLogout() {
         UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
-        UserDefaults.standard.set(nil, forKey: TVShowsUserDefaultsKeys.email.rawValue)
-        UserDefaults.standard.set(nil, forKey: TVShowsUserDefaultsKeys.password.rawValue)
         navigationController?.popViewController(animated: true)
     }
 

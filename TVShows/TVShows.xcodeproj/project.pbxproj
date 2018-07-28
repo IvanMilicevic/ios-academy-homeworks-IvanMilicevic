@@ -26,6 +26,7 @@
 		5C6416FA2107B39D008E0AC9 /* AddNewEpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416F92107B39D008E0AC9 /* AddNewEpisodeViewController.swift */; };
 		5C6416FC210907C9008E0AC9 /* SwiftlyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416FB210907C9008E0AC9 /* SwiftlyLogger.swift */; };
 		5C64171C210B7A5F008E0AC9 /* TVShowsUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64171B210B7A5F008E0AC9 /* TVShowsUserDefaults.swift */; };
+		5C64171F210C9187008E0AC9 /* TVShowsKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64171E210C9187008E0AC9 /* TVShowsKeyChain.swift */; };
 		5CD3ABDD210092ED006A0E88 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3ABDC210092ED006A0E88 /* User.swift */; };
 		5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		5C6416F92107B39D008E0AC9 /* AddNewEpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewEpisodeViewController.swift; sourceTree = "<group>"; };
 		5C6416FB210907C9008E0AC9 /* SwiftlyLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftlyLogger.swift; sourceTree = "<group>"; };
 		5C64171B210B7A5F008E0AC9 /* TVShowsUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsUserDefaults.swift; sourceTree = "<group>"; };
+		5C64171E210C9187008E0AC9 /* TVShowsKeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsKeyChain.swift; sourceTree = "<group>"; };
 		5CD3ABDC210092ED006A0E88 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CD3AC032101EBCF006A0E88 /* UITextField+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Border.swift"; sourceTree = "<group>"; };
 		AC52B5A2C4F7DE974BAACABE /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				5C6416C121049E55008E0AC9 /* CodableStorage.swift */,
 				5C6416FB210907C9008E0AC9 /* SwiftlyLogger.swift */,
 				5C64171B210B7A5F008E0AC9 /* TVShowsUserDefaults.swift */,
+				5C64171E210C9187008E0AC9 /* TVShowsKeyChain.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				5C6416FA2107B39D008E0AC9 /* AddNewEpisodeViewController.swift in Sources */,
 				5C6416C421051128008E0AC9 /* TVShowsCell.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
+				5C64171F210C9187008E0AC9 /* TVShowsKeyChain.swift in Sources */,
 				5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */,
 				5C6416F321067B20008E0AC9 /* TVShowsDescriptionCell.swift in Sources */,
 				5C6416EF21067AED008E0AC9 /* TVShowsEpisodeCell.swift in Sources */,
