@@ -26,29 +26,25 @@ class TVShowsImageCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //TODO find default image
-        showImageView.image=UIImage(named: "show-details-default")
-//        showImage.image = UIImage(named: "resizer.php")
+        showImageView.image=nil
     }
 
     // MARK: - Functions
     func configure(with item: ShowDetails?, auth: LoginData) {
+        guard
+            let item: ShowDetails = item
+            else {
+                return
+                
+        }
         
-        guard let item: ShowDetails = item else { return }
-        
-        let url = URL(string: "https://rzzy0b736k-flywheel.netdna-ssl.com/wp-content/uploads/2016/02/XFiles_01_cvr-MOCKONLY.jpg")
-        
-//        let url = URL(string: "https://api.infinum.academy/api\(item.imageUrl)");
-        
+        let url = URL(string: "https://api.infinum.academy\(item.imageUrl)");
         let modifier = AnyModifier { request in
             var r = request
             r.setValue(auth.token, forHTTPHeaderField: "Authorization")
             return r
         }
         showImageView.kf.setImage(with: url, placeholder: placeholderImg, options: [.requestModifier(modifier)])
-        
-        
-        
     }
 
 }
