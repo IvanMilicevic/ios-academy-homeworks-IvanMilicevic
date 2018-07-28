@@ -128,7 +128,7 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! TVShowsCell
         
-        cell.configure(with: showsArray[indexPath.row])
+        cell.configure(with: showsArray[indexPath.row], loginData: loginData)
         return cell
     }
     
