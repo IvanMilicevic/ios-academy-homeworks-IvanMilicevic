@@ -20,6 +20,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var rememberMeButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var loginImageView: UIImageView!
+    @IBOutlet weak var rememberMeLabel: UILabel!
+    @IBOutlet weak var orLabel: UILabel!
+    @IBOutlet weak var createAnAccountButton: UIButton!
+    
+    //  MARK: - IBOutlet constraints
+    @IBOutlet weak var emailTextFieldLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var emailTextFieldTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var passwordTextFieldLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var passwordTextFieldTrailingConstraint: NSLayoutConstraint!
     
     
     // MARK: - Private
@@ -43,15 +53,23 @@ class LoginViewController: UIViewController {
                                                selector: #selector(keyboardWillHide),
                                                name:NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
-        
+
         emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
         checkIfUserLoggedIn()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        prepareForAnimation()
     }
     
     
@@ -142,6 +160,7 @@ class LoginViewController: UIViewController {
         var loginIsOk = true;
         if email.isEmpty {
             emailTextField.setBottomBorderRed()
+            shake(element: emailTextField)
             loginIsOk = false
         } else {
             emailTextField.setBottomBorderDefault()
@@ -222,7 +241,67 @@ class LoginViewController: UIViewController {
         let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
         keychain[TVShowsKeyChain.email.rawValue] = email
         keychain[TVShowsKeyChain.password.rawValue] = password
+    }
+    
+    private func shake(element: UITextField) {
         
+    }
+    private func prepareForAnimation() {
+        emailTextFieldLeadingConstraint.constant -= view.bounds.width
+        emailTextFieldTrailingConstraint.constant += view.bounds.width
+        
+        passwordTextFieldLeadingConstraint.constant -= view.bounds.width
+        passwordTextFieldTrailingConstraint.constant += view.bounds.width
+        
+        loginImageView.alpha=0
+        rememberMeButton.alpha=0
+        loginButton.alpha=0
+        rememberMeButton.alpha=0
+        rememberMeLabel.alpha=0
+        orLabel.alpha=0
+        createAnAccountButton.alpha=0
+    }
+    
+    private func animate () {
+        moveToTheRight(leadingConstraint: emailTextFieldLeadingConstraint,
+                       trailingConstraint: emailTextFieldTrailingConstraint,
+                       duration:1)
+        moveToTheRight(leadingConstraint: passwordTextFieldLeadingConstraint,
+                       trailingConstraint: passwordTextFieldTrailingConstraint,
+                       duration:1.3)
+        makeElementsOpaque()
+    }
+    
+    private func moveToTheRight(leadingConstraint: NSLayoutConstraint, trailingConstraint: NSLayoutConstraint, duration: TimeInterval) {
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       options: .curveEaseOut,
+                       animations: {
+                        
+                        leadingConstraint.constant += self.view.bounds.width
+                        trailingConstraint.constant -= self.view.bounds.width
+                        
+                        self.view.layoutIfNeeded()
+            }, completion: nil)
+    }
+    
+    private func makeElementsOpaque() {
+        UIView.animate(withDuration: 1.5,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: { [weak self] in
+                        guard let `self` = self else { return }
+                        
+                        self.loginImageView.alpha=1
+                        self.rememberMeButton.alpha=1
+                        self.rememberMeLabel.alpha=1
+                        self.loginButton.alpha=1
+                        self.rememberMeButton.alpha=1
+                        self.orLabel.alpha=1
+                        self.createAnAccountButton.alpha=1
+                        
+                        self.view.layoutIfNeeded()
+            }, completion: nil)
     }
     
 }
