@@ -32,7 +32,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextFieldLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var passwordTextFieldTrailingConstraint: NSLayoutConstraint!
     
-    
     // MARK: - Private
     private let loginCornerRadius: CGFloat = 10
     private var rememberState: Bool = false
@@ -58,7 +57,6 @@ class LoginViewController: UIViewController {
         emailTextField.setBottomBorderDefault()
         passwordTextField.setBottomBorderDefault()
         checkIfUserLoggedIn()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -288,7 +286,9 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: duration,
                        delay: 0,
                        options: .curveEaseOut,
-                       animations: {
+                       animations: { [weak self] in
+                        
+                        guard let `self` = self else { return }
                         
                         leadingConstraint.constant += self.view.bounds.width
                         trailingConstraint.constant -= self.view.bounds.width

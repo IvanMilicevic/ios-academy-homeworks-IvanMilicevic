@@ -85,8 +85,10 @@ class HomeViewController: UIViewController {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self]
             (action:UIAlertAction) in
+            guard let `self` = self else { return }
+            
             self.returnToLoginScreen()
         })
         self.present(alertController, animated: true, completion: nil)
