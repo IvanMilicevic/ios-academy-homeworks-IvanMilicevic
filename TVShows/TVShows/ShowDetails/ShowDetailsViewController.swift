@@ -128,6 +128,7 @@ class ShowDetailsViewController: UIViewController {
                         SwiftyLog.info("Show episodes fetched - \(episodes)")
                         SVProgressHUD.dismiss()
                         self.showDetailsTableView.reloadData()
+                        self.animateTable()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching episodes went wrong - \(error)")
@@ -171,6 +172,26 @@ class ShowDetailsViewController: UIViewController {
         button.curve = Spring.AnimationCurve.EaseIn.rawValue
         
         button.animate()
+    }
+    
+    private func animateTable() {
+        let cells = showDetailsTableView.visibleCells
+        let tableViewHeight = showDetailsTableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 0.25,
+                           delay: Double(delayCounter) * 0.02,
+                           options: .curveEaseInOut,
+                           animations: { cell.transform=CGAffineTransform.identity },
+                           completion: nil)
+            delayCounter += 1
+        }
+        
     }
 
 }
