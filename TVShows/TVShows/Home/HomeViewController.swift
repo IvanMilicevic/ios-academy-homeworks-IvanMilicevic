@@ -33,7 +33,6 @@ class HomeViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title="Shows"
         
         fetchShowsArray()
         configureNavigationBar()
@@ -97,6 +96,7 @@ class HomeViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
+        self.title="Shows"
         let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
                                                            style: .plain,
