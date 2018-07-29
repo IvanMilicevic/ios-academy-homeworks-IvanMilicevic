@@ -11,14 +11,15 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 import KeychainAccess
+import Spring
 
 class LoginViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var loginButton: SpringButton!
+    @IBOutlet weak var rememberMeButton: SpringButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loginImageView: UIImageView!
     @IBOutlet weak var rememberMeLabel: UILabel!
@@ -76,6 +77,13 @@ class LoginViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
         rememberState = !rememberState
+        
+        rememberMeButton.force = CGFloat(1)
+        rememberMeButton.duration = CGFloat(1)
+        rememberMeButton.animation = Spring.AnimationPreset.Swing.rawValue
+        rememberMeButton.curve = Spring.AnimationCurve.EaseIn.rawValue
+        
+        rememberMeButton.animate()
         
         if rememberState {
             rememberMeButton.setImage(UIImage(named: "ic-checkbox-filled"), for: .normal)
