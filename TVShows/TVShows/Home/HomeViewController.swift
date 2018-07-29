@@ -72,6 +72,7 @@ class HomeViewController: UIViewController {
                         SwiftyLog.info("Shows fetched: \(shows)")
                         self.showsArray = shows
                         self.homeTableView.reloadData()
+                        self.animateTable()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching shows went wrong - \(error)")
@@ -102,6 +103,27 @@ class HomeViewController: UIViewController {
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(didLogout))
+    }
+    
+    private func animateTable() {
+        let cells = homeTableView.visibleCells
+        let tableViewHeight = homeTableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 1.75,
+                           delay: Double(delayCounter) * 0.05,
+                           options: .curveEaseInOut,
+                           animations: { cell.transform=CGAffineTransform.identity },
+                           completion: nil)
+            delayCounter += 1
+        }
+        
+        
     }
     
     // MARK: - objC Functions
