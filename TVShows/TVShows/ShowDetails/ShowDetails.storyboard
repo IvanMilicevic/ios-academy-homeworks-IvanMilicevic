@@ -152,14 +152,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Si-6K-qUN">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Si-6K-qUN" customClass="SpringButton" customModule="Spring">
                                 <rect key="frame" x="287" y="583" width="68" height="74"/>
                                 <state key="normal" image="ic-fab-button"/>
                                 <connections>
                                     <action selector="addNewEpisode:" destination="BNJ-Ua-W3V" eventType="touchUpInside" id="Wgx-Yd-10O"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXX-WY-uAh">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXX-WY-uAh" customClass="SpringButton" customModule="Spring">
                                 <rect key="frame" x="20" y="40" width="32" height="32"/>
                                 <state key="normal" image="ic-navigate-back"/>
                                 <connections>

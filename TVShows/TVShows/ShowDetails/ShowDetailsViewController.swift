@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import Spring
 
 class ShowDetailsViewController: UIViewController {
     
@@ -24,8 +25,8 @@ class ShowDetailsViewController: UIViewController {
             showDetailsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
         }
     }
-    @IBOutlet weak var addNewEpisodeButton: UIButton!
-    @IBOutlet weak var navigateBackButton: UIButton!
+    @IBOutlet weak var addNewEpisodeButton: SpringButton!
+    @IBOutlet weak var navigateBackButton: SpringButton!
     
     // MARK: - Private
     private var loginData: LoginData!
@@ -52,9 +53,11 @@ class ShowDetailsViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func navigateBack(_ sender: Any) {
+        animate(button: navigateBackButton)
         navigationController?.popViewController(animated: true)
     }
     @IBAction func addNewEpisode(_ sender: Any) {
+        animate(button: addNewEpisodeButton)
         let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
             as! AddNewEpisodeViewController
@@ -159,6 +162,15 @@ class ShowDetailsViewController: UIViewController {
         btn.addTarget(self,action: selector, for: UIControlEvents.touchUpInside)
         
         view.addSubview(btn)
+    }
+    
+    private func animate(button: SpringButton) {
+        button.force = CGFloat(1)
+        button.duration = CGFloat(1)
+        button.animation = Spring.AnimationPreset.ZoomIn.rawValue
+        button.curve = Spring.AnimationCurve.EaseIn.rawValue
+        
+        button.animate()
     }
 
 }
