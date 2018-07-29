@@ -136,22 +136,35 @@ class AddNewEpisodeViewController: UIViewController {
     private func allFieldsAreOk() -> Bool {
         var fieldsAreOk = true
         
-        fieldsAreOk = checkField(field: episodeTitleTextField) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: seasonNumberTextField) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: episodeNumberTextField) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: episodeDescriptionTextField) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeTitleTextField, mustBeNumber: false) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: seasonNumberTextField, mustBeNumber: true) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeNumberTextField, mustBeNumber: true) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeDescriptionTextField, mustBeNumber: false) ? fieldsAreOk : false
         
         return fieldsAreOk
     }
     
-    private func checkField (field: UITextField!) -> Bool {
+    private func checkField (field: UITextField!, mustBeNumber: Bool) -> Bool {
         if field.text!.isEmpty {
             field.setBottomBorderRed()
             field.shake()
             return false
         } else {
-            field.setBottomBorderDefault()
-            return true
+            if mustBeNumber {
+                let num = Int(field.text!);
+                
+                if num != nil {
+                    field.setBottomBorderDefault()
+                    return true
+                } else {
+                    field.setBottomBorderRed()
+                    field.shake()
+                    return false
+                }
+            } else {
+                field.setBottomBorderDefault()
+                return true
+            }
         }
     }
     
