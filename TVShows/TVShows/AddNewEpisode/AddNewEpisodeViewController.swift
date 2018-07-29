@@ -147,6 +147,7 @@ class AddNewEpisodeViewController: UIViewController {
     private func checkField (field: UITextField!) -> Bool {
         if field.text!.isEmpty {
             field.setBottomBorderRed()
+            field.shake()
             return false
         } else {
             field.setBottomBorderDefault()

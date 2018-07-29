@@ -160,13 +160,14 @@ class LoginViewController: UIViewController {
         var loginIsOk = true;
         if email.isEmpty {
             emailTextField.setBottomBorderRed()
-            shake(element: emailTextField)
+            emailTextField.shake()
             loginIsOk = false
         } else {
             emailTextField.setBottomBorderDefault()
         }
         if password.isEmpty {
             passwordTextField.setBottomBorderRed()
+            passwordTextField.shake()
             loginIsOk = false
         } else {
             passwordTextField.setBottomBorderDefault()
@@ -243,9 +244,6 @@ class LoginViewController: UIViewController {
         keychain[TVShowsKeyChain.password.rawValue] = password
     }
     
-    private func shake(element: UITextField) {
-        
-    }
     private func prepareForAnimation() {
         emailTextFieldLeadingConstraint.constant -= view.bounds.width
         emailTextFieldTrailingConstraint.constant += view.bounds.width
@@ -274,7 +272,7 @@ class LoginViewController: UIViewController {
     
     private func moveToTheRight(leadingConstraint: NSLayoutConstraint, trailingConstraint: NSLayoutConstraint, duration: TimeInterval) {
         UIView.animate(withDuration: duration,
-                       delay: 0,
+                       delay: 0.5,
                        options: .curveEaseOut,
                        animations: {
                         
@@ -287,7 +285,7 @@ class LoginViewController: UIViewController {
     
     private func makeElementsOpaque() {
         UIView.animate(withDuration: 1.5,
-                       delay: 0,
+                       delay: 0.5,
                        options: .curveEaseIn,
                        animations: { [weak self] in
                         guard let `self` = self else { return }
