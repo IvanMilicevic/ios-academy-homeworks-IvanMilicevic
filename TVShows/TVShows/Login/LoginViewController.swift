@@ -70,6 +70,7 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
+        prepareTextFields()
         prepareForAnimation()
     }
     
@@ -230,6 +231,11 @@ class LoginViewController: UIViewController {
             }
     }
     
+    private func prepareTextFields() {
+        emailTextField.text=nil
+        passwordTextField.text=nil
+    }
+    
     private func checkIfUserLoggedIn() {
         if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
             let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
@@ -280,7 +286,7 @@ class LoginViewController: UIViewController {
     
     private func moveToTheRight(leadingConstraint: NSLayoutConstraint, trailingConstraint: NSLayoutConstraint, duration: TimeInterval) {
         UIView.animate(withDuration: duration,
-                       delay: 0.5,
+                       delay: 0,
                        options: .curveEaseOut,
                        animations: {
                         
@@ -293,7 +299,7 @@ class LoginViewController: UIViewController {
     
     private func makeElementsOpaque() {
         UIView.animate(withDuration: 1.5,
-                       delay: 0.5,
+                       delay: 0,
                        options: .curveEaseIn,
                        animations: { [weak self] in
                         guard let `self` = self else { return }
