@@ -13,6 +13,8 @@
 		5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A220EE6F2D008A0C2F /* Assets.xcassets */; };
 		5C19049420FF464B00260FA2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19049320FF464B00260FA2 /* HomeViewController.swift */; };
 		5C19049620FF473F00260FA2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C19049520FF473F00260FA2 /* Home.storyboard */; };
+		5C3F1A26210E92600083E956 /* EpisodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A25210E92600083E956 /* EpisodeDetailsViewController.swift */; };
+		5C3F1A28210E92880083E956 /* EpisodeDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 		5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416C121049E55008E0AC9 /* CodableStorage.swift */; };
@@ -37,6 +39,8 @@
 		5C08372720FA4AF900AEBE07 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5C19049320FF464B00260FA2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5C19049520FF473F00260FA2 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		5C3F1A25210E92600083E956 /* EpisodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailsViewController.swift; sourceTree = "<group>"; };
+		5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EpisodeDetails.storyboard; sourceTree = "<group>"; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +94,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		5C3F1A22210E91C00083E956 /* EpisodeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				5C3F1A25210E92600083E956 /* EpisodeDetailsViewController.swift */,
+				5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */,
+			);
+			path = EpisodeDetails;
+			sourceTree = "<group>";
+		};
 		5C40338F20EE6F2A008A0C2F = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +129,7 @@
 				5C19049220FF45E500260FA2 /* Home */,
 				5C6416C52105E2B1008E0AC9 /* ShowDetails */,
 				5C6416F62107B340008E0AC9 /* AddNewEpisode */,
+				5C3F1A22210E91C00083E956 /* EpisodeDetails */,
 				5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */,
 				5C4033A220EE6F2D008A0C2F /* Assets.xcassets */,
 				5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */,
@@ -242,6 +256,7 @@
 				5C08372820FA4AF900AEBE07 /* Login.storyboard in Resources */,
 				5C6416C92105E444008E0AC9 /* ShowDetails.storyboard in Resources */,
 				5C19049620FF473F00260FA2 /* Home.storyboard in Resources */,
+				5C3F1A28210E92880083E956 /* EpisodeDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +323,7 @@
 				5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */,
 				5C64171C210B7A5F008E0AC9 /* TVShowsUserDefaults.swift in Sources */,
 				5C6416FA2107B39D008E0AC9 /* AddNewEpisodeViewController.swift in Sources */,
+				5C3F1A26210E92600083E956 /* EpisodeDetailsViewController.swift in Sources */,
 				5C6416C421051128008E0AC9 /* TVShowsCell.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
 				5C64171F210C9187008E0AC9 /* TVShowsKeyChain.swift in Sources */,
