@@ -65,7 +65,7 @@ class EpisodeDetailsViewController: UIViewController {
     
     // MARK: - Private
     private func configureScrollView() {
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     }
     
     
