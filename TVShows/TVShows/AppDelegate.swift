@@ -22,8 +22,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                          blue: CGFloat(140.0/255),
                                                          alpha: CGFloat(1))
         UINavigationBar.appearance().shadowImage = UIImage()
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-//        UINavigationBar.appearance().isTranslucent = true
+        
+        //        if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
+        //            let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
+        //            guard
+        //                let email = keychain[TVShowsKeyChain.email.rawValue],
+        //                let password = keychain[TVShowsKeyChain.password.rawValue]
+        //                else { return true }
+        //
+        //            let parameters: [String: String] = [
+        //                "email": email,
+        //                "password": password
+        //            ]
+        //
+        //            Alamofire
+        //                .request("https://api.infinum.academy/api/users/sessions",
+        //                         method: .post,
+        //                         parameters: parameters,
+        //                         encoding: JSONEncoding.default)
+        //                .validate()
+        //                .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
+        //
+        //                    guard let `self` = self else { return }
+        //
+        //                    SVProgressHUD.dismiss()
+        //                    switch response.result {
+        //                    case .success(let loginData):
+        //                        SwiftyLog.info("Success: \(loginData)")
+        //
+        //                        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //                        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
+        //                            as! HomeViewController
+        //                        viewController.loginData = loginData
+        //                        let nc = UINavigationController(rootViewController: viewController)
+        //                        self.window = UIWindow(frame: UIScreen.main.bounds)
+        //                        self.window?.rootViewController=nc
+        //                        self.window?.makeKeyAndVisible()
+        //                    case .failure(let error):
+        //                       SwiftyLog.error("\(error.localizedDescription)")
+        //                    }
+        //            }
+        //
+        //
+        //
+        //        }
         
         return true
     }
