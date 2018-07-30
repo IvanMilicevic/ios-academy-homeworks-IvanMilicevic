@@ -20,6 +20,7 @@ class CommentsViewController: UIViewController {
     // MARK: - private functions
     private func configureNavigationBar() {
         self.title="Comments"
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         let img = UIImage(named: "ic-navigate-back")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
                                                            style: .plain,
