@@ -255,7 +255,7 @@ extension ShowDetailsViewController: UITableViewDelegate {
             as! EpisodeDetailsViewController
         
         
-        viewController.configure(id: episodesArray[indexPath.row-2].title, login: loginData)
+        viewController.configure(id: episodesArray[indexPath.row-2].id, login: loginData)
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(viewController, animated: true)
     }
