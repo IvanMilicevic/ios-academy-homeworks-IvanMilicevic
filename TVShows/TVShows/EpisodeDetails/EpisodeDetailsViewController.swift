@@ -11,6 +11,7 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 import Spring
+import Kingfisher
 
 class EpisodeDetailsViewController: UIViewController {
     
@@ -29,6 +30,7 @@ class EpisodeDetailsViewController: UIViewController {
     
     // MARK: - Private
     private var episodeDetails: EpisodeDetails?
+    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -98,8 +100,46 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     private func setUpView() {
+        guard
+            let title = episodeDetails?.title,
+            let description = episodeDetails?.description,
+            let episodeNumber = episodeDetails?.episodeNumber,
+            let season = episodeDetails?.season,
+            let imageUrl = episodeDetails?.imageUrl,
+            let token = loginData?.token
+            else {
+                return
+        }
+        var episodeNum = "?"
+        var seasonNum = "?"
+        if isNumber(string: episodeNumber) {
+            episodeNum = String(Int(episodeNumber)!) //get rid of possible 0 before number
+        }
+        if isNumber(string: season) {
+            seasonNum = String(Int(season)!) //get rid of possible 0 before number
+        }
+        seasonAndEpisodeNumberLabel.text = "S\(seasonNum) Ep\(episodeNum)"
         
+        let url = URL(string: "https://api.infinum.academy\(imageUrl)");
+        let modifier = AnyModifier { request in
+            var r = request
+            r.setValue(token, forHTTPHeaderField: "Authorization")
+            return r
+        }
+        episodeImageView.kf.setImage(with: url, placeholder: placeholderImg, options: [.requestModifier(modifier)])
         
+        titleLabel.text=title
+        descriptionLabel.text=description
+    }
+    
+    private func isNumber (string: String) -> Bool {
+        let num = Int(string);
+        
+        if num != nil {
+            return true
+        } else {
+            return false
+        }
     }
     
     
