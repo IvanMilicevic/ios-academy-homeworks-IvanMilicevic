@@ -15,6 +15,8 @@
 		5C19049620FF473F00260FA2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C19049520FF473F00260FA2 /* Home.storyboard */; };
 		5C3F1A26210E92600083E956 /* EpisodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A25210E92600083E956 /* EpisodeDetailsViewController.swift */; };
 		5C3F1A28210E92880083E956 /* EpisodeDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */; };
+		5C3F1A2B210F413B0083E956 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */; };
+		5C3F1A2D210F41480083E956 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2C210F41480083E956 /* Comments.storyboard */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 		5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416C121049E55008E0AC9 /* CodableStorage.swift */; };
@@ -41,6 +43,8 @@
 		5C19049520FF473F00260FA2 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		5C3F1A25210E92600083E956 /* EpisodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailsViewController.swift; sourceTree = "<group>"; };
 		5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EpisodeDetails.storyboard; sourceTree = "<group>"; };
+		5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		5C3F1A2C210F41480083E956 /* Comments.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +107,15 @@
 			path = EpisodeDetails;
 			sourceTree = "<group>";
 		};
+		5C3F1A29210F3EF40083E956 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */,
+				5C3F1A2C210F41480083E956 /* Comments.storyboard */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
 		5C40338F20EE6F2A008A0C2F = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +143,7 @@
 				5C6416C52105E2B1008E0AC9 /* ShowDetails */,
 				5C6416F62107B340008E0AC9 /* AddNewEpisode */,
 				5C3F1A22210E91C00083E956 /* EpisodeDetails */,
+				5C3F1A29210F3EF40083E956 /* Comments */,
 				5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */,
 				5C4033A220EE6F2D008A0C2F /* Assets.xcassets */,
 				5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */,
@@ -250,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C3F1A2D210F41480083E956 /* Comments.storyboard in Resources */,
 				5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */,
 				5C6416F82107B373008E0AC9 /* AddNewEpisode.storyboard in Resources */,
 				5C08372920FA55B800AEBE07 /* Assets.xcassets in Resources */,
@@ -319,6 +334,7 @@
 				5C6416C72105E30B008E0AC9 /* ShowDetailsViewController.swift in Sources */,
 				5C6416F121067B00008E0AC9 /* TVShowsImageCell.swift in Sources */,
 				5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */,
+				5C3F1A2B210F413B0083E956 /* CommentsViewController.swift in Sources */,
 				5CD3ABDD210092ED006A0E88 /* User.swift in Sources */,
 				5C08372420FA4A3B00AEBE07 /* LoginViewController.swift in Sources */,
 				5C64171C210B7A5F008E0AC9 /* TVShowsUserDefaults.swift in Sources */,
