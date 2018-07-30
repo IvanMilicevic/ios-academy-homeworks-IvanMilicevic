@@ -10,9 +10,11 @@ import UIKit
 
 class EpisodeDetailsViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
         // Do any additional setup after loading the view.
     }
 
