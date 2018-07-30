@@ -10,26 +10,26 @@ import UIKit
 
 class CommentsViewController: UIViewController {
 
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        configureNavigationBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - private functions
+    private func configureNavigationBar() {
+        self.title="Comments"
+        let img = UIImage(named: "ic-navigate-back")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didGoBack))
     }
-    */
+    
+    // MARK: - objC Functions
+    @objc func didGoBack() {
+        dismiss(animated: true, completion: nil)
+    }
 
 }
