@@ -243,6 +243,16 @@ extension ShowDetailsViewController: UITableViewDataSource {
 
 extension ShowDetailsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_EpisodeDetails")
+            as! EpisodeDetailsViewController
+        
+//        viewController.configure(id: showsArray[indexPath.row].id, login: loginData!)
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
 }
 
 extension ShowDetailsViewController: TVShowDetailsDelegate {
