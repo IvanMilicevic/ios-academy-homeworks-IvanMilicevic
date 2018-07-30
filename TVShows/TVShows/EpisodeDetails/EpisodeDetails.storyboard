@@ -43,8 +43,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL1-23-mTq">
-                                                <rect key="frame" x="15" y="430" width="340" height="284.5"/>
-                                                <mutableString key="text">Andy decides to throws a garden party at Schrute Farms to impress both Robert and his parents. Andy is noticeably jealous at the amount of attention his younger brother Walter Bernard, Jr. receives from his father, and he thinks that by throwing an elaborate party he can ensure his father's blessings. Andy decides to throws a garden party at Schrute Farms to impress both Robert and his parents. Andy is noticeably jealous at the amount of attention his younger brother Walter Bernard, Jr. receives from his father, and he thinks that by throwing an elaborate party he can ensure his father's blessings</mutableString>
+                                                <rect key="frame" x="15" y="430" width="340" height="142.5"/>
+                                                <string key="text">Andy decides to throws a garden party at Schrute Farms to impress both Robert and his parents. Andy is noticeably jealous at the amount of attention his younger brother Walter Bernard, Jr. receives from his father, and he thinks that by throwing an elaborate party he can ensure his father's blessings.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -84,6 +84,17 @@
                                     <constraint firstAttribute="width" constant="25" id="WFq-fj-GNw"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wi-x3-DXy">
+                                <rect key="frame" x="20" y="40" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Ad2-wN-mWs"/>
+                                    <constraint firstAttribute="width" constant="32" id="xhF-ya-iF9"/>
+                                </constraints>
+                                <state key="normal" image="ic-navigate-back"/>
+                                <connections>
+                                    <action selector="didGoBack:" destination="ZPG-be-bCE" eventType="touchUpInside" id="VtC-Iw-1Bw"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czu-nm-iFT">
                                 <rect key="frame" x="45" y="625" width="75" height="30"/>
                                 <constraints>
@@ -100,15 +111,19 @@
                             <constraint firstItem="B5x-vf-HvN" firstAttribute="bottom" secondItem="GeO-l7-P4U" secondAttribute="bottom" constant="15" id="3nm-mw-A64"/>
                             <constraint firstItem="2BM-14-5W4" firstAttribute="top" secondItem="B5x-vf-HvN" secondAttribute="top" id="4pN-NO-ejo"/>
                             <constraint firstItem="B5x-vf-HvN" firstAttribute="trailing" secondItem="2BM-14-5W4" secondAttribute="trailing" id="Cq2-li-FQ4"/>
+                            <constraint firstItem="4wi-x3-DXy" firstAttribute="top" secondItem="B5x-vf-HvN" secondAttribute="top" constant="20" id="FkI-p9-z4b"/>
                             <constraint firstItem="2BM-14-5W4" firstAttribute="leading" secondItem="B5x-vf-HvN" secondAttribute="leading" id="Fsp-Zi-ALe"/>
                             <constraint firstItem="czu-nm-iFT" firstAttribute="leading" secondItem="B5x-vf-HvN" secondAttribute="leading" constant="45" id="GJ1-MK-nIw"/>
                             <constraint firstItem="B5x-vf-HvN" firstAttribute="bottom" secondItem="czu-nm-iFT" secondAttribute="bottom" constant="12" id="fco-rO-F8d"/>
                             <constraint firstItem="B5x-vf-HvN" firstAttribute="bottom" secondItem="2BM-14-5W4" secondAttribute="bottom" id="i2E-Td-O2a"/>
                             <constraint firstItem="GeO-l7-P4U" firstAttribute="leading" secondItem="B5x-vf-HvN" secondAttribute="leading" constant="15" id="s5f-rm-0pr"/>
+                            <constraint firstItem="4wi-x3-DXy" firstAttribute="leading" secondItem="B5x-vf-HvN" secondAttribute="leading" constant="20" id="ygd-S5-cXk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B5x-vf-HvN"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="4wi-x3-DXy" id="3Xl-gz-o2t"/>
+                        <outlet property="commentsButton" destination="czu-nm-iFT" id="Hlo-6T-VwA"/>
                         <outlet property="scrollView" destination="2BM-14-5W4" id="feF-Up-Qry"/>
                     </connections>
                 </viewController>
@@ -118,6 +133,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic-navigate-back" width="32" height="32"/>
         <image name="img-placehoder-comments" width="107" height="102"/>
         <image name="resizer.php" width="620" height="348"/>
     </resources>
