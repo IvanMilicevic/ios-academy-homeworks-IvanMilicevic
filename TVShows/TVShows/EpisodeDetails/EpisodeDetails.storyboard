@@ -124,7 +124,11 @@
                     <connections>
                         <outlet property="backButton" destination="4wi-x3-DXy" id="3Xl-gz-o2t"/>
                         <outlet property="commentsButton" destination="czu-nm-iFT" id="Hlo-6T-VwA"/>
+                        <outlet property="descriptionLabel" destination="GL1-23-mTq" id="Ig4-Te-FVB"/>
+                        <outlet property="episodeImageView" destination="xUs-Yc-swH" id="tzb-CK-Fzk"/>
                         <outlet property="scrollView" destination="2BM-14-5W4" id="feF-Up-Qry"/>
+                        <outlet property="seasonAndEpisodeNumberLabel" destination="1Ou-rJ-EUu" id="5Ca-dv-baQ"/>
+                        <outlet property="titleLabel" destination="dNT-Bt-qOT" id="qkE-MB-AK2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="led-d9-Cii" userLabel="First Responder" sceneMemberID="firstResponder"/>

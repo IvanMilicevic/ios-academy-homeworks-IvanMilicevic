@@ -46,6 +46,7 @@ class ShowDetailsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    // MARK: - Public
     func configure(id: String, login: LoginData) {
         loginData =  login
         showID = id
@@ -215,13 +216,15 @@ extension ShowDetailsViewController: UITableViewDataSource {
                     for: indexPath
                 ) as! TVShowsImageCell
                 cell.configure(with: showDetails, auth: loginData)
+                cell.selectionStyle = .none
                 return cell
             case 1:
                 let cell = showDetailsTableView.dequeueReusableCell(
                     withIdentifier: "TVShowsDescriptionCell",
                     for: indexPath
                 ) as! TVShowsDescriptionCell
-            
+                cell.selectionStyle = .none
+                
                 if showDetails != nil {
                     cell.configure(with: showDetails!, count: episodesArray.count )
                     return cell
@@ -244,11 +247,15 @@ extension ShowDetailsViewController: UITableViewDataSource {
 extension ShowDetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 || indexPath.row == 1{
+            return
+        }
         let storyboard = UIStoryboard(name: "EpisodeDetails", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_EpisodeDetails")
             as! EpisodeDetailsViewController
         
-//        viewController.configure(id: showsArray[indexPath.row].id, login: loginData!)
+        
+        viewController.configure(id: episodesArray[indexPath.row-2].title, login: loginData)
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(viewController, animated: true)
     }
