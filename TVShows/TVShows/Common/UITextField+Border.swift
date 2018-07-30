@@ -36,6 +36,7 @@ extension UITextField {
         animation.toValue = CGPoint(x: self.center.x+4, y: self.center.y)
         
         self.layer.add(animation, forKey: "position")
+        setBottomBorderRed()
     }
     
 }

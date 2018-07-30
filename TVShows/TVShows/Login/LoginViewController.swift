@@ -166,14 +166,12 @@ class LoginViewController: UIViewController {
     private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
         if email.isEmpty {
-            emailTextField.setBottomBorderRed()
             emailTextField.shake()
             loginIsOk = false
         } else {
             emailTextField.setBottomBorderDefault()
         }
         if password.isEmpty {
-            passwordTextField.setBottomBorderRed()
             passwordTextField.shake()
             loginIsOk = false
         } else {
