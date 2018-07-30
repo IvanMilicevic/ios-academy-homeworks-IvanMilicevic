@@ -45,6 +45,18 @@ class EpisodeDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func didGoToComments(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Comments", bundle: nil)
+        let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Comments")
+            as! CommentsViewController
+        
+//        CommentsViewController.sth = sth
+//        CommentsViewController.sth = sth
+        
+        let navigationController = UINavigationController.init(rootViewController: addEpViewController)
+        present(navigationController, animated: true, completion: nil)
+    }
+    
     // MARK: - Public
     func configure(id: String, login: LoginData) {
         loginData =  login

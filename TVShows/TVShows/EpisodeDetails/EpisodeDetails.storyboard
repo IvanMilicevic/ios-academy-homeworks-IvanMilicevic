@@ -104,6 +104,9 @@
                                 <state key="normal" title="Comments">
                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="didGoToComments:" destination="ZPG-be-bCE" eventType="touchUpInside" id="2wf-vu-hVY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
