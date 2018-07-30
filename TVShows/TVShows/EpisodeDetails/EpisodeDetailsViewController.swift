@@ -110,6 +110,13 @@ class EpisodeDetailsViewController: UIViewController {
             else {
                 return
         }
+        seasonAndEpisodeNumberLabel.text = getSeasonAndNumber(episodeNumber: episodeNumber, season: season)
+        setUpImageView(imageView: episodeImageView, imageUrl: imageUrl, auth:token)
+        titleLabel.text=title
+        descriptionLabel.text=description
+    }
+    
+    private func getSeasonAndNumber(episodeNumber: String, season: String) -> String{
         var episodeNum = "?"
         var seasonNum = "?"
         if isNumber(string: episodeNumber) {
@@ -118,18 +125,7 @@ class EpisodeDetailsViewController: UIViewController {
         if isNumber(string: season) {
             seasonNum = String(Int(season)!) //get rid of possible 0 before number
         }
-        seasonAndEpisodeNumberLabel.text = "S\(seasonNum) Ep\(episodeNum)"
-        
-        let url = URL(string: "https://api.infinum.academy\(imageUrl)");
-        let modifier = AnyModifier { request in
-            var r = request
-            r.setValue(token, forHTTPHeaderField: "Authorization")
-            return r
-        }
-        episodeImageView.kf.setImage(with: url, placeholder: placeholderImg, options: [.requestModifier(modifier)])
-        
-        titleLabel.text=title
-        descriptionLabel.text=description
+        return "S\(seasonNum) Ep\(episodeNum)"
     }
     
     private func isNumber (string: String) -> Bool {
@@ -140,6 +136,16 @@ class EpisodeDetailsViewController: UIViewController {
         } else {
             return false
         }
+    }
+    
+    private func setUpImageView(imageView: UIImageView, imageUrl: String, auth: String) {
+        let url = URL(string: "https://api.infinum.academy\(imageUrl)");
+        let modifier = AnyModifier { request in
+            var r = request
+            r.setValue(auth, forHTTPHeaderField: "Authorization")
+            return r
+        }
+        imageView.kf.setImage(with: url, placeholder: placeholderImg, options: [.requestModifier(modifier)])
     }
     
     
