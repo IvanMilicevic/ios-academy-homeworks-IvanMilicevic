@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+import Alamofire
 
 class CommentsViewController: UIViewController {
 
@@ -29,6 +31,7 @@ class CommentsViewController: UIViewController {
     // MARK: - private
     private let cornerRadius: CGFloat = 18
     private let bottomConstraint: CGFloat = 10
+    private var commentsArray: [Comment] = []
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -37,6 +40,7 @@ class CommentsViewController: UIViewController {
         inputTextField.setCornerRadius(cornerRadius: cornerRadius)
         configureNavigationBar()
         addKeyboardEventsHandlers()
+        fetchComments()
     }
     
     // MARK: - Public
@@ -69,6 +73,33 @@ class CommentsViewController: UIViewController {
                                                object: nil)
     }
     
+    private func fetchComments() {
+        
+        let headers = ["Authorization": loginData.token]
+        
+        SVProgressHUD.show()
+        Alamofire
+            .request("https://api.infinum.academy/api/episodes/\(episodeID!)/comments",
+                method: .get,
+                encoding: JSONEncoding.default,
+                headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[Comment]>) in
+                
+                guard let `self` = self else { return }
+                
+                SVProgressHUD.dismiss()
+                switch response.result {
+                case .success(let comments):
+                    self.commentsArray = comments
+                    SwiftyLog.info("Comments fetched - \(comments)")
+                    self.commentsTableView.reloadData()
+                case .failure(let error):
+                    SwiftyLog.error("Fetching episode details went wrong - \(error)")
+                }
+        }
+    }
+    
     // MARK: - objC Functions
     @objc func didGoBack() {
         dismiss(animated: true, completion: nil)
@@ -99,7 +130,7 @@ extension CommentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return commentsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
