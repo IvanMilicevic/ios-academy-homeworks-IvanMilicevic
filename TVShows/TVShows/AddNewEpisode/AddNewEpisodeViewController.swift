@@ -140,7 +140,7 @@ class AddNewEpisodeViewController: UIViewController {
 
         let headers = ["Authorization": token]
         let imageByteData = UIImagePNGRepresentation(image)!
-        
+        SVProgressHUD.show()
         Alamofire
             .upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(imageByteData,
@@ -158,6 +158,7 @@ class AddNewEpisodeViewController: UIViewController {
                     SwiftyLog.debug("uploadImageOnAPI : SUCESS")
                     self?.processUploadRequest(uploadRequest)
                 case .failure(let encodingError):
+                    SVProgressHUD.dismiss()
                     SwiftyLog.debug("uploadImageOnAPI : FAILURE")
                     SwiftyLog.error("\(encodingError)")
                 } }
@@ -174,6 +175,7 @@ class AddNewEpisodeViewController: UIViewController {
                     SwiftyLog.info("DECODED: \(media)")
                     self.uploadEpisode(mediaID: media.id)
                 case .failure(let error):
+                    SVProgressHUD.dismiss()
                     SwiftyLog.debug("processUploadRequest : FAILURE")
                     SwiftyLog.error("FAILURE: \(error)")
                 }
@@ -201,7 +203,6 @@ class AddNewEpisodeViewController: UIViewController {
                           "season": seasonNumber
         ]
         
-        SVProgressHUD.show()
         Alamofire.request("https://api.infinum.academy/api/episodes",
                           method: .post,
                           parameters: parameters,
@@ -209,7 +210,7 @@ class AddNewEpisodeViewController: UIViewController {
                           headers: headers)
             .validate()
             .responseJSON {  [weak self]  dataResponse in
-                SVProgressHUD.dismiss()
+                
                 
                 guard let `self` = self else { return }
                 
@@ -219,7 +220,9 @@ class AddNewEpisodeViewController: UIViewController {
                     SwiftyLog.info("Sucess \(response)")
                     self.delegate?.reloadEpisodes()
                     self.dismiss(animated: true, completion: nil)
+                    SVProgressHUD.showSuccess(withStatus: "Episode added")
                 case .failure(let error):
+                    SVProgressHUD.dismiss()
                     self.alertUser(title: "Error",
                                    message: "Episode is not added: \(error.localizedDescription)",
                         warning: "Failed to add episode")
