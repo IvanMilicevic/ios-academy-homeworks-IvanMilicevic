@@ -72,7 +72,7 @@
                                                     <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Well this episode is reaaly bad, but why such a time wasting" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09f-wI-fJQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Well this episode is reaaly bad, but why such a time wasting" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09f-wI-fJQ">
                                                     <rect key="frame" x="65" y="36.5" width="285.5" height="31.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -86,11 +86,19 @@
                                                 <constraint firstItem="09f-wI-fJQ" firstAttribute="top" secondItem="mvV-gx-wff" secondAttribute="bottom" constant="7" id="J8d-EA-hwf"/>
                                                 <constraint firstItem="eih-W9-jvq" firstAttribute="top" secondItem="apQ-nd-b5t" secondAttribute="top" constant="10" id="LDG-Fy-DIN"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="09f-wI-fJQ" secondAttribute="bottom" constant="8" id="PmX-dB-GQs"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eih-W9-jvq" secondAttribute="bottom" constant="10" id="SZh-C7-fcb"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="09f-wI-fJQ" secondAttribute="trailing" constant="10" id="alG-Hc-Tr6"/>
                                                 <constraint firstItem="mvV-gx-wff" firstAttribute="top" secondItem="apQ-nd-b5t" secondAttribute="top" constant="10" id="fHX-at-g6G"/>
                                                 <constraint firstItem="eih-W9-jvq" firstAttribute="leading" secondItem="apQ-nd-b5t" secondAttribute="leading" constant="10" id="gPw-54-QgO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentTextLabel" destination="09f-wI-fJQ" id="la2-AY-eZA"/>
+                                            <outlet property="imageView" destination="eih-W9-jvq" id="VHW-2g-qsS"/>
+                                            <outlet property="textLabel" destination="09f-wI-fJQ" id="wUL-Ml-rs3"/>
+                                            <outlet property="titleLabel" destination="mvV-gx-wff" id="PHb-5E-8vG"/>
+                                            <outlet property="userImageView" destination="eih-W9-jvq" id="leX-kI-JKd"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

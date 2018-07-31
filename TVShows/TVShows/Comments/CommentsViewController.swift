@@ -17,6 +17,7 @@ class CommentsViewController: UIViewController {
         didSet {
             commentsTableView.dataSource = self
             commentsTableView.delegate = self
+            commentsTableView.estimatedRowHeight=70
         }
     }
     @IBOutlet weak var inputTextField: UITextField!
@@ -138,6 +139,8 @@ extension CommentsViewController: UITableViewDataSource {
             withIdentifier: "CommentsCell",
             for: indexPath
             ) as! CommentsCell
+        
+        cell.configure(with: commentsArray[indexPath.row])
         
         return cell
     }
