@@ -22,15 +22,21 @@ class AddNewEpisodeViewController: UIViewController {
     @IBOutlet weak var seasonNumberTextField: UITextField!
     @IBOutlet weak var episodeNumberTextField: UITextField!
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Public
     var loginData: LoginData?
     var showID: String?
     weak var delegate: TVShowDetailsDelegate?
     
+    // MARK: - private
+    private let imagePicker = UIImagePickerController()
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePicker.delegate = self
         
         configureNavigationBar()
         configureTextFieldBorders()
@@ -38,9 +44,7 @@ class AddNewEpisodeViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
-        alertUser(title: "Oops",
-                  message: "This feature is not implemented yet.",
-                  warning: "Api sucks...")
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
     // MARK: - objC Functions
@@ -104,6 +108,7 @@ class AddNewEpisodeViewController: UIViewController {
     // MARK: - Private functions
     private func configureNavigationBar() {
         self.title = "Add Episode"
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
                                                            target: self,
@@ -129,6 +134,8 @@ class AddNewEpisodeViewController: UIViewController {
             (action:UIAlertAction) in
             SwiftyLog.warning(warning)
         })
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -167,4 +174,23 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
 
+}
+
+extension AddNewEpisodeViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imageView.image=image
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension AddNewEpisodeViewController: UINavigationControllerDelegate {
+    
 }
