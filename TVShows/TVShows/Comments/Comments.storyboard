@@ -40,6 +40,9 @@
                                         <state key="normal" title="Post">
                                             <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didPost:" destination="oHJ-P9-Pp1" eventType="touchUpInside" id="9PM-WD-C4U"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

@@ -44,6 +44,45 @@ class CommentsViewController: UIViewController {
         fetchComments()
     }
     
+    // MARK: - IBActions
+    @IBAction func didPost(_ sender: Any) {
+        guard
+            let text = inputTextField.text,
+            !text.isEmpty
+            else {
+                return
+        }
+        
+        let headers = ["Authorization": loginData.token]
+        let parameters = ["text": text,
+                          "episodeId": episodeID!]
+        
+        SVProgressHUD.show()
+        Alamofire.request("https://api.infinum.academy/api/comments",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers)
+            .validate()
+            .responseJSON {  [weak self]  dataResponse in
+                SVProgressHUD.dismiss()
+                
+                guard let `self` = self else { return }
+                
+                switch dataResponse.result {
+                case .success(let response):
+                    SwiftyLog.info("Sucess \(response)")
+                    self.fetchComments()
+                case .failure(let error):
+                    SwiftyLog.error("\(error)")
+                    self.alertUser(title: "Error",
+                                   message: "Episode is not added: \(error.localizedDescription)",
+                        warning: "Failed to add episode")
+                }
+        }
+        
+    }
+    
     // MARK: - Public
     func configure(id: String, login: LoginData) {
         loginData =  login
@@ -61,6 +100,16 @@ class CommentsViewController: UIViewController {
                                                            action: #selector(didGoBack))
     }
     
+    private func alertUser(title: String, message: String, warning: String) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
+            (action:UIAlertAction) in
+            SwiftyLog.warning(warning)
+        })
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     private func addKeyboardEventsHandlers() {
         NotificationCenter.default.addObserver(self,
