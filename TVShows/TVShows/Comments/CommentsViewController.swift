@@ -10,19 +10,21 @@ import UIKit
 
 class CommentsViewController: UIViewController {
 
-    // MARK: - IBOutlets
+    // MARK: - IBOutlet views
     @IBOutlet weak var commentsTableView: UITableView! {
         didSet {
             commentsTableView.dataSource = self
             commentsTableView.delegate = self
-//            commentsTableView.estimatedRowHeight = 100
-//            commentsTableView.rowHeight = UITableViewAutomaticDimension
         }
     }
-
     @IBOutlet weak var inputTextField: UITextField!
     
+    // MARK: - IBOutlet constraints
     @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
+    
+    // MARK: - Public
+    var loginData: LoginData!
+    var episodeID: String!
     
     // MARK: - private
     private let cornerRadius: CGFloat = 18
@@ -35,6 +37,12 @@ class CommentsViewController: UIViewController {
         inputTextField.setCornerRadius(cornerRadius: cornerRadius)
         configureNavigationBar()
         addKeyboardEventsHandlers()
+    }
+    
+    // MARK: - Public
+    func configure(id: String, login: LoginData) {
+        loginData =  login
+        episodeID = id
     }
     
     // MARK: - private functions

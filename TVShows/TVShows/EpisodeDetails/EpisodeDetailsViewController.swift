@@ -50,8 +50,7 @@ class EpisodeDetailsViewController: UIViewController {
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Comments")
             as! CommentsViewController
         
-//        CommentsViewController.sth = sth
-//        CommentsViewController.sth = sth
+        addEpViewController.configure(id: episodeID, login: loginData)
         
         let navigationController = UINavigationController.init(rootViewController: addEpViewController)
         present(navigationController, animated: true, completion: nil)
