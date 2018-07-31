@@ -54,12 +54,7 @@ class AddNewEpisodeViewController: UIViewController {
     
     @objc func didSelectAdd() {
         guard
-            let showID = showID,
-            let token = loginData?.token,
-            let episodeTitle = episodeTitleTextField.text,
-            let seasonNumber = seasonNumberTextField.text,
-            let episodeNumber = episodeNumberTextField.text,
-            let episodeDescription = episodeDescriptionTextField.text
+            let token = loginData?.token
         else {
             return
         }
@@ -68,39 +63,7 @@ class AddNewEpisodeViewController: UIViewController {
             return
         }
         
-        let headers = ["Authorization": token]
-        let parameters = ["showId": showID,
-                          "mediaId": "mediaID",
-                          "title": episodeTitle,
-                          "description": episodeDescription,
-                          "episodeNumber": episodeNumber,
-                          "season": seasonNumber
-        ]
-        
-        SVProgressHUD.show()
-        Alamofire.request("https://api.infinum.academy/api/episodes",
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default,
-                          headers: headers)
-            .validate()
-            .responseJSON {  [weak self]  dataResponse in
-                SVProgressHUD.dismiss()
-                
-                guard let `self` = self else { return }
-                
-                switch dataResponse.result {
-                    
-                    case .success(let response):
-                        SwiftyLog.info("Sucess \(response)")
-                        self.delegate?.reloadEpisodes()
-                        self.dismiss(animated: true, completion: nil)
-                    case .failure(let error):
-                        self.alertUser(title: "Error",
-                                       message: "Episode is not added: \(error.localizedDescription)",
-                                       warning: "Failed to add episode")
-                }
-        }
+        uploadImageOnAPI(token: token, image: imageView.image!)
     }
     
 
@@ -170,6 +133,97 @@ class AddNewEpisodeViewController: UIViewController {
                 field.setBottomBorderDefault()
                 return true
             }
+        }
+    }
+    
+    private func uploadImageOnAPI(token: String, image: UIImage) {
+
+        let headers = ["Authorization": token]
+        let imageByteData = UIImagePNGRepresentation(image)!
+        
+        Alamofire
+            .upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imageByteData,
+                                         withName: "file",
+                                         fileName: "image.png",
+                                         mimeType: "image/png")
+            }, to: "https://api.infinum.academy/api/media",
+               method: .post,
+               headers: headers)
+            { [weak self] result in
+                
+                SwiftyLog.debug("UPLOAD ON API:")
+                switch result {
+                case .success(let uploadRequest, _, _):
+                    SwiftyLog.debug("uploadImageOnAPI : SUCESS")
+                    self?.processUploadRequest(uploadRequest)
+                case .failure(let encodingError):
+                    SwiftyLog.debug("uploadImageOnAPI : FAILURE")
+                    SwiftyLog.error("\(encodingError)")
+                } }
+    }
+    
+    private func processUploadRequest(_ uploadRequest: UploadRequest) {
+        uploadRequest
+            .responseDecodableObject(keyPath: "data") { (response:
+                DataResponse<Media>) in
+                SwiftyLog.debug("processUploadRequest")
+                switch response.result {
+                case .success(let media):
+                    SwiftyLog.debug("processUploadRequest : SUCESS")
+                    SwiftyLog.info("DECODED: \(media)")
+                    self.uploadEpisode(mediaID: media.id)
+                case .failure(let error):
+                    SwiftyLog.debug("processUploadRequest : FAILURE")
+                    SwiftyLog.error("FAILURE: \(error)")
+                }
+        }
+    }
+    
+    private func uploadEpisode(mediaID: String) {
+        guard
+            let showID = showID,
+            let token = loginData?.token,
+            let episodeTitle = episodeTitleTextField.text,
+            let seasonNumber = seasonNumberTextField.text,
+            let episodeNumber = episodeNumberTextField.text,
+            let episodeDescription = episodeDescriptionTextField.text
+            else {
+                return
+        }
+        
+        let headers = ["Authorization": token]
+        let parameters = ["showId": showID,
+                          "mediaId": mediaID,
+                          "title": episodeTitle,
+                          "description": episodeDescription,
+                          "episodeNumber": episodeNumber,
+                          "season": seasonNumber
+        ]
+        
+        SVProgressHUD.show()
+        Alamofire.request("https://api.infinum.academy/api/episodes",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers)
+            .validate()
+            .responseJSON {  [weak self]  dataResponse in
+                SVProgressHUD.dismiss()
+                
+                guard let `self` = self else { return }
+                
+                switch dataResponse.result {
+                    
+                case .success(let response):
+                    SwiftyLog.info("Sucess \(response)")
+                    self.delegate?.reloadEpisodes()
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    self.alertUser(title: "Error",
+                                   message: "Episode is not added: \(error.localizedDescription)",
+                        warning: "Failed to add episode")
+                }
         }
     }
     
