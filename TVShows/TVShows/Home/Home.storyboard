@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,8 +75,35 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q00-k5-L5S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="fuM-Sz-xa2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="4ah-99-jMF">
+                            <rect key="frame" x="150" y="160" width="75" height="80"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oops, looks like there aren't any shows avaliable at this time." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3h-Es-lSe">
+                            <rect key="frame" x="20" y="255" width="335" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="yjm-QH-Jqn" firstAttribute="trailing" secondItem="l3h-Es-lSe" secondAttribute="trailing" constant="20" id="A4z-zZ-pZn"/>
+                        <constraint firstItem="4ah-99-jMF" firstAttribute="centerY" secondItem="fuM-Sz-xa2" secondAttribute="centerY" multiplier="0.8" id="OgA-h9-Nk7"/>
+                        <constraint firstItem="4ah-99-jMF" firstAttribute="centerX" secondItem="fuM-Sz-xa2" secondAttribute="centerX" id="Q2a-N0-6YX"/>
+                        <constraint firstItem="l3h-Es-lSe" firstAttribute="top" secondItem="4ah-99-jMF" secondAttribute="bottom" constant="15" id="ZnE-V4-MXf"/>
+                        <constraint firstItem="l3h-Es-lSe" firstAttribute="leading" secondItem="yjm-QH-Jqn" secondAttribute="leading" constant="20" id="bcG-YO-Zp4"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="yjm-QH-Jqn"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="85.599999999999994" y="150.67466266866569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="login-logo" width="75" height="80"/>
+    </resources>
 </document>
