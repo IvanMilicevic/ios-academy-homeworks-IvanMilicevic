@@ -14,6 +14,12 @@ class CommentsCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var commentTextLabel: UILabel!
     
+    // MARK: - View Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
 
