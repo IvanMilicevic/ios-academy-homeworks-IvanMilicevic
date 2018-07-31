@@ -20,12 +20,18 @@ class CommentsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
+    
+    // MARK: - private
+    private let loginCornerRadius: CGFloat = 10
+    private let bottomConstraint: CGFloat = 10
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationBar()
+        addKeyboardEventsHandlers()
     }
     
     // MARK: - private functions
@@ -39,9 +45,41 @@ class CommentsViewController: UIViewController {
                                                            action: #selector(didGoBack))
     }
     
+    
+    private func addKeyboardEventsHandlers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    
+    
+    
     // MARK: - objC Functions
     @objc func didGoBack() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        inputBatBottomConstraint.constant=bottomConstraint+keyboardFrame.size.height
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification) {
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        inputBatBottomConstraint.constant=bottomConstraint
     }
 
 }
@@ -53,7 +91,7 @@ extension CommentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
