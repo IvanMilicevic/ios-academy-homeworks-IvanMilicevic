@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -125,11 +126,45 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qky-ps-Md4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="0Rk-CE-4op">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-placehoder-comments" translatesAutoresizingMaskIntoConstraints="NO" id="YIL-Xt-c9f">
+                            <rect key="frame" x="134" y="149" width="107" height="102"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, we don't have comments yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-fE-k1f">
+                            <rect key="frame" x="20" y="266" width="335" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be first who will write a review." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XF-Pj-zQf">
+                            <rect key="frame" x="20" y="287" width="335" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ALa-fE-k1f" firstAttribute="top" secondItem="YIL-Xt-c9f" secondAttribute="bottom" constant="15" id="31v-Mx-9mo"/>
+                        <constraint firstItem="Lh0-Vu-rz0" firstAttribute="trailing" secondItem="5XF-Pj-zQf" secondAttribute="trailing" constant="20" id="5FI-0W-iDF"/>
+                        <constraint firstItem="5XF-Pj-zQf" firstAttribute="leading" secondItem="Lh0-Vu-rz0" secondAttribute="leading" constant="20" id="Ec6-43-hQn"/>
+                        <constraint firstItem="ALa-fE-k1f" firstAttribute="leading" secondItem="Lh0-Vu-rz0" secondAttribute="leading" constant="20" id="LRZ-wE-SSG"/>
+                        <constraint firstItem="5XF-Pj-zQf" firstAttribute="top" secondItem="ALa-fE-k1f" secondAttribute="bottom" id="Sig-u4-thY"/>
+                        <constraint firstItem="YIL-Xt-c9f" firstAttribute="centerX" secondItem="0Rk-CE-4op" secondAttribute="centerX" id="aQd-x4-89w"/>
+                        <constraint firstItem="Lh0-Vu-rz0" firstAttribute="trailing" secondItem="ALa-fE-k1f" secondAttribute="trailing" constant="20" id="fmN-vV-tWS"/>
+                        <constraint firstItem="YIL-Xt-c9f" firstAttribute="centerY" secondItem="0Rk-CE-4op" secondAttribute="centerY" multiplier="0.8" id="zDw-cH-5Ig"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Lh0-Vu-rz0"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="80.799999999999997" y="155.17241379310346"/>
         </scene>
     </scenes>
     <resources>
+        <image name="img-placehoder-comments" width="107" height="102"/>
         <image name="img-placeholder-user1" width="48" height="48"/>
     </resources>
 </document>
