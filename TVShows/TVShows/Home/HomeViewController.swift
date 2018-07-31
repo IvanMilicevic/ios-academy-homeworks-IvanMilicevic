@@ -11,6 +11,7 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 import Kingfisher
+import Spring
 
 class HomeViewController: UIViewController {
     
@@ -29,6 +30,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Private
     private var showsArray: [Show] = []
+    private let refresher = UIRefreshControl()
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -36,6 +38,7 @@ class HomeViewController: UIViewController {
         
         fetchShowsArray()
         configureNavigationBar()
+        setUpRefresheControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +49,12 @@ class HomeViewController: UIViewController {
     }
     
      // MARK: - Private Functions
+    private func setUpRefresheControl() {
+        refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
+        refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
+        homeTableView.refreshControl = refresher
+    }
+    
     private func fetchShowsArray() {
         guard
             let token = loginData?.token
@@ -132,6 +141,16 @@ class HomeViewController: UIViewController {
     @objc func didLogout() {
         UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func updateTableView() {
+        fetchShowsArray()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
     }
 
 }

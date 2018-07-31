@@ -33,11 +33,13 @@ class ShowDetailsViewController: UIViewController {
     private var showID: String!
     private var showDetails: ShowDetails?
     private var episodesArray: [ShowEpisode] = []
+    private let refresher = UIRefreshControl()
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpRefresheControl()
         fetchShowDetails()
     }
     
@@ -104,6 +106,14 @@ class ShowDetailsViewController: UIViewController {
                 }
         }
     }
+    
+    private func setUpRefresheControl() {
+        refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
+        refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
+        showDetailsTableView.refreshControl = refresher
+    }
+    
+    
     
     private func fetchShowEpisodes () {
         guard
@@ -193,6 +203,17 @@ class ShowDetailsViewController: UIViewController {
             delayCounter += 1
         }
         
+    }
+    
+    // MARK: - objC Functions
+    @objc func updateTableView() {
+        fetchShowEpisodes()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
     }
 
 }

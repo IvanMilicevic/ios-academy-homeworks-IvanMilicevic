@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import Alamofire
+import Spring
 
 class CommentsViewController: UIViewController {
 
@@ -33,6 +34,7 @@ class CommentsViewController: UIViewController {
     private let cornerRadius: CGFloat = 18
     private let bottomConstraint: CGFloat = 10
     private var commentsArray: [Comment] = []
+    private let refresher = UIRefreshControl()
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -42,6 +44,7 @@ class CommentsViewController: UIViewController {
         configureNavigationBar()
         addKeyboardEventsHandlers()
         fetchComments()
+        setUpRefresheControl()
     }
     
     // MARK: - IBActions
@@ -98,6 +101,12 @@ class CommentsViewController: UIViewController {
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(didGoBack))
+    }
+    
+    private func setUpRefresheControl() {
+        refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
+        refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
+        commentsTableView.refreshControl = refresher
     }
     
     private func alertUser(title: String, message: String, warning: String) {
@@ -169,6 +178,16 @@ class CommentsViewController: UIViewController {
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
         inputBatBottomConstraint.constant=bottomConstraint
+    }
+    
+    @objc func updateTableView() {
+        fetchComments()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
     }
 
 }
