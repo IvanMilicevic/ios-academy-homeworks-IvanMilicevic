@@ -19,17 +19,20 @@ class CommentsViewController: UIViewController {
 //            commentsTableView.rowHeight = UITableViewAutomaticDimension
         }
     }
+
+    @IBOutlet weak var inputTextField: UITextField!
     
     @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
     
     // MARK: - private
-    private let loginCornerRadius: CGFloat = 10
+    private let cornerRadius: CGFloat = 18
     private let bottomConstraint: CGFloat = 10
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        inputTextField.setCornerRadius(cornerRadius: cornerRadius)
         configureNavigationBar()
         addKeyboardEventsHandlers()
     }
@@ -57,9 +60,6 @@ class CommentsViewController: UIViewController {
                                                name:NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
     }
-    
-    
-    
     
     // MARK: - objC Functions
     @objc func didGoBack() {

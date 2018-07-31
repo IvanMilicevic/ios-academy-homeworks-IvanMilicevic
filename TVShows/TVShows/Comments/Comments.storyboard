@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="t8k-jd-xi0">
-                                <rect key="frame" x="10" y="621" width="355" height="36"/>
+                                <rect key="frame" x="10" y="621" width="345" height="36"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-M2-DDb">
-                                        <rect key="frame" x="0.0" y="0.0" width="299" height="36"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-M2-DDb">
+                                        <rect key="frame" x="0.0" y="0.0" width="289" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -31,7 +31,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2Y-2s-CRZ">
-                                        <rect key="frame" x="316" y="0.0" width="39" height="36"/>
+                                        <rect key="frame" x="306" y="0.0" width="39" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="39" id="8Lh-IB-MYv"/>
                                             <constraint firstAttribute="height" constant="36" id="qAV-Z6-4BO"/>
@@ -102,7 +102,7 @@
                             <constraint firstItem="8tK-Mc-hux" firstAttribute="trailing" secondItem="yac-tt-ufb" secondAttribute="trailing" id="Ydv-Ih-Mka"/>
                             <constraint firstItem="t8k-jd-xi0" firstAttribute="top" secondItem="8tK-Mc-hux" secondAttribute="bottom" constant="10" id="eKJ-0u-X8c"/>
                             <constraint firstItem="8tK-Mc-hux" firstAttribute="leading" secondItem="yac-tt-ufb" secondAttribute="leading" id="qKo-rj-Rrp"/>
-                            <constraint firstItem="yac-tt-ufb" firstAttribute="trailing" secondItem="t8k-jd-xi0" secondAttribute="trailing" constant="10" id="v7x-Db-sZQ"/>
+                            <constraint firstItem="yac-tt-ufb" firstAttribute="trailing" secondItem="t8k-jd-xi0" secondAttribute="trailing" constant="20" id="v7x-Db-sZQ"/>
                             <constraint firstItem="8tK-Mc-hux" firstAttribute="top" secondItem="4Eh-DB-c3m" secondAttribute="top" id="yDV-mh-NEx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yac-tt-ufb"/>
@@ -110,6 +110,7 @@
                     <connections>
                         <outlet property="commentsTableView" destination="8tK-Mc-hux" id="bO6-PJ-23H"/>
                         <outlet property="inputBatBottomConstraint" destination="2ZG-Ha-YGC" id="mYr-Rw-f6u"/>
+                        <outlet property="inputTextField" destination="Pga-M2-DDb" id="mwk-2A-EIa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qky-ps-Md4" userLabel="First Responder" sceneMemberID="firstResponder"/>

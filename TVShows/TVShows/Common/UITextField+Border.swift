@@ -39,4 +39,12 @@ extension UITextField {
         setBottomBorderRed()
     }
     
+    func setCornerRadius(cornerRadius: CGFloat) {
+        self.layer.cornerRadius = cornerRadius
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.height+5))
+        self.leftViewMode = .always
+    }
+    
 }
