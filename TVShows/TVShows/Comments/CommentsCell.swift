@@ -13,7 +13,7 @@ class CommentsCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var commentTextLabel: UILabel!
-        
+    
     override func prepareForReuse() {
         super.prepareForReuse()
 

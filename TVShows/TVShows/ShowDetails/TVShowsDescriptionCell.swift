@@ -24,7 +24,7 @@ class TVShowsDescriptionCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        //TODO find default image
+
         showTitle.text = nil
         showDescription.text = nil
         numberOfEpisodes.text = "0"

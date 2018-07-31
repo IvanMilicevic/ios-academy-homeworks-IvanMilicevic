@@ -21,7 +21,6 @@ class TVShowsImageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        // Initialization code
     }
     
     override func prepareForReuse() {
