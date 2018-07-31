@@ -17,6 +17,7 @@
 		5C3F1A28210E92880083E956 /* EpisodeDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */; };
 		5C3F1A2B210F413B0083E956 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */; };
 		5C3F1A2D210F41480083E956 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2C210F41480083E956 /* Comments.storyboard */; };
+		5C3F1A2F210FDE550083E956 /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2E210FDE550083E956 /* CommentsCell.swift */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 		5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416C121049E55008E0AC9 /* CodableStorage.swift */; };
@@ -45,6 +46,7 @@
 		5C3F1A27210E92880083E956 /* EpisodeDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EpisodeDetails.storyboard; sourceTree = "<group>"; };
 		5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		5C3F1A2C210F41480083E956 /* Comments.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
+		5C3F1A2E210FDE550083E956 /* CommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */,
 				5C3F1A2C210F41480083E956 /* Comments.storyboard */,
+				5C3F1A2E210FDE550083E956 /* CommentsCell.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C6416C72105E30B008E0AC9 /* ShowDetailsViewController.swift in Sources */,
+				5C3F1A2F210FDE550083E956 /* CommentsCell.swift in Sources */,
 				5C6416F121067B00008E0AC9 /* TVShowsImageCell.swift in Sources */,
 				5CD3AC042101EBCF006A0E88 /* UITextField+Border.swift in Sources */,
 				5C3F1A2B210F413B0083E956 /* CommentsViewController.swift in Sources */,

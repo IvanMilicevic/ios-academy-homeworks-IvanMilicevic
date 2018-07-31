@@ -10,6 +10,17 @@ import UIKit
 
 class CommentsViewController: UIViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var commentsTableView: UITableView! {
+        didSet {
+            commentsTableView.dataSource = self
+            commentsTableView.delegate = self
+//            commentsTableView.estimatedRowHeight = 100
+//            commentsTableView.rowHeight = UITableViewAutomaticDimension
+        }
+    }
+    
+    
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,4 +44,30 @@ class CommentsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+}
+
+extension CommentsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = commentsTableView.dequeueReusableCell(
+            withIdentifier: "CommentsCell",
+            for: indexPath
+            ) as! CommentsCell
+        
+        return cell
+    }
+    
+}
+
+extension CommentsViewController: UITableViewDelegate {
+    
+    
 }
