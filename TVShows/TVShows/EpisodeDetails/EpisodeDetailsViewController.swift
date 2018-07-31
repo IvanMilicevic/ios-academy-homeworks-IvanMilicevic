@@ -130,23 +130,13 @@ class EpisodeDetailsViewController: UIViewController {
     private func getSeasonAndNumber(episodeNumber: String, season: String) -> String{
         var episodeNum = "?"
         var seasonNum = "?"
-        if isNumber(string: episodeNumber) {
+        if Util.isInteger(episodeNumber) {
             episodeNum = String(Int(episodeNumber)!) //get rid of possible 0 before number
         }
-        if isNumber(string: season) {
+        if Util.isInteger(season) {
             seasonNum = String(Int(season)!) //get rid of possible 0 before number
         }
         return "S\(seasonNum) Ep\(episodeNum)"
-    }
-    
-    private func isNumber (string: String) -> Bool {
-        let num = Int(string);
-        
-        if num != nil {
-            return true
-        } else {
-            return false
-        }
     }
     
     private func setUpImageView(imageView: UIImageView, imageUrl: String, auth: String) {

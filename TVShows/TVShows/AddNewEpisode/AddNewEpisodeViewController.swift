@@ -120,9 +120,7 @@ class AddNewEpisodeViewController: UIViewController {
             return false
         } else {
             if mustBeNumber {
-                let num = Int(field.text!);
-                
-                if num != nil {
+                if Util.isInteger(field.text!) {
                     field.setBottomBorderDefault()
                     return true
                 } else {

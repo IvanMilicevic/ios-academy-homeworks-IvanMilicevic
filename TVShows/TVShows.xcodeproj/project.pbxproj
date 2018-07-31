@@ -18,6 +18,7 @@
 		5C3F1A2B210F413B0083E956 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */; };
 		5C3F1A2D210F41480083E956 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2C210F41480083E956 /* Comments.storyboard */; };
 		5C3F1A2F210FDE550083E956 /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A2E210FDE550083E956 /* CommentsCell.swift */; };
+		5C3F1A31211118490083E956 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F1A30211118490083E956 /* Util.swift */; };
 		5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */; };
 		5C4033A620EE6F2D008A0C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4033A420EE6F2D008A0C2F /* LaunchScreen.storyboard */; };
 		5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6416C121049E55008E0AC9 /* CodableStorage.swift */; };
@@ -47,6 +48,7 @@
 		5C3F1A2A210F413B0083E956 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		5C3F1A2C210F41480083E956 /* Comments.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
 		5C3F1A2E210FDE550083E956 /* CommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
+		5C3F1A30211118490083E956 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		5C40339820EE6F2A008A0C2F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C40339B20EE6F2A008A0C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4033A220EE6F2D008A0C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				5C6416FB210907C9008E0AC9 /* SwiftlyLogger.swift */,
 				5C64171B210B7A5F008E0AC9 /* TVShowsUserDefaults.swift */,
 				5C64171E210C9187008E0AC9 /* TVShowsKeyChain.swift */,
+				5C3F1A30211118490083E956 /* Util.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				5C3F1A26210E92600083E956 /* EpisodeDetailsViewController.swift in Sources */,
 				5C6416C421051128008E0AC9 /* TVShowsCell.swift in Sources */,
 				5C40339C20EE6F2A008A0C2F /* AppDelegate.swift in Sources */,
+				5C3F1A31211118490083E956 /* Util.swift in Sources */,
 				5C64171F210C9187008E0AC9 /* TVShowsKeyChain.swift in Sources */,
 				5C6416C221049E55008E0AC9 /* CodableStorage.swift in Sources */,
 				5C6416F321067B20008E0AC9 /* TVShowsDescriptionCell.swift in Sources */,
