@@ -78,7 +78,23 @@ struct EpisodeDetails: Codable {
         case type
         case id = "_id"
         case imageUrl
+        
+    }
+}
 
+struct Comment: Codable {
+    
+    let text: String
+    let episodeId: String
+    let userEmail: String
+    let id: String
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case episodeId
+        case userEmail
+        case id = "_id"
         
     }
 }
