@@ -10,6 +10,7 @@ import UIKit
 
 class CommentsCell: UITableViewCell {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var commentTextLabel: UILabel!
@@ -30,7 +31,7 @@ class CommentsCell: UITableViewCell {
     
     // MARK: - Functions
     func configure(with item: Comment) {
-        userImageView.image = UIImage(named: "img-placeholder-user1")
+        userImageView.image = Util.getRandomUserImage()
         titleLabel.text = item.userEmail
         commentTextLabel.text = item.text
     }

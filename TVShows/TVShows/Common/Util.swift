@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ivan Milicevic. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Util {
     
@@ -17,6 +17,19 @@ class Util {
             return true
         } else {
             return false
+        }
+    }
+    
+    static func getRandomUserImage() -> UIImage {
+        switch arc4random_uniform(3) {
+        case 0:
+            return UIImage(named: "img-placeholder-user1")!
+        case 1:
+            return UIImage(named: "img-placeholder-user2")!
+        case 2:
+            return UIImage(named: "img-placeholder-user3")!
+        default:
+            return UIImage(named: "img-placeholder-user1")!
         }
     }
     
