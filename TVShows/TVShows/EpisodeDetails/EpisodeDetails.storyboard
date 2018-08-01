@@ -77,7 +77,7 @@
                                     <constraint firstItem="2oQ-2Y-YmE" firstAttribute="top" secondItem="2BM-14-5W4" secondAttribute="top" id="i42-Es-4yh"/>
                                 </constraints>
                             </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-placehoder-comments" translatesAutoresizingMaskIntoConstraints="NO" id="GeO-l7-P4U">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-message-circle" translatesAutoresizingMaskIntoConstraints="NO" id="GeO-l7-P4U">
                                 <rect key="frame" x="15" y="627" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Qpa-uV-OYR"/>
@@ -140,8 +140,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic-message-circle" width="24" height="24"/>
         <image name="ic-navigate-back" width="32" height="32"/>
-        <image name="img-placehoder-comments" width="107" height="102"/>
         <image name="resizer.php" width="620" height="348"/>
     </resources>
 </document>
