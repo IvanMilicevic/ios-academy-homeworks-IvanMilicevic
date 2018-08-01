@@ -135,7 +135,6 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
     private func uploadImageOnAPI(token: String, image: UIImage) {
-
         let headers = ["Authorization": token]
         let imageByteData = UIImagePNGRepresentation(image)!
         SVProgressHUD.show()
@@ -150,11 +149,13 @@ class AddNewEpisodeViewController: UIViewController {
                headers: headers)
             { [weak self] result in
                 
+                guard let `self` = self else { return }
+                
                 SwiftyLog.debug("UPLOAD ON API:")
                 switch result {
                 case .success(let uploadRequest, _, _):
                     SwiftyLog.debug("uploadImageOnAPI : SUCESS")
-                    self?.processUploadRequest(uploadRequest)
+                    self.processUploadRequest(uploadRequest)
                 case .failure(let encodingError):
                     SVProgressHUD.dismiss()
                     SwiftyLog.debug("uploadImageOnAPI : FAILURE")
@@ -164,8 +165,7 @@ class AddNewEpisodeViewController: UIViewController {
     
     private func processUploadRequest(_ uploadRequest: UploadRequest) {
         uploadRequest
-            .responseDecodableObject(keyPath: "data") { (response:
-                DataResponse<Media>) in
+            .responseDecodableObject(keyPath: "data") { (response: DataResponse<Media>) in
                 SwiftyLog.debug("processUploadRequest")
                 switch response.result {
                 case .success(let media):

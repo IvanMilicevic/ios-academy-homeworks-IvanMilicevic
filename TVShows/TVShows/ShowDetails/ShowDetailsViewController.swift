@@ -48,17 +48,12 @@ class ShowDetailsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    // MARK: - Public
-    func configure(id: String, login: LoginData) {
-        loginData =  login
-        showID = id
-    }
-    
     // MARK: - IBActions
     @IBAction func navigateBack(_ sender: Any) {
         animate(button: navigateBackButton)
         navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func addNewEpisode(_ sender: Any) {
         animate(button: addNewEpisodeButton)
         let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
@@ -73,6 +68,12 @@ class ShowDetailsViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
+    // MARK: - Public functions
+    func configure(id: String, login: LoginData) {
+        loginData =  login
+        showID = id
+    }
+    
     // MARK: - Private Functions
     private func fetchShowDetails () {
         guard
@@ -83,7 +84,6 @@ class ShowDetailsViewController: UIViewController {
         let headers = ["Authorization": token]
         
         SVProgressHUD.show()
-        
         Alamofire
             .request("https://api.infinum.academy/api/shows/\(showID!)",
                      method: .get,

@@ -13,7 +13,7 @@ import Spring
 
 class CommentsViewController: UIViewController {
 
-    // MARK: - IBOutlet views
+    // MARK: - IBOutlets
     @IBOutlet weak var commentsTableView: UITableView! {
         didSet {
             commentsTableView.dataSource = self
@@ -22,8 +22,6 @@ class CommentsViewController: UIViewController {
         }
     }
     @IBOutlet weak var inputTextField: UITextField!
-    
-    // MARK: - IBOutlet constraints
     @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Public
@@ -73,14 +71,15 @@ class CommentsViewController: UIViewController {
                 guard let `self` = self else { return }
                 
                 switch dataResponse.result {
-                case .success(let response):
-                    SwiftyLog.info("Sucess \(response)")
-                    self.fetchComments()
-                case .failure(let error):
-                    SwiftyLog.error("\(error)")
-                    self.alertUser(title: "Error",
-                                   message: "Episode is not added: \(error.localizedDescription)",
-                        warning: "Failed to add episode")
+                    case .success(let response):
+                        SwiftyLog.info("Sucess \(response)")
+                        self.inputTextField.text = nil
+                        self.fetchComments()
+                    case .failure(let error):
+                        SwiftyLog.error("\(error)")
+                        self.alertUser(title: "Error",
+                                       message: "Episode is not added: \(error.localizedDescription)",
+                                       warning: "Failed to add episode")
                 }
         }
         
