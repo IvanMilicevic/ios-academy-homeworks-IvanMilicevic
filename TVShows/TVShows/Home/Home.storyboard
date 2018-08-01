@@ -72,6 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="HomeTableView" destination="Rp5-8l-JjD" id="Ryy-ku-vs1"/>
+                        <outlet property="emptyStateView" destination="fuM-Sz-xa2" id="D7p-A9-Jze"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q00-k5-L5S" userLabel="First Responder" sceneMemberID="firstResponder"/>

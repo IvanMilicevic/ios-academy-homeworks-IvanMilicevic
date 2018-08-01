@@ -34,7 +34,6 @@ class CommentsViewController: UIViewController {
     private let bottomConstraint: CGFloat = 10
     private var commentsArray: [Comment] = [] {
         didSet {
-            
             commentsTableView.backgroundView = commentsArray.count == 0 ? emptyStateView : nil
         }
     }

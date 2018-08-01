@@ -24,12 +24,17 @@ class HomeViewController: UIViewController {
             homeTableView.separatorStyle = .none
         }
     }
+    @IBOutlet var emptyStateView: UIView!
     
     // MARK: - Public
     var loginData: LoginData?
     
     // MARK: - Private
-    private var showsArray: [Show] = []
+    private var showsArray: [Show] = [] {
+        didSet {
+            homeTableView.backgroundView = showsArray.count == 0 ? emptyStateView : nil
+        }
+    }
     private let refresher = UIRefreshControl()
     
     // MARK: - View Lifecycle
@@ -169,6 +174,7 @@ extension HomeViewController: UITableViewDelegate {
         if (editingStyle == .delete){
             showsArray.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            homeTableView.backgroundView = showsArray.count == 0 ? emptyStateView : nil
         }
     }
     
