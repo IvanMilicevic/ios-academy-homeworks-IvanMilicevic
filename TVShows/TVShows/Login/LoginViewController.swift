@@ -223,6 +223,8 @@ class LoginViewController: UIViewController {
                     switch response.response?.statusCode {
                     case 401:
                         Util.alert(target: self, title: "Login Problem", message: "Wrong email or password", error: error)
+                    case nil:
+                        Util.alert(target: self, title: "Login Problem", message: error.localizedDescription, error: error)
                     default:
                         Util.alert(target: self, title: "Login Problem", message: "Something went wrong", error: error)
                     }
