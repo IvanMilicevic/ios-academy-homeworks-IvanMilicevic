@@ -91,12 +91,12 @@ class EpisodeDetailsViewController: UIViewController {
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching episode details went wrong - \(error)")
-                        self.callAlertControler(error: error)
+                        self.alert(error: error)
                 }
         }
     }
     
-    private func callAlertControler (error: Error) {
+    private func alert (error: Error) {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)
