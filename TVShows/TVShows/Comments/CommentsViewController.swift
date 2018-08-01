@@ -76,10 +76,7 @@ class CommentsViewController: UIViewController {
                         self.inputTextField.text = nil
                         self.fetchComments()
                     case .failure(let error):
-                        SwiftyLog.error("\(error)")
-                        self.alertUser(title: "Error",
-                                       message: "Episode is not added: \(error.localizedDescription)",
-                                       warning: "Failed to add episode")
+                        Util.alert(target: self, title: "Error", message: "Comment is not added", error: error)
                 }
         }
         
@@ -106,17 +103,6 @@ class CommentsViewController: UIViewController {
         refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
         refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
         commentsTableView.refreshControl = refresher
-    }
-    
-    private func alertUser(title: String, message: String, warning: String) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
-            (action:UIAlertAction) in
-            SwiftyLog.warning(warning)
-        })
-        self.present(alertController, animated: true, completion: nil)
     }
     
     private func addKeyboardEventsHandlers() {
