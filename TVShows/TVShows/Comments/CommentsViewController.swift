@@ -19,11 +19,12 @@ class CommentsViewController: UIViewController {
             commentsTableView.dataSource = self
             commentsTableView.delegate = self
             commentsTableView.estimatedRowHeight=70
+            commentsTableView.tableFooterView = UIView()
         }
     }
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
-    
+    @IBOutlet var emptyStateView: UIView!
     // MARK: - Public
     var loginData: LoginData!
     var episodeID: String!
@@ -31,7 +32,12 @@ class CommentsViewController: UIViewController {
     // MARK: - private
     private let cornerRadius: CGFloat = 18
     private let bottomConstraint: CGFloat = 10
-    private var commentsArray: [Comment] = []
+    private var commentsArray: [Comment] = [] {
+        didSet {
+            
+            commentsTableView.backgroundView = commentsArray.count == 0 ? emptyStateView : nil
+        }
+    }
     private let refresher = UIRefreshControl()
     
     // MARK: - View lifecycle

@@ -56,7 +56,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentsCell" rowHeight="93" id="9Bt-Ck-dkS" customClass="CommentsCell" customModule="TVShows" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentsCell" rowHeight="93" id="9Bt-Ck-dkS" customClass="CommentsCell" customModule="TVShows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Bt-Ck-dkS" id="apQ-nd-b5t">
@@ -121,6 +121,7 @@
                     </view>
                     <connections>
                         <outlet property="commentsTableView" destination="8tK-Mc-hux" id="bO6-PJ-23H"/>
+                        <outlet property="emptyStateView" destination="0Rk-CE-4op" id="qIW-db-RcU"/>
                         <outlet property="inputBatBottomConstraint" destination="2ZG-Ha-YGC" id="mYr-Rw-f6u"/>
                         <outlet property="inputTextField" destination="Pga-M2-DDb" id="mwk-2A-EIa"/>
                     </connections>
