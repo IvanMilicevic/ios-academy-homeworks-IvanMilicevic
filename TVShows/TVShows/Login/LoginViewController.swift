@@ -220,14 +220,14 @@ class LoginViewController: UIViewController {
                     
                     self.navigationController?.pushViewController(viewController, animated: animate)
                 case .failure(let error):
-                    let alertController = UIAlertController(title: "Login Problem",
-                                                            message: "Wrong username or password",
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
-                        (action:UIAlertAction) in
-                        SwiftyLog.warning("Problem with logging in occured: \(error.localizedDescription)")
-                    })
-                    self.present(alertController, animated: true, completion: nil)
+                    SwiftyLog.debug(response.response?.statusCode)
+                    switch response.response?.statusCode {
+                    case 401:
+                        Util.alert(target: self, title: "Login Problem", message: "Wrong email or password", error: error)
+                    default:
+                        Util.alert(target: self, title: "Login Problem", message: "Something went wrong", error: error)
+                    }
+                    
                 }
             }
     }

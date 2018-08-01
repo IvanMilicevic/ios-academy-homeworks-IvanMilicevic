@@ -33,4 +33,18 @@ class Util {
         }
     }
     
+    static func alert(target: UIViewController, title: String, message: String, error: Error?) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+            (action:UIAlertAction) in
+            if error != nil {
+                SwiftyLog.error("\(error!.localizedDescription)")
+            }
+            
+        })
+        target.present(alertController, animated: true, completion: nil)
+    }
+    
 }
