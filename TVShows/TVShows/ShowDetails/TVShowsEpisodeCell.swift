@@ -18,14 +18,34 @@ class TVShowsEpisodeCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        seasonEpisode.text = ""
-        episodeTitle.text = ""
+        seasonEpisode.text = nil
+        episodeTitle.text = nil
     }
     
     // MARK: - Functions
     func configure(with item: ShowEpisode) {
-        seasonEpisode.text = "S2 Ep2"
+        var episodeNum = "?"
+        var seasonNum = "?"
+        if isNumber(string: item.episodeNumber) {
+            episodeNum = String(Int(item.episodeNumber)!) //get rid of possible 0 before number
+        }
+        if isNumber(string: item.season) {
+            seasonNum = String(Int(item.season)!) //get rid of possible 0 before number
+        }
+        
+        seasonEpisode.text = "S\(seasonNum) Ep\(episodeNum)"
         episodeTitle.text = item.title
+    }
+    
+    // MARK: - private functions
+    private func isNumber (string: String) -> Bool {
+        let num = Int(string);
+        
+        if num != nil {
+            return true
+        } else {
+            return false
+        }
     }
 
 }

@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import Spring
 
 class ShowDetailsViewController: UIViewController {
     
@@ -24,8 +25,8 @@ class ShowDetailsViewController: UIViewController {
             showDetailsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
         }
     }
-    @IBOutlet weak var addNewEpisodeButton: UIButton!
-    @IBOutlet weak var navigateBackButton: UIButton!
+    @IBOutlet weak var addNewEpisodeButton: SpringButton!
+    @IBOutlet weak var navigateBackButton: SpringButton!
     
     // MARK: - Private
     private var loginData: LoginData!
@@ -52,9 +53,11 @@ class ShowDetailsViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func navigateBack(_ sender: Any) {
+        animate(button: navigateBackButton)
         navigationController?.popViewController(animated: true)
     }
     @IBAction func addNewEpisode(_ sender: Any) {
+        animate(button: addNewEpisodeButton)
         let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
             as! AddNewEpisodeViewController
@@ -125,6 +128,7 @@ class ShowDetailsViewController: UIViewController {
                         SwiftyLog.info("Show episodes fetched - \(episodes)")
                         SVProgressHUD.dismiss()
                         self.showDetailsTableView.reloadData()
+                        self.animateTable()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching episodes went wrong - \(error)")
@@ -138,8 +142,11 @@ class ShowDetailsViewController: UIViewController {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){ [weak self]
             (action:UIAlertAction) in
+            
+            guard let `self` = self else { return }
+            
             self.navigationController?.popViewController(animated: true)
         })
         present(alertController, animated: true, completion: nil)
@@ -156,6 +163,35 @@ class ShowDetailsViewController: UIViewController {
         btn.addTarget(self,action: selector, for: UIControlEvents.touchUpInside)
         
         view.addSubview(btn)
+    }
+    
+    private func animate(button: SpringButton) {
+        button.force = CGFloat(1)
+        button.duration = CGFloat(1)
+        button.animation = Spring.AnimationPreset.ZoomIn.rawValue
+        button.curve = Spring.AnimationCurve.EaseIn.rawValue
+        
+        button.animate()
+    }
+    
+    private func animateTable() {
+        let cells = showDetailsTableView.visibleCells
+        let tableViewHeight = showDetailsTableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 0.25,
+                           delay: Double(delayCounter) * 0.02,
+                           options: .curveEaseInOut,
+                           animations: { cell.transform=CGAffineTransform.identity },
+                           completion: nil)
+            delayCounter += 1
+        }
+        
     }
 
 }
@@ -178,6 +214,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                     withIdentifier: "TVShowsImageCell",
                     for: indexPath
                 ) as! TVShowsImageCell
+                cell.configure(with: showDetails, auth: loginData)
                 return cell
             case 1:
                 let cell = showDetailsTableView.dequeueReusableCell(
@@ -208,7 +245,7 @@ extension ShowDetailsViewController: UITableViewDelegate {
     
 }
 
-extension ShowDetailsViewController: TVShowDetails_Delegate {
+extension ShowDetailsViewController: TVShowDetailsDelegate {
     func reloadEpisodes() {
         self.fetchShowDetails()
     }

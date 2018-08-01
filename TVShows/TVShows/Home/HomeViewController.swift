@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import Kingfisher
 
 class HomeViewController: UIViewController {
     
@@ -32,9 +33,9 @@ class HomeViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title="Shows"
         
         fetchShowsArray()
+        configureNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +72,7 @@ class HomeViewController: UIViewController {
                         SwiftyLog.info("Shows fetched: \(shows)")
                         self.showsArray = shows
                         self.homeTableView.reloadData()
+                        self.animateTable()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching shows went wrong - \(error)")
@@ -83,14 +85,52 @@ class HomeViewController: UIViewController {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self]
             (action:UIAlertAction) in
+            guard let `self` = self else { return }
+            
             self.returnToLoginScreen()
         })
         self.present(alertController, animated: true, completion: nil)
     }
     
     private func returnToLoginScreen(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func configureNavigationBar() {
+        self.title="Shows"
+        let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didLogout))
+    }
+    
+    private func animateTable() {
+        let cells = homeTableView.visibleCells
+        let tableViewHeight = homeTableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 1.75,
+                           delay: Double(delayCounter) * 0.05,
+                           options: .curveEaseInOut,
+                           animations: { cell.transform=CGAffineTransform.identity },
+                           completion: nil)
+            delayCounter += 1
+        }
+        
+        
+    }
+    
+    // MARK: - objC Functions
+    @objc func didLogout() {
+        UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
         navigationController?.popViewController(animated: true)
     }
 
@@ -112,7 +152,7 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! TVShowsCell
         
-        cell.configure(with: showsArray[indexPath.row])
+        cell.configure(with: showsArray[indexPath.row], loginData: loginData)
         return cell
     }
     
@@ -137,8 +177,8 @@ extension HomeViewController: UITableViewDelegate {
             as! ShowDetailsViewController
         
         viewController.configure(id: showsArray[indexPath.row].id, login: loginData!)
-        
-        self.navigationController?.pushViewController(viewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
 }

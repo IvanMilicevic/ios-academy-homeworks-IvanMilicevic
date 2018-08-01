@@ -24,7 +24,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v58-Zk-HFv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="522"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEv-Pw-rsw">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEv-Pw-rsw" customClass="SpringButton" customModule="Spring">
                                                 <rect key="frame" x="20" y="324" width="24" height="24"/>
                                                 <state key="normal" image="ic-checkbox-empty"/>
                                                 <connections>
@@ -61,7 +61,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" textContentType="username"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftW-3I-3J9">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftW-3I-3J9" customClass="SpringButton" customModule="Spring">
                                                 <rect key="frame" x="20" y="373" width="280" height="58"/>
                                                 <color key="backgroundColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -133,10 +133,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="S9W-fz-8K2"/>
                     <connections>
+                        <outlet property="createAnAccountButton" destination="K5V-GO-Wwa" id="Ps1-Mf-1Om"/>
                         <outlet property="emailTextField" destination="UvX-mS-vaE" id="mtU-sK-dos"/>
+                        <outlet property="emailTextFieldLeadingConstraint" destination="81J-qK-hcU" id="ykv-zx-dXo"/>
+                        <outlet property="emailTextFieldTrailingConstraint" destination="WPo-ks-RHt" id="7tv-JT-GHc"/>
                         <outlet property="loginButton" destination="ftW-3I-3J9" id="ole-1h-kbk"/>
+                        <outlet property="loginImageView" destination="DQU-tq-mAP" id="sCg-m3-Yav"/>
+                        <outlet property="orLabel" destination="Lft-tU-jHA" id="x0K-4Z-EqR"/>
                         <outlet property="passwordTextField" destination="dQD-U4-hNk" id="ezz-qb-W2k"/>
+                        <outlet property="passwordTextFieldLeadingConstraint" destination="oic-IW-Pxj" id="xEb-2x-unk"/>
+                        <outlet property="passwordTextFieldTrailingConstraint" destination="TrZ-hy-fId" id="f4h-9s-e1K"/>
                         <outlet property="rememberMeButton" destination="LEv-Pw-rsw" id="1wq-w0-iwi"/>
+                        <outlet property="rememberMeLabel" destination="5Us-tD-M0S" id="PcL-py-Sda"/>
                         <outlet property="scrollView" destination="lsG-A6-gTP" id="QgC-4b-Yuc"/>
                     </connections>
                 </viewController>

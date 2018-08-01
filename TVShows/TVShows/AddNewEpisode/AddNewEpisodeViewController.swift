@@ -11,48 +11,36 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 
-protocol TVShowDetails_Delegate: class {
+protocol TVShowDetailsDelegate: class {
     func reloadEpisodes()
 }
 
 class AddNewEpisodeViewController: UIViewController {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var episodeTitle: UITextField!
-    @IBOutlet weak var seasonN: UITextField!
-    @IBOutlet weak var episodeN: UITextField!
-    @IBOutlet weak var episodeDescription: UITextField!
+    @IBOutlet weak var episodeTitleTextField: UITextField!
+    @IBOutlet weak var seasonNumberTextField: UITextField!
+    @IBOutlet weak var episodeNumberTextField: UITextField!
+    @IBOutlet weak var episodeDescriptionTextField: UITextField!
     
     // MARK: - Public
     var loginData: LoginData?
     var showID: String?
-    weak var delegate: TVShowDetails_Delegate?
+    weak var delegate: TVShowDetailsDelegate?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationBar()
+        configureTextFieldBorders()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        episodeTitle.setBottomBorderDefault()
-        seasonN.setBottomBorderDefault()
-        episodeN.setBottomBorderDefault()
-        episodeDescription.setBottomBorderDefault()
-    }
-    
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
-        let alertController = UIAlertController(title: "Oops",
-                                                message: "This feature is not implemented yet.",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
-            (action:UIAlertAction) in
-            SwiftyLog.warning("Api sucks...")
-        })
-        self.present(alertController, animated: true, completion: nil)
+        alertUser(title: "Oops",
+                  message: "This feature is not implemented yet.",
+                  warning: "Api sucks...")
     }
     
     // MARK: - objC Functions
@@ -61,23 +49,28 @@ class AddNewEpisodeViewController: UIViewController {
     }
     
     @objc func didSelectAdd() {
+        guard
+            let showID = showID,
+            let token = loginData?.token,
+            let episodeTitle = episodeTitleTextField.text,
+            let seasonNumber = seasonNumberTextField.text,
+            let episodeNumber = episodeNumberTextField.text,
+            let episodeDescription = episodeDescriptionTextField.text
+        else {
+            return
+        }
+        
         if !allFieldsAreOk() {
             return
         }
         
-        guard
-            let token = loginData?.token
-            else {
-                return
-        }
-        
         let headers = ["Authorization": token]
-        let parameters = ["showId": showID!,
+        let parameters = ["showId": showID,
                           "mediaId": "mediaID",
-                          "title": episodeTitle.text!,
-                          "description": episodeDescription.text!,
-                          "episodeNumber": episodeN.text!,
-                          "season": seasonN.text!
+                          "title": episodeTitle,
+                          "description": episodeDescription,
+                          "episodeNumber": episodeNumber,
+                          "season": seasonNumber
         ]
         
         SVProgressHUD.show()
@@ -99,7 +92,9 @@ class AddNewEpisodeViewController: UIViewController {
                         self.delegate?.reloadEpisodes()
                         self.dismiss(animated: true, completion: nil)
                     case .failure(let error):
-                        SwiftyLog.error("Adding episode went wrong - \(error)")
+                        self.alertUser(title: "Error",
+                                       message: "Episode is not added: \(error.localizedDescription)",
+                                       warning: "Failed to add episode")
                 }
         }
     }
@@ -119,24 +114,57 @@ class AddNewEpisodeViewController: UIViewController {
                                                             action: #selector(didSelectAdd))
     }
     
+    private func configureTextFieldBorders() {
+        episodeTitleTextField.setBottomBorderDefault()
+        seasonNumberTextField.setBottomBorderDefault()
+        episodeNumberTextField.setBottomBorderDefault()
+        episodeDescriptionTextField.setBottomBorderDefault()
+    }
+    
+    private func alertUser(title: String, message: String, warning: String) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
+            (action:UIAlertAction) in
+            SwiftyLog.warning(warning)
+        })
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
     private func allFieldsAreOk() -> Bool {
-        var fieldsAreOk = true;
+        var fieldsAreOk = true
         
-        fieldsAreOk = checkField(field: episodeTitle) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: seasonN) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: episodeN) ? fieldsAreOk : false
-        fieldsAreOk = checkField(field: episodeDescription) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeTitleTextField, mustBeNumber: false) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: seasonNumberTextField, mustBeNumber: true) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeNumberTextField, mustBeNumber: true) ? fieldsAreOk : false
+        fieldsAreOk = checkField(field: episodeDescriptionTextField, mustBeNumber: false) ? fieldsAreOk : false
         
         return fieldsAreOk
     }
     
-    private func checkField (field: UITextField!) -> Bool {
+    private func checkField (field: UITextField!, mustBeNumber: Bool) -> Bool {
         if field.text!.isEmpty {
             field.setBottomBorderRed()
+            field.shake()
             return false
         } else {
-            field.setBottomBorderDefault()
-            return true
+            if mustBeNumber {
+                let num = Int(field.text!);
+                
+                if num != nil {
+                    field.setBottomBorderDefault()
+                    return true
+                } else {
+                    field.setBottomBorderRed()
+                    field.shake()
+                    return false
+                }
+            } else {
+                field.setBottomBorderDefault()
+                return true
+            }
         }
     }
     

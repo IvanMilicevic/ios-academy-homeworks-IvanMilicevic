@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TVShowsImageCell: UITableViewCell {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var showImage: UIImageView!
+    @IBOutlet weak var showImageView: UIImageView!
+    
+    // MARK: - Private
+    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
     
     // MARK: - View Lifecycle
     override func awakeFromNib() {
@@ -22,14 +26,25 @@ class TVShowsImageCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //TODO find default image
-        showImage.image=UIImage(named: "show-details-default")
-//        showImage.image = UIImage(named: "resizer.php")
+        showImageView.image=nil
     }
 
     // MARK: - Functions
-    func configure(with item: UIImage) {
-        showImage.image = item
+    func configure(with item: ShowDetails?, auth: LoginData) {
+        guard
+            let item: ShowDetails = item
+            else {
+                return
+                
+        }
+        
+        let url = URL(string: "https://api.infinum.academy\(item.imageUrl)");
+        let modifier = AnyModifier { request in
+            var r = request
+            r.setValue(auth.token, forHTTPHeaderField: "Authorization")
+            return r
+        }
+        showImageView.kf.setImage(with: url, placeholder: placeholderImg, options: [.requestModifier(modifier)])
     }
 
 }
