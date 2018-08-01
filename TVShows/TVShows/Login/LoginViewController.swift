@@ -41,21 +41,8 @@ class LoginViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.setDefaultMaskType(.black)
-        loginButton.layer.cornerRadius = loginCornerRadius
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name:NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name:NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-
-        emailTextField.setBottomBorderDefault()
-        passwordTextField.setBottomBorderDefault()
+        configure()
         checkIfUserLoggedIn()
     }
     
@@ -163,6 +150,24 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Private functions
+    private func configure() {
+        SVProgressHUD.setDefaultMaskType(.black)
+        loginButton.layer.cornerRadius = loginCornerRadius
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+        
+        emailTextField.setBottomBorderDefault()
+        passwordTextField.setBottomBorderDefault()
+    }
+    
     private func isLoginOk(email: String, password : String) -> Bool {
         var loginIsOk = true;
         if email.isEmpty {
