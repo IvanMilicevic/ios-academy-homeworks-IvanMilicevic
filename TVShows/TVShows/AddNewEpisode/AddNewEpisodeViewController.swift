@@ -37,6 +37,8 @@ class AddNewEpisodeViewController: UIViewController {
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         
         configureNavigationBar()
         configureTextFieldBorders()
@@ -88,20 +90,6 @@ class AddNewEpisodeViewController: UIViewController {
         episodeNumberTextField.setBottomBorderDefault()
         episodeDescriptionTextField.setBottomBorderDefault()
     }
-    
-    private func alertUser(title: String, message: String, warning: String) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
-            (action:UIAlertAction) in
-            SwiftyLog.warning(warning)
-        })
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     
     private func allFieldsAreOk() -> Bool {
         var fieldsAreOk = true
@@ -221,9 +209,7 @@ class AddNewEpisodeViewController: UIViewController {
                     SVProgressHUD.showSuccess(withStatus: "Episode added")
                 case .failure(let error):
                     SVProgressHUD.dismiss()
-                    self.alertUser(title: "Error",
-                                   message: "Episode is not added: \(error.localizedDescription)",
-                        warning: "Failed to add episode")
+                    Util.alert(target: self, title: "Error", message: "Episode is not added", error: error)
                 }
         }
     }

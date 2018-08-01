@@ -155,7 +155,6 @@ class ShowDetailsViewController: UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel){ [weak self]
             (action:UIAlertAction) in
-            
             guard let `self` = self else { return }
             
             self.navigationController?.popViewController(animated: true)

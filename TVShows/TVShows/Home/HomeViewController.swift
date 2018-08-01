@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
         guard
             let token = loginData?.token
             else {
-                self.returnToLoginScreen()
+                self.logout()
                 return
         }
         let headers = ["Authorization": token]
@@ -84,27 +84,9 @@ class HomeViewController: UIViewController {
                         self.animateTable()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
-                        SwiftyLog.error("Fetching shows went wrong - \(error)")
-                        self.callAlertControler(error: error)
+                        SwiftyLog.error("\(error)")
                 }
         }
-    }
-    
-    private func callAlertControler (error: Error) {
-        let alertController = UIAlertController(title: "Error",
-                                                message: error.localizedDescription,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self]
-            (action:UIAlertAction) in
-            guard let `self` = self else { return }
-            
-            self.returnToLoginScreen()
-        })
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    private func returnToLoginScreen(){
-        navigationController?.popViewController(animated: true)
     }
     
     private func configureNavigationBar() {
@@ -113,7 +95,7 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
                                                            style: .plain,
                                                            target: self,
-                                                           action: #selector(didLogout))
+                                                           action: #selector(logout))
     }
     
     private func animateTable() {
@@ -138,7 +120,7 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - objC Functions
-    @objc func didLogout() {
+    @objc func logout() {
         UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
         navigationController?.popViewController(animated: true)
     }

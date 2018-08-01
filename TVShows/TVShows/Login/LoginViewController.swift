@@ -220,7 +220,6 @@ class LoginViewController: UIViewController {
                     
                     self.navigationController?.pushViewController(viewController, animated: animate)
                 case .failure(let error):
-                    SwiftyLog.debug(response.response?.statusCode)
                     switch response.response?.statusCode {
                     case 401:
                         Util.alert(target: self, title: "Login Problem", message: "Wrong email or password", error: error)
