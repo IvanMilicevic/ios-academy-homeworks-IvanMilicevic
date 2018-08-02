@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,61 +18,88 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-camera" translatesAutoresizingMaskIntoConstraints="NO" id="XdE-MV-skr">
-                                <rect key="frame" x="175.5" y="104.5" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="6Bp-Q4-qSC"/>
-                                    <constraint firstAttribute="width" constant="24" id="Mme-rP-a2F"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G1j-0a-Nvr">
-                                <rect key="frame" x="30" y="236" width="315" height="158"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRa-Oi-Mk5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZGW-ho-p0M">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Season n." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcT-uz-bBz">
-                                        <rect key="frame" x="0.0" y="47" width="315" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode n." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCm-6n-3oa">
-                                        <rect key="frame" x="0.0" y="94" width="315" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssv-A0-fOM">
-                                        <rect key="frame" x="0.0" y="141" width="315" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GfE-Js-CYp">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-camera" translatesAutoresizingMaskIntoConstraints="NO" id="XdE-MV-skr">
+                                                <rect key="frame" x="62" y="10" width="250" height="250"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="250" id="Oiy-gS-JD2"/>
+                                                    <constraint firstAttribute="width" constant="250" id="T19-nd-cBp"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-Fi-0u2">
+                                                <rect key="frame" x="141" y="261" width="93" height="30"/>
+                                                <state key="normal" title="Upload photo">
+                                                    <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="uploadPhoto:" destination="jO1-8B-z7F" eventType="touchUpInside" id="ijN-jy-Aqf"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G1j-0a-Nvr">
+                                                <rect key="frame" x="20" y="321" width="335" height="158"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZGW-ho-p0M">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Season n." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcT-uz-bBz">
+                                                        <rect key="frame" x="0.0" y="47" width="335" height="17"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode n." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCm-6n-3oa">
+                                                        <rect key="frame" x="0.0" y="94" width="335" height="17"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssv-A0-fOM">
+                                                        <rect key="frame" x="0.0" y="141" width="335" height="17"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="XdE-MV-skr" firstAttribute="leading" secondItem="nkb-eG-66v" secondAttribute="leading" constant="62" id="161-NI-zYh"/>
+                                            <constraint firstItem="fbl-Fi-0u2" firstAttribute="centerX" secondItem="GfE-Js-CYp" secondAttribute="centerX" id="1gq-B2-TJs"/>
+                                            <constraint firstItem="nkb-eG-66v" firstAttribute="trailing" secondItem="XdE-MV-skr" secondAttribute="trailing" constant="63" id="6wt-bY-Gvd"/>
+                                            <constraint firstItem="XdE-MV-skr" firstAttribute="top" secondItem="GfE-Js-CYp" secondAttribute="top" constant="10" id="87t-Su-hKy"/>
+                                            <constraint firstItem="fbl-Fi-0u2" firstAttribute="top" secondItem="XdE-MV-skr" secondAttribute="bottom" constant="1" id="9sa-OT-Z7S"/>
+                                            <constraint firstItem="G1j-0a-Nvr" firstAttribute="leading" secondItem="nkb-eG-66v" secondAttribute="leading" constant="20" id="KAc-Mq-ULn"/>
+                                            <constraint firstItem="nkb-eG-66v" firstAttribute="trailing" secondItem="G1j-0a-Nvr" secondAttribute="trailing" constant="20" id="SNk-mi-9uE"/>
+                                            <constraint firstItem="G1j-0a-Nvr" firstAttribute="top" secondItem="fbl-Fi-0u2" secondAttribute="bottom" constant="30" id="crU-9p-i9O"/>
+                                            <constraint firstItem="XdE-MV-skr" firstAttribute="centerX" secondItem="GfE-Js-CYp" secondAttribute="centerX" id="iUb-Ai-MeN"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="nkb-eG-66v"/>
+                                    </view>
                                 </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-Fi-0u2">
-                                <rect key="frame" x="141" y="136" width="93" height="30"/>
-                                <state key="normal" title="Upload photo">
-                                    <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadPhoto:" destination="jO1-8B-z7F" eventType="touchUpInside" id="ijN-jy-Aqf"/>
-                                </connections>
-                            </button>
+                                <constraints>
+                                    <constraint firstItem="GfE-Js-CYp" firstAttribute="leading" secondItem="sRa-Oi-Mk5" secondAttribute="leading" id="G65-qx-HFe"/>
+                                    <constraint firstAttribute="trailing" secondItem="GfE-Js-CYp" secondAttribute="trailing" id="GsX-cW-wbe"/>
+                                    <constraint firstItem="GfE-Js-CYp" firstAttribute="top" secondItem="sRa-Oi-Mk5" secondAttribute="top" id="MVe-u4-IgC"/>
+                                    <constraint firstItem="GfE-Js-CYp" firstAttribute="centerY" secondItem="sRa-Oi-Mk5" secondAttribute="centerY" id="Sjn-Bv-ku2"/>
+                                    <constraint firstAttribute="bottom" secondItem="GfE-Js-CYp" secondAttribute="bottom" id="btT-eb-O7W"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="G1j-0a-Nvr" firstAttribute="top" secondItem="fbl-Fi-0u2" secondAttribute="bottom" constant="70" id="0dc-ja-n2o"/>
-                            <constraint firstItem="G1j-0a-Nvr" firstAttribute="leading" secondItem="xBF-Xl-pyJ" secondAttribute="leading" constant="30" id="Skh-a4-t5s"/>
-                            <constraint firstItem="fbl-Fi-0u2" firstAttribute="centerX" secondItem="3tE-oQ-6Jw" secondAttribute="centerX" id="Ug9-3w-BtF"/>
-                            <constraint firstItem="fbl-Fi-0u2" firstAttribute="top" secondItem="XdE-MV-skr" secondAttribute="bottom" constant="7.5" id="dfc-92-im7"/>
-                            <constraint firstItem="xBF-Xl-pyJ" firstAttribute="trailing" secondItem="G1j-0a-Nvr" secondAttribute="trailing" constant="30" id="gx8-qr-I6w"/>
-                            <constraint firstItem="XdE-MV-skr" firstAttribute="centerX" secondItem="3tE-oQ-6Jw" secondAttribute="centerX" id="qFO-tW-Six"/>
-                            <constraint firstItem="XdE-MV-skr" firstAttribute="centerY" secondItem="3tE-oQ-6Jw" secondAttribute="centerY" multiplier="0.35" id="qQI-G7-U8l"/>
+                            <constraint firstItem="sRa-Oi-Mk5" firstAttribute="leading" secondItem="xBF-Xl-pyJ" secondAttribute="leading" id="JLA-ID-uBK"/>
+                            <constraint firstItem="sRa-Oi-Mk5" firstAttribute="top" secondItem="3tE-oQ-6Jw" secondAttribute="top" id="cd3-Fo-3Ac"/>
+                            <constraint firstItem="sRa-Oi-Mk5" firstAttribute="bottom" secondItem="xBF-Xl-pyJ" secondAttribute="bottom" id="hMg-Gc-2DL"/>
+                            <constraint firstItem="sRa-Oi-Mk5" firstAttribute="trailing" secondItem="xBF-Xl-pyJ" secondAttribute="trailing" id="o16-7M-tUe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xBF-Xl-pyJ"/>
                     </view>
@@ -82,6 +108,7 @@
                         <outlet property="episodeNumberTextField" destination="QCm-6n-3oa" id="evT-8E-umd"/>
                         <outlet property="episodeTitleTextField" destination="ZGW-ho-p0M" id="tVZ-VP-FYy"/>
                         <outlet property="imageView" destination="XdE-MV-skr" id="H49-Yf-h66"/>
+                        <outlet property="scrollView" destination="sRa-Oi-Mk5" id="2Bf-bG-uBc"/>
                         <outlet property="seasonNumberTextField" destination="qcT-uz-bBz" id="xmf-O1-E9N"/>
                     </connections>
                 </viewController>

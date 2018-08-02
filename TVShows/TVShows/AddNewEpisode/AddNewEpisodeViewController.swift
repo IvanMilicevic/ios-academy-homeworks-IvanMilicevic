@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import Spring
 
 protocol TVShowDetailsDelegate: class {
     func reloadEpisodes()
@@ -22,7 +23,14 @@ class AddNewEpisodeViewController: UIViewController {
     @IBOutlet weak var seasonNumberTextField: UITextField!
     @IBOutlet weak var episodeNumberTextField: UITextField!
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.backgroundColor = .white
+            imageView.layer.cornerRadius = 125
+            imageView.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Public
     var loginData: LoginData?
@@ -36,12 +44,10 @@ class AddNewEpisodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        
+        configureImagePicker()
         configureNavigationBar()
         configureTextFieldBorders()
+        configureKeyboardEvents()
     }
     
     // MARK: - IBActions
@@ -68,9 +74,30 @@ class AddNewEpisodeViewController: UIViewController {
         uploadImageOnAPI(token: token, image: imageView.image!)
     }
     
-
+    // MARK: - objc functions
+    @objc func keyboardWillShow(notification: NSNotification) {
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height/2
+        scrollView.contentInset = contentInset
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+    }
     
     // MARK: - Private functions
+    private func configureImagePicker() {
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+    }
+    
     private func configureNavigationBar() {
         self.title = "Add Episode"
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -89,6 +116,18 @@ class AddNewEpisodeViewController: UIViewController {
         seasonNumberTextField.setBottomBorderDefault()
         episodeNumberTextField.setBottomBorderDefault()
         episodeDescriptionTextField.setBottomBorderDefault()
+    }
+    
+    private func configureKeyboardEvents() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
     }
     
     private func allFieldsAreOk() -> Bool {
@@ -221,7 +260,8 @@ extension AddNewEpisodeViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.image=image
+            imageView.image = image
+            imageView.contentMode = UIViewContentMode.scaleToFill
         }
         dismiss(animated: true, completion: nil)
     }
