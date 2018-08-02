@@ -31,6 +31,7 @@ class AddNewEpisodeViewController: UIViewController {
         }
     }
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var uploadPhotoButton: SpringButton!
     
     // MARK: - Public
     var loginData: LoginData?
@@ -52,6 +53,13 @@ class AddNewEpisodeViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
+        uploadPhotoButton.force = CGFloat(1)
+        uploadPhotoButton.duration = CGFloat(0.2)
+        uploadPhotoButton.animation = Spring.AnimationPreset.Flash.rawValue
+        uploadPhotoButton.curve = Spring.AnimationCurve.EaseInOutBack.rawValue
+        uploadPhotoButton.repeatCount=2
+        uploadPhotoButton.animate()
+
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -164,6 +172,7 @@ class AddNewEpisodeViewController: UIViewController {
     private func uploadImageOnAPI(token: String, image: UIImage) {
         let headers = ["Authorization": token]
         let imageByteData = UIImagePNGRepresentation(image)!
+        
         SVProgressHUD.show()
         Alamofire
             .upload(multipartFormData: { multipartFormData in

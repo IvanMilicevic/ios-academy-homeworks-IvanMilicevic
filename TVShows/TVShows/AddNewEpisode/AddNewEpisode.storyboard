@@ -31,7 +31,7 @@
                                                     <constraint firstAttribute="width" secondItem="XdE-MV-skr" secondAttribute="height" multiplier="1:1" id="QsL-01-Kv8"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-Fi-0u2">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-Fi-0u2" customClass="SpringButton" customModule="Spring">
                                                 <rect key="frame" x="141" y="261" width="93" height="30"/>
                                                 <state key="normal" title="Upload photo">
                                                     <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -111,6 +111,7 @@
                         <outlet property="imageView" destination="XdE-MV-skr" id="H49-Yf-h66"/>
                         <outlet property="scrollView" destination="sRa-Oi-Mk5" id="2Bf-bG-uBc"/>
                         <outlet property="seasonNumberTextField" destination="qcT-uz-bBz" id="xmf-O1-E9N"/>
+                        <outlet property="uploadPhotoButton" destination="fbl-Fi-0u2" id="tzK-oy-sal"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lga-aO-H0i" userLabel="First Responder" sceneMemberID="firstResponder"/>

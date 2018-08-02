@@ -18,7 +18,7 @@ class EpisodeDetailsViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var commentsButton: UIButton!
+    @IBOutlet weak var commentsButton: SpringButton!
     @IBOutlet weak var episodeImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var seasonAndEpisodeNumberLabel: UILabel!

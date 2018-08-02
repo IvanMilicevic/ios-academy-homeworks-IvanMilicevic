@@ -18,13 +18,14 @@ class CommentsViewController: UIViewController {
         didSet {
             commentsTableView.dataSource = self
             commentsTableView.delegate = self
-            commentsTableView.estimatedRowHeight=70
+            commentsTableView.estimatedRowHeight = 70
             commentsTableView.tableFooterView = UIView()
         }
     }
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
     @IBOutlet var emptyStateView: UIView!
+    
     // MARK: - Public
     var loginData: LoginData!
     var episodeID: String!
@@ -93,7 +94,7 @@ class CommentsViewController: UIViewController {
         episodeID = id
     }
     
-    // MARK: - private functions
+    // MARK: - Private functions
     private func configureNavigationBar() {
         self.title="Comments"
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
