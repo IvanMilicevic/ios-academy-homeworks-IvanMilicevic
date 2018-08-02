@@ -15,7 +15,7 @@ class TVShowsImageCell: UITableViewCell {
     @IBOutlet weak var showImageView: UIImageView!
     
     // MARK: - Private
-    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
+    private let placeholderImg: UIImage = UIImage(named: "missing")!
     
     // MARK: - View Lifecycle
     override func awakeFromNib() {

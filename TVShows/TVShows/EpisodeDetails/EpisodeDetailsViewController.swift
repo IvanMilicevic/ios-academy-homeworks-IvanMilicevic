@@ -30,7 +30,7 @@ class EpisodeDetailsViewController: UIViewController {
     
     // MARK: - Private
     private var episodeDetails: EpisodeDetails?
-    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
+    private let placeholderImg: UIImage = UIImage(named: "missing")!
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
