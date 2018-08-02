@@ -63,20 +63,13 @@ class LoginViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
         rememberState = !rememberState
-        
-        rememberMeButton.force = CGFloat(1)
-        rememberMeButton.duration = CGFloat(1)
-        rememberMeButton.animation = Spring.AnimationPreset.Swing.rawValue
-        rememberMeButton.curve = Spring.AnimationCurve.EaseIn.rawValue
-        
-        rememberMeButton.animate()
+        rememberMeButton.doAnimation()
         
         if rememberState {
             rememberMeButton.setImage(UIImage(named: "ic-checkbox-filled"), for: .normal)
         } else {
             rememberMeButton.setImage(UIImage(named: "ic-checkbox-empty"), for: .normal)
         }
-
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {

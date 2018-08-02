@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Spring
 
 extension UITextField {
     
@@ -47,4 +48,15 @@ extension UITextField {
         self.leftViewMode = .always
     }
     
+}
+
+extension SpringButton {
+    
+    func doAnimation() {
+        self.force = CGFloat(1)
+        self.duration = CGFloat(1)
+        self.animation = Spring.AnimationPreset.Swing.rawValue
+        self.curve = Spring.AnimationCurve.EaseIn.rawValue
+        self.animate()
+    }
 }

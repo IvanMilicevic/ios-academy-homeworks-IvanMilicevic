@@ -53,13 +53,7 @@ class AddNewEpisodeViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
-        uploadPhotoButton.force = CGFloat(1)
-        uploadPhotoButton.duration = CGFloat(0.2)
-        uploadPhotoButton.animation = Spring.AnimationPreset.Flash.rawValue
-        uploadPhotoButton.curve = Spring.AnimationCurve.EaseInOutBack.rawValue
-        uploadPhotoButton.repeatCount=2
-        uploadPhotoButton.animate()
-
+        uploadPhotoButton.doAnimation()
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -82,7 +76,6 @@ class AddNewEpisodeViewController: UIViewController {
         uploadImageOnAPI(token: token, image: imageView.image!)
     }
     
-    // MARK: - objc functions
     @objc func keyboardWillShow(notification: NSNotification) {
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
@@ -187,31 +180,29 @@ class AddNewEpisodeViewController: UIViewController {
                 
                 guard let `self` = self else { return }
                 
-                SwiftyLog.debug("UPLOAD ON API:")
                 switch result {
-                case .success(let uploadRequest, _, _):
-                    SwiftyLog.debug("uploadImageOnAPI : SUCESS")
-                    self.processUploadRequest(uploadRequest)
-                case .failure(let encodingError):
-                    SVProgressHUD.dismiss()
-                    SwiftyLog.debug("uploadImageOnAPI : FAILURE")
-                    SwiftyLog.error("\(encodingError)")
-                } }
+                    case .success(let uploadRequest, _, _):
+                        self.processUploadRequest(uploadRequest)
+                    case .failure(let encodingError):
+                        SVProgressHUD.showError(withStatus: "Adding episode failed")
+                        SwiftyLog.error("\(encodingError)")
+                }
+                
+        }
     }
     
     private func processUploadRequest(_ uploadRequest: UploadRequest) {
         uploadRequest
-            .responseDecodableObject(keyPath: "data") { (response: DataResponse<Media>) in
-                SwiftyLog.debug("processUploadRequest")
+            .responseDecodableObject(keyPath: "data") { [weak self] (response: DataResponse<Media>) in
+
+                guard let `self` = self else { return }
+                
                 switch response.result {
                 case .success(let media):
-                    SwiftyLog.debug("processUploadRequest : SUCESS")
                     SwiftyLog.info("DECODED: \(media)")
                     self.uploadEpisode(mediaID: media.id)
                 case .failure(let error):
-                    SVProgressHUD.dismiss()
-                    Util.alert(target: self, title: "Error", message: "Episode is not added", error: error)
-                    SwiftyLog.debug("processUploadRequest : FAILURE")
+                    SVProgressHUD.showError(withStatus: "Adding episode failed")
                     SwiftyLog.error("FAILURE: \(error)")
                 }
         }
@@ -246,19 +237,17 @@ class AddNewEpisodeViewController: UIViewController {
             .validate()
             .responseJSON {  [weak self]  dataResponse in
                 
-                
                 guard let `self` = self else { return }
                 
                 switch dataResponse.result {
-                    
-                case .success(let response):
-                    SwiftyLog.info("Sucess \(response)")
-                    self.delegate?.reloadEpisodes()
-                    self.dismiss(animated: true, completion: nil)
-                    SVProgressHUD.showSuccess(withStatus: "Episode added")
-                case .failure(let error):
-                    SVProgressHUD.dismiss()
-                    Util.alert(target: self, title: "Error", message: "Episode is not added", error: error)
+                    case .success(let response):
+                        SwiftyLog.info("Sucess \(response)")
+                        self.delegate?.reloadEpisodes()
+                        self.dismiss(animated: true, completion: nil)
+                        SVProgressHUD.showSuccess(withStatus: "Episode added")
+                    case .failure(let error):
+                        SVProgressHUD.showError(withStatus: "Adding episode failed")
+                        SwiftyLog.error("FAILURE: \(error)")
                 }
         }
     }
