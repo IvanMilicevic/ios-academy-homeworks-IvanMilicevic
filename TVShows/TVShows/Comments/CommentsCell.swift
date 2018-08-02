@@ -18,7 +18,7 @@ class CommentsCell: UITableViewCell {
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle=UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
     override func prepareForReuse() {

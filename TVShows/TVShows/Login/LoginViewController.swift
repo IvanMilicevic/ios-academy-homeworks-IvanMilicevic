@@ -229,8 +229,8 @@ class LoginViewController: UIViewController {
     }
     
     private func prepareTextFields() {
-        emailTextField.text=nil
-        passwordTextField.text=nil
+        emailTextField.text = nil
+        passwordTextField.text = nil
     }
     
     private func checkIfUserLoggedIn() {
@@ -254,13 +254,13 @@ class LoginViewController: UIViewController {
         passwordTextFieldLeadingConstraint.constant -= view.bounds.width
         passwordTextFieldTrailingConstraint.constant += view.bounds.width
         
-        loginImageView.alpha=0
-        rememberMeButton.alpha=0
-        loginButton.alpha=0
-        rememberMeButton.alpha=0
-        rememberMeLabel.alpha=0
-        orLabel.alpha=0
-        createAnAccountButton.alpha=0
+        loginImageView.alpha = 0
+        rememberMeButton.alpha = 0
+        loginButton.alpha = 0
+        rememberMeButton.alpha = 0
+        rememberMeLabel.alpha = 0
+        orLabel.alpha = 0
+        createAnAccountButton.alpha = 0
     }
     
     private func animate () {
@@ -295,13 +295,13 @@ class LoginViewController: UIViewController {
                        animations: { [weak self] in
                         guard let `self` = self else { return }
                         
-                        self.loginImageView.alpha=1
-                        self.rememberMeButton.alpha=1
-                        self.rememberMeLabel.alpha=1
-                        self.loginButton.alpha=1
-                        self.rememberMeButton.alpha=1
-                        self.orLabel.alpha=1
-                        self.createAnAccountButton.alpha=1
+                        self.loginImageView.alpha = 1
+                        self.rememberMeButton.alpha = 1
+                        self.rememberMeLabel.alpha = 1
+                        self.loginButton.alpha = 1
+                        self.rememberMeButton.alpha = 1
+                        self.orLabel.alpha = 1
+                        self.createAnAccountButton.alpha = 1
                         
                         self.view.layoutIfNeeded()
             }, completion: nil)

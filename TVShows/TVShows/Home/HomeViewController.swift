@@ -118,7 +118,7 @@ class HomeViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        self.title="Shows"
+        self.title = "Shows"
         let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
                                                            style: .plain,
@@ -139,7 +139,7 @@ class HomeViewController: UIViewController {
             UIView.animate(withDuration: 1.75,
                            delay: Double(delayCounter) * 0.05,
                            options: .curveEaseInOut,
-                           animations: { cell.transform=CGAffineTransform.identity },
+                           animations: { cell.transform = CGAffineTransform.identity },
                            completion: nil)
             delayCounter += 1
         }

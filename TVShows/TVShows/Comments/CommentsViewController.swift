@@ -104,7 +104,7 @@ class CommentsViewController: UIViewController {
         var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
-        inputBatBottomConstraint.constant=bottomConstraint+keyboardFrame.size.height
+        inputBatBottomConstraint.constant = bottomConstraint+keyboardFrame.size.height
     }
     
     @objc func keyboardWillHide(notification:NSNotification) {
@@ -112,7 +112,7 @@ class CommentsViewController: UIViewController {
         var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
-        inputBatBottomConstraint.constant=bottomConstraint
+        inputBatBottomConstraint.constant = bottomConstraint
     }
     
     @objc func updateTableView() {
@@ -128,7 +128,7 @@ class CommentsViewController: UIViewController {
     
     // MARK: - Private functions
     private func configureNavigationBar() {
-        self.title="Comments"
+        self.title = "Comments"
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         let img = UIImage(named: "ic-navigate-back")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,

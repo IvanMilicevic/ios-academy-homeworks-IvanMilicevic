@@ -26,7 +26,7 @@ class TVShowsImageCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        showImageView.image=nil
+        showImageView.image = nil
     }
 
     

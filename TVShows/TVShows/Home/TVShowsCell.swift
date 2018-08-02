@@ -23,7 +23,7 @@ class TVShowsCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         cellLabel.text = nil
-        cellImage.image=UIImage(named: "ic-camera")
+        cellImage.image = UIImage(named: "ic-camera")
     }
     
     // MARK: - Functions
@@ -33,7 +33,7 @@ class TVShowsCell: UITableViewCell {
         guard
             let token = loginData?.token
             else {
-                cellImage.image=placeholderImg
+                cellImage.image = placeholderImg
                 return
         }
         let headers = ["Authorization": token]

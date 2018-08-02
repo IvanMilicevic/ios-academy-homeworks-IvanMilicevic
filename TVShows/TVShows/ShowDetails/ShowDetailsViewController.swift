@@ -89,7 +89,7 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Private functions
     private func fetchShowDetails () {
         guard
-            let token=loginData?.token
+            let token = loginData?.token
             else {
                 return
         }
@@ -108,7 +108,7 @@ class ShowDetailsViewController: UIViewController {
             
                 switch response.result {
                     case .success(let details):
-                        self.showDetails=details
+                        self.showDetails = details
                         SwiftyLog.info("Show Details fetched - \(details)")
                         self.fetchShowEpisodes()
                     case .failure(let error):
@@ -207,7 +207,7 @@ class ShowDetailsViewController: UIViewController {
             UIView.animate(withDuration: 0.25,
                            delay: Double(delayCounter) * 0.02,
                            options: .curveEaseInOut,
-                           animations: { cell.transform=CGAffineTransform.identity },
+                           animations: { cell.transform = CGAffineTransform.identity },
                            completion: nil)
             delayCounter += 1
         }

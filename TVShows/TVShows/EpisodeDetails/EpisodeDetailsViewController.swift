@@ -123,8 +123,8 @@ class EpisodeDetailsViewController: UIViewController {
         }
         seasonAndEpisodeNumberLabel.text = getSeasonAndNumber(episodeNumber: episodeNumber, season: season)
         setUpImageView(imageView: episodeImageView, imageUrl: imageUrl, auth:token)
-        titleLabel.text=title
-        descriptionLabel.text=description
+        titleLabel.text = title
+        descriptionLabel.text = description
     }
     
     private func getSeasonAndNumber(episodeNumber: String, season: String) -> String{
