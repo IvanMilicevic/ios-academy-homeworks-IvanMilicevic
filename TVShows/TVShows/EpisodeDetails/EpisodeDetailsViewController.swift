@@ -140,7 +140,7 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     private func setUpImageView(imageView: UIImageView, imageUrl: String, auth: String) {
-        let url = URL(string: "https://api.infinum.academy\(imageUrl)");
+        let url = URL(string: "https://api.infinum.academy\(imageUrl)")
         let modifier = AnyModifier { request in
             var r = request
             r.setValue(auth, forHTTPHeaderField: "Authorization")

@@ -19,25 +19,25 @@ class SwiftyLog {
     
     static func debug(_ items: Any) {
         if (SwiftyLog.swiftyFlag == SwiftyState.development){
-            print("Debug:[🛠]: \(items)");
+            print("Debug:[🛠]: \(items)")
         }
     }
     
     static func error(_ items: Any) {
         if (SwiftyLog.swiftyFlag == SwiftyState.development){
-            print("ERROR:[❌]: \(items)");
+            print("ERROR:[❌]: \(items)")
         }
     }
     
     static func info(_ items: Any) {
         if (SwiftyLog.swiftyFlag == SwiftyState.development){
-            print("Info:[ℹ️]: \(items)");
+            print("Info:[ℹ️]: \(items)")
         }
     }
     
     static func warning(_ items: Any) {
         if (SwiftyLog.swiftyFlag == SwiftyState.development){
-            print("Warning:[⚠️]: \(items)");
+            print("Warning:[⚠️]: \(items)")
         }
     }
     
