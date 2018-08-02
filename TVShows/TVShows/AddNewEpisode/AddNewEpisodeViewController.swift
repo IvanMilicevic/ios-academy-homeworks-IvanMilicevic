@@ -201,6 +201,7 @@ class AddNewEpisodeViewController: UIViewController {
                     self.uploadEpisode(mediaID: media.id)
                 case .failure(let error):
                     SVProgressHUD.dismiss()
+                    Util.alert(target: self, title: "Error", message: "Episode is not added", error: error)
                     SwiftyLog.debug("processUploadRequest : FAILURE")
                     SwiftyLog.error("FAILURE: \(error)")
                 }
