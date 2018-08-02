@@ -240,12 +240,7 @@ class LoginViewController: UIViewController {
     
     private func checkIfUserLoggedIn() {
         if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
-            let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
-            guard
-                let email = keychain[TVShowsKeyChain.email.rawValue],
-                let password = keychain[TVShowsKeyChain.password.rawValue]
-                else { return }
-            
+            let(email,password) = KeycChainService.getEmailAndPassword()
             loginUserWith(email: email,
                           password: password,
                           animate: false)
@@ -254,10 +249,7 @@ class LoginViewController: UIViewController {
     
     private func storeDataForLoggingIn(email: String, password: String) {
         UserDefaults.standard.set(true, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
-        
-        let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
-        keychain[TVShowsKeyChain.email.rawValue] = email
-        keychain[TVShowsKeyChain.password.rawValue] = password
+        KeycChainService.storeEmailAndPassword(email: email, password: password)
     }
     
     private func prepareForAnimation() {
