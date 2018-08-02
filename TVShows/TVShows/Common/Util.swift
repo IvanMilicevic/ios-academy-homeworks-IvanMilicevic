@@ -11,7 +11,7 @@ import UIKit
 class Util {
     
     static func isInteger(_ string: String) -> Bool {
-        let num = Int(string);
+        let num = Int(string)
         
         if num != nil {
             return true

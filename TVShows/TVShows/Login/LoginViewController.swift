@@ -164,7 +164,7 @@ class LoginViewController: UIViewController {
     }
     
     private func isLoginOk(email: String, password : String) -> Bool {
-        var loginIsOk = true;
+        var loginIsOk = true
         if email.isEmpty {
             emailTextField.shake()
             loginIsOk = false

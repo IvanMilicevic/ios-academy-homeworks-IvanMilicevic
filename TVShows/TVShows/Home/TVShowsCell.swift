@@ -52,7 +52,7 @@ class TVShowsCell: UITableViewCell {
                     case .success(let details):
                         SwiftyLog.info("Show Details fetched - \(details)")
                         
-                        let url = URL(string: "https://api.infinum.academy\(details.imageUrl)");
+                        let url = URL(string: "https://api.infinum.academy\(details.imageUrl)")
                         let modifier = AnyModifier { request in
                             var r = request
                             r.setValue(token, forHTTPHeaderField: "Authorization")

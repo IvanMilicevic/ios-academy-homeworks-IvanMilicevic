@@ -39,7 +39,7 @@ class TVShowsImageCell: UITableViewCell {
                 
         }
         
-        let url = URL(string: "https://api.infinum.academy\(item.imageUrl)");
+        let url = URL(string: "https://api.infinum.academy\(item.imageUrl)")
         let modifier = AnyModifier { request in
             var r = request
             r.setValue(auth.token, forHTTPHeaderField: "Authorization")

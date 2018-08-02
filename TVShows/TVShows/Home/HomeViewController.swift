@@ -119,7 +119,7 @@ class HomeViewController: UIViewController {
     
     private func configureNavigationBar() {
         self.title="Shows"
-        let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
+        let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
                                                            style: .plain,
                                                            target: self,
