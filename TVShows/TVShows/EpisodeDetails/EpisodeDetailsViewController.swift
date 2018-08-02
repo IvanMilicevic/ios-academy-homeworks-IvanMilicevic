@@ -24,13 +24,12 @@ class EpisodeDetailsViewController: UIViewController {
     @IBOutlet weak var seasonAndEpisodeNumberLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    // MARK: - Public
-    var loginData: LoginData!
-    var episodeID: String!
-    
     // MARK: - Private
+    private var loginData: LoginData!
+    private var episodeID: String!
     private var episodeDetails: EpisodeDetails?
     private let placeholderImg: UIImage = UIImage(named: "missing")!
+    
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -56,17 +55,18 @@ class EpisodeDetailsViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
-    // MARK: - Public
+    
+    // MARK: - Functions
     func configure(id: String, login: LoginData) {
         loginData =  login
         episodeID = id
     }
     
-    // MARK: - Private
+    
+    // MARK: - Private functions
     private func configureScrollView() {
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     }
-    
     
     private func fetchEpisodeDetails() {
         let headers = ["Authorization": loginData.token]
@@ -96,7 +96,7 @@ class EpisodeDetailsViewController: UIViewController {
         }
     }
     
-    private func alert (error: Error) {
+    private func alert(error: Error) {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)

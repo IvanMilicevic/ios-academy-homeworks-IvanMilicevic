@@ -33,13 +33,12 @@ class AddNewEpisodeViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var uploadPhotoButton: SpringButton!
     
-    // MARK: - Public
-    var loginData: LoginData?
-    var showID: String?
-    weak var delegate: TVShowDetailsDelegate?
-    
-    // MARK: - private
+    // MARK: - Private
+    private var loginData: LoginData?
+    private var showID: String?
+    private weak var delegate: TVShowDetailsDelegate?
     private let imagePicker = UIImagePickerController()
+    
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -51,13 +50,23 @@ class AddNewEpisodeViewController: UIViewController {
         configureKeyboardEvents()
     }
     
+    
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
         uploadPhotoButton.doAnimation()
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    // MARK: - objC Functions
+    
+    // MARK: - Functions
+    func configure(id: String?, login: LoginData, delegate: TVShowDetailsDelegate?) {
+        showID = id
+        loginData = login
+        self.delegate = delegate
+    }
+    
+    
+    // MARK: - @objc functions
     @objc func didSelectCancel() {
         dismiss(animated: true, completion: nil)
     }
@@ -91,6 +100,7 @@ class AddNewEpisodeViewController: UIViewController {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
+    
     
     // MARK: - Private functions
     private func configureImagePicker() {

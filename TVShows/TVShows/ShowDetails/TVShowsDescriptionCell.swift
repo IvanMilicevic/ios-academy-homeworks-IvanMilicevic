@@ -15,6 +15,7 @@ class TVShowsDescriptionCell: UITableViewCell {
     @IBOutlet weak var showDescription: UITextView!
     @IBOutlet weak var numberOfEpisodes: UILabel!
     
+    
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +30,7 @@ class TVShowsDescriptionCell: UITableViewCell {
         numberOfEpisodes.text = "0"
     }
 
+    
     // MARK: - Functions
     func configure(with item: ShowDetails, count: Int) {
         showTitle.text = item.title

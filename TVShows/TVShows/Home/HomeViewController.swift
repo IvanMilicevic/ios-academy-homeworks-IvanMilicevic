@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
     }
     private let refresher = UIRefreshControl()
     
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +52,29 @@ class HomeViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
     }
     
-    // MARK: - Public Functions
+    
+    // MARK: - Functions
     func configure (loginData: LoginData?) {
         self.loginData = loginData
     }
+    
+    
+    // MARK: - @objc functions
+    @objc func logout() {
+        UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func updateTableView() {
+        fetchShowsArray()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
+    }
+    
     
     // MARK: - Private Functions
     private func setUpRefresheControl() {
@@ -122,24 +142,6 @@ class HomeViewController: UIViewController {
                            animations: { cell.transform=CGAffineTransform.identity },
                            completion: nil)
             delayCounter += 1
-        }
-        
-        
-    }
-    
-    // MARK: - objC Functions
-    @objc func logout() {
-        UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func updateTableView() {
-        fetchShowsArray()
-        let delay = DispatchTime.now() + .seconds(1)
-        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
-            guard let `self` = self else { return }
-            
-            self.refresher.endRefreshing()
         }
     }
 

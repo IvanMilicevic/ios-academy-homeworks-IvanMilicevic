@@ -14,6 +14,7 @@ class TVShowsEpisodeCell: UITableViewCell {
     @IBOutlet weak var seasonEpisode: UILabel!
     @IBOutlet weak var episodeTitle: UILabel!
     
+    
     // MARK: - View Lifecycle
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -21,6 +22,7 @@ class TVShowsEpisodeCell: UITableViewCell {
         seasonEpisode.text = nil
         episodeTitle.text = nil
     }
+    
     
     // MARK: - Functions
     func configure(with item: ShowEpisode) {

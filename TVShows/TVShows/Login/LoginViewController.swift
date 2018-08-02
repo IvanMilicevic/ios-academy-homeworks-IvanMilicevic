@@ -38,6 +38,7 @@ class LoginViewController: UIViewController {
     private var user: User?
     private var loginData: LoginData?
     
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +126,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    // MARK: - objc functions
+    // MARK: - @objc functions
     @objc func keyboardWillShow(notification: NSNotification) {
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
@@ -141,6 +142,7 @@ class LoginViewController: UIViewController {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
+    
     
     // MARK: - Private functions
     private func configure() {

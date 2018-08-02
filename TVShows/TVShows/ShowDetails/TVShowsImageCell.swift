@@ -17,6 +17,7 @@ class TVShowsImageCell: UITableViewCell {
     // MARK: - Private
     private let placeholderImg: UIImage = UIImage(named: "missing")!
     
+    
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,7 @@ class TVShowsImageCell: UITableViewCell {
         showImageView.image=nil
     }
 
+    
     // MARK: - Functions
     func configure(with item: ShowDetails?, auth: LoginData) {
         guard

@@ -26,11 +26,9 @@ class CommentsViewController: UIViewController {
     @IBOutlet weak var inputBatBottomConstraint: NSLayoutConstraint!
     @IBOutlet var emptyStateView: UIView!
     
-    // MARK: - Public
-    var loginData: LoginData!
-    var episodeID: String!
-    
-    // MARK: - private
+    // MARK: - Private
+    private var loginData: LoginData!
+    private var episodeID: String!
     private let cornerRadius: CGFloat = 18
     private let bottomConstraint: CGFloat = 10
     private var commentsArray: [Comment] = [] {
@@ -39,6 +37,7 @@ class CommentsViewController: UIViewController {
         }
     }
     private let refresher = UIRefreshControl()
+    
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -85,14 +84,47 @@ class CommentsViewController: UIViewController {
                         Util.alert(target: self, title: "Error", message: "Comment is not added", error: error)
                 }
         }
-        
     }
+    
     
     // MARK: - Public
     func configure(id: String, login: LoginData) {
         loginData =  login
         episodeID = id
     }
+    
+    
+    // MARK: - @objc Functions
+    @objc func didGoBack() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        inputBatBottomConstraint.constant=bottomConstraint+keyboardFrame.size.height
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification) {
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        inputBatBottomConstraint.constant=bottomConstraint
+    }
+    
+    @objc func updateTableView() {
+        fetchComments()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
+    }
+    
     
     // MARK: - Private functions
     private func configureNavigationBar() {
@@ -124,7 +156,6 @@ class CommentsViewController: UIViewController {
     }
     
     private func fetchComments() {
-        
         let headers = ["Authorization": loginData.token]
         
         SVProgressHUD.show()
@@ -147,37 +178,6 @@ class CommentsViewController: UIViewController {
                 case .failure(let error):
                     SwiftyLog.error("Fetching episode details went wrong - \(error)")
                 }
-        }
-    }
-    
-    // MARK: - objC Functions
-    @objc func didGoBack() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        var userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-        inputBatBottomConstraint.constant=bottomConstraint+keyboardFrame.size.height
-    }
-    
-    @objc func keyboardWillHide(notification:NSNotification) {
-        var userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-        inputBatBottomConstraint.constant=bottomConstraint
-    }
-    
-    @objc func updateTableView() {
-        fetchComments()
-        let delay = DispatchTime.now() + .seconds(1)
-        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
-            guard let `self` = self else { return }
-            
-            self.refresher.endRefreshing()
         }
     }
 

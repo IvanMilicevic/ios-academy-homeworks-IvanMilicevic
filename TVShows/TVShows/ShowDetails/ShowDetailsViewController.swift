@@ -60,21 +60,33 @@ class ShowDetailsViewController: UIViewController {
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
             as! AddNewEpisodeViewController
         
-        addEpViewController.showID = showID
-        addEpViewController.loginData = loginData
-        addEpViewController.delegate = self
+        addEpViewController.configure(id: showID, login: loginData, delegate: self)
         
         let navigationController = UINavigationController.init(rootViewController: addEpViewController)
         present(navigationController, animated: true, completion: nil)
     }
     
-    // MARK: - Public functions
+    
+    // MARK: - Functions
     func configure(id: String, login: LoginData) {
         loginData =  login
         showID = id
     }
     
-    // MARK: - Private Functions
+    
+    // MARK: - @objc functions
+    @objc func updateTableView() {
+        fetchShowEpisodes()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
+    }
+    
+    
+    // MARK: - Private functions
     private func fetchShowDetails () {
         guard
             let token=loginData?.token
@@ -112,8 +124,6 @@ class ShowDetailsViewController: UIViewController {
         refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
         showDetailsTableView.refreshControl = refresher
     }
-    
-    
     
     private func fetchShowEpisodes () {
         guard
@@ -201,20 +211,8 @@ class ShowDetailsViewController: UIViewController {
                            completion: nil)
             delayCounter += 1
         }
-        
     }
     
-    // MARK: - objC Functions
-    @objc func updateTableView() {
-        fetchShowEpisodes()
-        let delay = DispatchTime.now() + .seconds(1)
-        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
-            guard let `self` = self else { return }
-            
-            self.refresher.endRefreshing()
-        }
-    }
-
 }
 
 extension ShowDetailsViewController: UITableViewDataSource {
@@ -259,7 +257,6 @@ extension ShowDetailsViewController: UITableViewDataSource {
                 cell.configure(with: episodesArray[indexPath.row-2])
                 return cell
         }
-
     }
     
 }
