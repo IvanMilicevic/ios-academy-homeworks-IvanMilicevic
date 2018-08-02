@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,8 +28,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-camera" translatesAutoresizingMaskIntoConstraints="NO" id="XdE-MV-skr">
                                                 <rect key="frame" x="62" y="10" width="250" height="250"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="Oiy-gS-JD2"/>
-                                                    <constraint firstAttribute="width" constant="250" id="T19-nd-cBp"/>
+                                                    <constraint firstAttribute="width" secondItem="XdE-MV-skr" secondAttribute="height" multiplier="1:1" id="QsL-01-Kv8"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-Fi-0u2">
@@ -86,10 +86,11 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="GfE-Js-CYp" firstAttribute="centerY" secondItem="sRa-Oi-Mk5" secondAttribute="centerY" id="2wl-tk-OPH"/>
                                     <constraint firstItem="GfE-Js-CYp" firstAttribute="leading" secondItem="sRa-Oi-Mk5" secondAttribute="leading" id="G65-qx-HFe"/>
                                     <constraint firstAttribute="trailing" secondItem="GfE-Js-CYp" secondAttribute="trailing" id="GsX-cW-wbe"/>
                                     <constraint firstItem="GfE-Js-CYp" firstAttribute="top" secondItem="sRa-Oi-Mk5" secondAttribute="top" id="MVe-u4-IgC"/>
-                                    <constraint firstItem="GfE-Js-CYp" firstAttribute="centerY" secondItem="sRa-Oi-Mk5" secondAttribute="centerY" id="Sjn-Bv-ku2"/>
+                                    <constraint firstAttribute="width" secondItem="GfE-Js-CYp" secondAttribute="width" id="XQe-hA-UBg"/>
                                     <constraint firstAttribute="bottom" secondItem="GfE-Js-CYp" secondAttribute="bottom" id="btT-eb-O7W"/>
                                 </constraints>
                             </scrollView>
