@@ -17,14 +17,9 @@ class TVShowsCell: UITableViewCell {
     @IBOutlet private weak var cellImage: UIImageView!
     
     // MARK: - Private
-    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
+    private let placeholderImg: UIImage = UIImage(named: "missing")!
     
     // MARK: - View Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         cellLabel.text = nil

@@ -26,10 +26,8 @@ class HomeViewController: UIViewController {
     }
     @IBOutlet var emptyStateView: UIView!
     
-    // MARK: - Public
-    var loginData: LoginData?
-    
     // MARK: - Private
+    private var loginData: LoginData?
     private var showsArray: [Show] = [] {
         didSet {
             homeTableView.backgroundView = showsArray.count == 0 ? emptyStateView : nil
@@ -53,7 +51,12 @@ class HomeViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
     }
     
-     // MARK: - Private Functions
+    // MARK: - Public Functions
+    func configure (loginData: LoginData?) {
+        self.loginData = loginData
+    }
+    
+    // MARK: - Private Functions
     private func setUpRefresheControl() {
         refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
         refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
