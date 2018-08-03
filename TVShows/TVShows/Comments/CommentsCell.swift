@@ -26,7 +26,7 @@ class CommentsCell: UITableViewCell {
 
         userImageView.image = nil
         titleLabel.text = nil
-        commentTextLabel.text = "nil"
+        commentTextLabel.text = nil
     }
     
     // MARK: - Functions

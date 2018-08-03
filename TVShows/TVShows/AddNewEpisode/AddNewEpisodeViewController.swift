@@ -90,15 +90,11 @@ class AddNewEpisodeViewController: UIViewController {
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-        
-        var contentInset:UIEdgeInsets = scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height/2
-        scrollView.contentInset = contentInset
+        scrollView.contentInset.bottom = keyboardFrame.height
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
+        scrollView.contentInset = .zero
     }
     
     

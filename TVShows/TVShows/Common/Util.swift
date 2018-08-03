@@ -11,13 +11,7 @@ import UIKit
 class Util {
     
     static func isInteger(_ string: String) -> Bool {
-        let num = Int(string)
-        
-        if num != nil {
-            return true
-        } else {
-            return false
-        }
+        return Int(string) != nil
     }
     
     static func getRandomUserImage() -> UIImage {

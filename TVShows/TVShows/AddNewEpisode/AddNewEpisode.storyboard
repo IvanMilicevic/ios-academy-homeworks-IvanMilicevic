@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GfE-Js-CYp">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="499"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-camera" translatesAutoresizingMaskIntoConstraints="NO" id="XdE-MV-skr">
                                                 <rect key="frame" x="62" y="10" width="250" height="250"/>
@@ -81,12 +81,12 @@
                                             <constraint firstItem="nkb-eG-66v" firstAttribute="trailing" secondItem="G1j-0a-Nvr" secondAttribute="trailing" constant="20" id="SNk-mi-9uE"/>
                                             <constraint firstItem="G1j-0a-Nvr" firstAttribute="top" secondItem="fbl-Fi-0u2" secondAttribute="bottom" constant="30" id="crU-9p-i9O"/>
                                             <constraint firstItem="XdE-MV-skr" firstAttribute="centerX" secondItem="GfE-Js-CYp" secondAttribute="centerX" id="iUb-Ai-MeN"/>
+                                            <constraint firstAttribute="bottom" secondItem="G1j-0a-Nvr" secondAttribute="bottom" constant="20" id="kku-zx-dd0"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="nkb-eG-66v"/>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="GfE-Js-CYp" firstAttribute="centerY" secondItem="sRa-Oi-Mk5" secondAttribute="centerY" id="2wl-tk-OPH"/>
                                     <constraint firstItem="GfE-Js-CYp" firstAttribute="leading" secondItem="sRa-Oi-Mk5" secondAttribute="leading" id="G65-qx-HFe"/>
                                     <constraint firstAttribute="trailing" secondItem="GfE-Js-CYp" secondAttribute="trailing" id="GsX-cW-wbe"/>
                                     <constraint firstItem="GfE-Js-CYp" firstAttribute="top" secondItem="sRa-Oi-Mk5" secondAttribute="top" id="MVe-u4-IgC"/>

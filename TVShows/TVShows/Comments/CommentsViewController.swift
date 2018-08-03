@@ -109,8 +109,8 @@ class CommentsViewController: UIViewController {
     
     @objc func keyboardWillHide(notification:NSNotification) {
         var userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        var keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = view.convert(keyboardFrame, from: nil)
         
         inputBatBottomConstraint.constant = bottomConstraint
     }

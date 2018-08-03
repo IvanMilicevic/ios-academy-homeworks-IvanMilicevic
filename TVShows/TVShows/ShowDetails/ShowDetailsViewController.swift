@@ -22,7 +22,7 @@ class ShowDetailsViewController: UIViewController {
             showDetailsTableView.estimatedRowHeight = 100
             showDetailsTableView.rowHeight = UITableViewAutomaticDimension
             showDetailsTableView.separatorStyle = .none
-            showDetailsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
+            showDetailsTableView.contentInset.bottom = 90
         }
     }
     @IBOutlet weak var addNewEpisodeButton: SpringButton!
@@ -159,7 +159,7 @@ class ShowDetailsViewController: UIViewController {
         
     }
     
-    private func alert (error: Error) {
+    private func alert(error: Error) {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)

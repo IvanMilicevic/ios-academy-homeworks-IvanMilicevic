@@ -21,7 +21,7 @@ class TVShowsImageCell: UITableViewCell {
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        selectionStyle = .none
     }
     
     override func prepareForReuse() {
