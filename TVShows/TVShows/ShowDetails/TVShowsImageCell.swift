@@ -15,20 +15,21 @@ class TVShowsImageCell: UITableViewCell {
     @IBOutlet weak var showImageView: UIImageView!
     
     // MARK: - Private
-    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
+    private let placeholderImg: UIImage = UIImage(named: "missing")!
+    
     
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        // Initialization code
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        showImageView.image=nil
+        showImageView.image = nil
     }
 
+    
     // MARK: - Functions
     func configure(with item: ShowDetails?, auth: LoginData) {
         guard
@@ -38,7 +39,7 @@ class TVShowsImageCell: UITableViewCell {
                 
         }
         
-        let url = URL(string: "https://api.infinum.academy\(item.imageUrl)");
+        let url = URL(string: "https://api.infinum.academy\(item.imageUrl)")
         let modifier = AnyModifier { request in
             var r = request
             r.setValue(auth.token, forHTTPHeaderField: "Authorization")

@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import Spring
 
 protocol TVShowDetailsDelegate: class {
     func reloadEpisodes()
@@ -22,40 +23,57 @@ class AddNewEpisodeViewController: UIViewController {
     @IBOutlet weak var seasonNumberTextField: UITextField!
     @IBOutlet weak var episodeNumberTextField: UITextField!
     @IBOutlet weak var episodeDescriptionTextField: UITextField!
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.backgroundColor = .white
+            imageView.layer.cornerRadius = 125
+            imageView.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var uploadPhotoButton: SpringButton!
     
-    // MARK: - Public
-    var loginData: LoginData?
-    var showID: String?
-    weak var delegate: TVShowDetailsDelegate?
+    // MARK: - Private
+    private var loginData: LoginData?
+    private var showID: String?
+    private weak var delegate: TVShowDetailsDelegate?
+    private let imagePicker = UIImagePickerController()
+    
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureImagePicker()
         configureNavigationBar()
         configureTextFieldBorders()
+        configureKeyboardEvents()
     }
+    
     
     // MARK: - IBActions
     @IBAction func uploadPhoto(_ sender: Any) {
-        alertUser(title: "Oops",
-                  message: "This feature is not implemented yet.",
-                  warning: "Api sucks...")
+        uploadPhotoButton.doAnimation()
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
-    // MARK: - objC Functions
+    
+    // MARK: - Functions
+    func configure(id: String?, login: LoginData, delegate: TVShowDetailsDelegate?) {
+        showID = id
+        loginData = login
+        self.delegate = delegate
+    }
+    
+    
+    // MARK: - @objc functions
     @objc func didSelectCancel() {
         dismiss(animated: true, completion: nil)
     }
     
     @objc func didSelectAdd() {
         guard
-            let showID = showID,
-            let token = loginData?.token,
-            let episodeTitle = episodeTitleTextField.text,
-            let seasonNumber = seasonNumberTextField.text,
-            let episodeNumber = episodeNumberTextField.text,
-            let episodeDescription = episodeDescriptionTextField.text
+            let token = loginData?.token
         else {
             return
         }
@@ -64,46 +82,36 @@ class AddNewEpisodeViewController: UIViewController {
             return
         }
         
-        let headers = ["Authorization": token]
-        let parameters = ["showId": showID,
-                          "mediaId": "mediaID",
-                          "title": episodeTitle,
-                          "description": episodeDescription,
-                          "episodeNumber": episodeNumber,
-                          "season": seasonNumber
-        ]
-        
-        SVProgressHUD.show()
-        Alamofire.request("https://api.infinum.academy/api/episodes",
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default,
-                          headers: headers)
-            .validate()
-            .responseJSON {  [weak self]  dataResponse in
-                SVProgressHUD.dismiss()
-                
-                guard let `self` = self else { return }
-                
-                switch dataResponse.result {
-                    
-                    case .success(let response):
-                        SwiftyLog.info("Sucess \(response)")
-                        self.delegate?.reloadEpisodes()
-                        self.dismiss(animated: true, completion: nil)
-                    case .failure(let error):
-                        self.alertUser(title: "Error",
-                                       message: "Episode is not added: \(error.localizedDescription)",
-                                       warning: "Failed to add episode")
-                }
-        }
+        uploadImageOnAPI(token: token, image: imageView.image!)
     }
     
-
+    @objc func keyboardWillShow(notification: NSNotification) {
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height/2
+        scrollView.contentInset = contentInset
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+    }
+    
     
     // MARK: - Private functions
+    private func configureImagePicker() {
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+    }
+    
     private func configureNavigationBar() {
         self.title = "Add Episode"
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
                                                            target: self,
@@ -121,17 +129,17 @@ class AddNewEpisodeViewController: UIViewController {
         episodeDescriptionTextField.setBottomBorderDefault()
     }
     
-    private func alertUser(title: String, message: String, warning: String) {
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) {
-            (action:UIAlertAction) in
-            SwiftyLog.warning(warning)
-        })
-        self.present(alertController, animated: true, completion: nil)
+    private func configureKeyboardEvents() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
     }
-    
     
     private func allFieldsAreOk() -> Bool {
         var fieldsAreOk = true
@@ -146,18 +154,14 @@ class AddNewEpisodeViewController: UIViewController {
     
     private func checkField (field: UITextField!, mustBeNumber: Bool) -> Bool {
         if field.text!.isEmpty {
-            field.setBottomBorderRed()
             field.shake()
             return false
         } else {
             if mustBeNumber {
-                let num = Int(field.text!);
-                
-                if num != nil {
+                if Util.isInteger(field.text!) {
                     field.setBottomBorderDefault()
                     return true
                 } else {
-                    field.setBottomBorderRed()
                     field.shake()
                     return false
                 }
@@ -168,5 +172,115 @@ class AddNewEpisodeViewController: UIViewController {
         }
     }
     
+    private func uploadImageOnAPI(token: String, image: UIImage) {
+        let headers = ["Authorization": token]
+        let imageByteData = UIImagePNGRepresentation(image)!
+        
+        SVProgressHUD.show()
+        Alamofire
+            .upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imageByteData,
+                                         withName: "file",
+                                         fileName: "image.png",
+                                         mimeType: "image/png")
+            }, to: "https://api.infinum.academy/api/media",
+               method: .post,
+               headers: headers)
+            { [weak self] result in
+                
+                guard let `self` = self else { return }
+                
+                switch result {
+                    case .success(let uploadRequest, _, _):
+                        self.processUploadRequest(uploadRequest)
+                    case .failure(let encodingError):
+                        SVProgressHUD.showError(withStatus: "Adding episode failed")
+                        SwiftyLog.error("\(encodingError)")
+                }
+                
+        }
+    }
+    
+    private func processUploadRequest(_ uploadRequest: UploadRequest) {
+        uploadRequest
+            .responseDecodableObject(keyPath: "data") { [weak self] (response: DataResponse<Media>) in
 
+                guard let `self` = self else { return }
+                
+                switch response.result {
+                case .success(let media):
+                    SwiftyLog.info("DECODED: \(media)")
+                    self.uploadEpisode(mediaID: media.id)
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Adding episode failed")
+                    SwiftyLog.error("FAILURE: \(error)")
+                }
+        }
+    }
+    
+    private func uploadEpisode(mediaID: String) {
+        guard
+            let showID = showID,
+            let token = loginData?.token,
+            let episodeTitle = episodeTitleTextField.text,
+            let seasonNumber = seasonNumberTextField.text,
+            let episodeNumber = episodeNumberTextField.text,
+            let episodeDescription = episodeDescriptionTextField.text
+            else {
+                return
+        }
+        
+        let headers = ["Authorization": token]
+        let parameters = ["showId": showID,
+                          "mediaId": mediaID,
+                          "title": episodeTitle,
+                          "description": episodeDescription,
+                          "episodeNumber": episodeNumber,
+                          "season": seasonNumber
+        ]
+        
+        Alamofire.request("https://api.infinum.academy/api/episodes",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers)
+            .validate()
+            .responseJSON {  [weak self]  dataResponse in
+                
+                guard let `self` = self else { return }
+                
+                switch dataResponse.result {
+                    case .success(let response):
+                        SwiftyLog.info("Sucess \(response)")
+                        self.delegate?.reloadEpisodes()
+                        self.dismiss(animated: true, completion: nil)
+                        SVProgressHUD.showSuccess(withStatus: "Episode added")
+                    case .failure(let error):
+                        SVProgressHUD.showError(withStatus: "Adding episode failed")
+                        SwiftyLog.error("FAILURE: \(error)")
+                }
+        }
+    }
+    
+
+}
+
+extension AddNewEpisodeViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imageView.image = image
+            imageView.contentMode = UIViewContentMode.scaleToFill
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension AddNewEpisodeViewController: UINavigationControllerDelegate {
+    
 }

@@ -29,7 +29,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="399.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ak-Yg-jfN">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="missing" translatesAutoresizingMaskIntoConstraints="NO" id="4Ak-Yg-jfN">
                                                     <rect key="frame" x="0.0" y="-10" width="375" height="409.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="409.5" id="mwH-kC-ryd"/>
@@ -138,7 +138,7 @@
                                                 <constraint firstItem="1z0-EC-lY3" firstAttribute="leading" secondItem="vsa-ZC-9M2" secondAttribute="trailing" constant="5" id="ANB-6j-SkZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="vsa-ZC-9M2" secondAttribute="bottom" constant="17" id="J9u-NI-X2I"/>
                                                 <constraint firstItem="vsa-ZC-9M2" firstAttribute="leading" secondItem="kL3-3t-9oa" secondAttribute="leading" constant="12" id="Mu2-Ze-o11"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1z0-EC-lY3" secondAttribute="trailing" constant="20" id="RnL-HG-zMD"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1z0-EC-lY3" secondAttribute="trailing" constant="40" id="RnL-HG-zMD"/>
                                                 <constraint firstAttribute="trailing" secondItem="yJV-du-Vfh" secondAttribute="trailing" constant="15" id="VKB-U3-ssm"/>
                                                 <constraint firstItem="yJV-du-Vfh" firstAttribute="top" secondItem="kL3-3t-9oa" secondAttribute="top" constant="15" id="Wat-km-DQC"/>
                                                 <constraint firstAttribute="bottom" secondItem="yJV-du-Vfh" secondAttribute="bottom" constant="15" id="kwf-S0-Zlu"/>
@@ -195,5 +195,6 @@
         <image name="ic-fab-button" width="68" height="74"/>
         <image name="ic-navigate-back" width="32" height="32"/>
         <image name="ic-navigation-chevron-right-medium" width="24" height="24"/>
+        <image name="missing" width="400" height="400"/>
     </resources>
 </document>

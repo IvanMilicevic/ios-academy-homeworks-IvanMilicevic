@@ -11,6 +11,7 @@ import SVProgressHUD
 import Alamofire
 import CodableAlamofire
 import Kingfisher
+import Spring
 
 class HomeViewController: UIViewController {
     
@@ -23,12 +24,17 @@ class HomeViewController: UIViewController {
             homeTableView.separatorStyle = .none
         }
     }
-    
-    // MARK: - Public
-    var loginData: LoginData?
+    @IBOutlet var emptyStateView: UIView!
     
     // MARK: - Private
-    private var showsArray: [Show] = []
+    private var loginData: LoginData?
+    private var showsArray: [Show] = [] {
+        didSet {
+            homeTableView.backgroundView = showsArray.count == 0 ? emptyStateView : nil
+        }
+    }
+    private let refresher = UIRefreshControl()
+    
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -36,6 +42,7 @@ class HomeViewController: UIViewController {
         
         fetchShowsArray()
         configureNavigationBar()
+        setUpRefresheControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,12 +52,42 @@ class HomeViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
     }
     
-     // MARK: - Private Functions
+    
+    // MARK: - Functions
+    func configure (loginData: LoginData?) {
+        self.loginData = loginData
+    }
+    
+    
+    // MARK: - @objc functions
+    @objc func logout() {
+        UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func updateTableView() {
+        fetchShowsArray()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
+    }
+    
+    
+    // MARK: - Private Functions
+    private func setUpRefresheControl() {
+        refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
+        refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
+        homeTableView.refreshControl = refresher
+    }
+    
     private func fetchShowsArray() {
         guard
             let token = loginData?.token
             else {
-                self.returnToLoginScreen()
+                self.logout()
                 return
         }
         let headers = ["Authorization": token]
@@ -75,36 +112,18 @@ class HomeViewController: UIViewController {
                         self.animateTable()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
-                        SwiftyLog.error("Fetching shows went wrong - \(error)")
-                        self.callAlertControler(error: error)
+                        SwiftyLog.error("\(error)")
                 }
         }
     }
     
-    private func callAlertControler (error: Error) {
-        let alertController = UIAlertController(title: "Error",
-                                                message: error.localizedDescription,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self]
-            (action:UIAlertAction) in
-            guard let `self` = self else { return }
-            
-            self.returnToLoginScreen()
-        })
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    private func returnToLoginScreen(){
-        navigationController?.popViewController(animated: true)
-    }
-    
     private func configureNavigationBar() {
-        self.title="Shows"
-        let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal);
+        self.title = "Shows"
+        let img = UIImage(named: "ic-logout")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img,
                                                            style: .plain,
                                                            target: self,
-                                                           action: #selector(didLogout))
+                                                           action: #selector(logout))
     }
     
     private func animateTable() {
@@ -120,18 +139,10 @@ class HomeViewController: UIViewController {
             UIView.animate(withDuration: 1.75,
                            delay: Double(delayCounter) * 0.05,
                            options: .curveEaseInOut,
-                           animations: { cell.transform=CGAffineTransform.identity },
+                           animations: { cell.transform = CGAffineTransform.identity },
                            completion: nil)
             delayCounter += 1
         }
-        
-        
-    }
-    
-    // MARK: - objC Functions
-    @objc func didLogout() {
-        UserDefaults.standard.set(false, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
-        navigationController?.popViewController(animated: true)
     }
 
 }
@@ -168,6 +179,7 @@ extension HomeViewController: UITableViewDelegate {
         if (editingStyle == .delete){
             showsArray.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            homeTableView.backgroundView = showsArray.count == 0 ? emptyStateView : nil
         }
     }
     

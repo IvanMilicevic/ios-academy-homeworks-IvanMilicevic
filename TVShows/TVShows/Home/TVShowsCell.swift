@@ -17,18 +17,13 @@ class TVShowsCell: UITableViewCell {
     @IBOutlet private weak var cellImage: UIImageView!
     
     // MARK: - Private
-    private let placeholderImg: UIImage = UIImage(named: "ic-camera")!
+    private let placeholderImg: UIImage = UIImage(named: "missing")!
     
     // MARK: - View Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         cellLabel.text = nil
-        cellImage.image=UIImage(named: "ic-camera")
+        cellImage.image = UIImage(named: "ic-camera")
     }
     
     // MARK: - Functions
@@ -38,7 +33,7 @@ class TVShowsCell: UITableViewCell {
         guard
             let token = loginData?.token
             else {
-                cellImage.image=placeholderImg
+                cellImage.image = placeholderImg
                 return
         }
         let headers = ["Authorization": token]
@@ -57,7 +52,7 @@ class TVShowsCell: UITableViewCell {
                     case .success(let details):
                         SwiftyLog.info("Show Details fetched - \(details)")
                         
-                        let url = URL(string: "https://api.infinum.academy\(details.imageUrl)");
+                        let url = URL(string: "https://api.infinum.academy\(details.imageUrl)")
                         let modifier = AnyModifier { request in
                             var r = request
                             r.setValue(token, forHTTPHeaderField: "Authorization")

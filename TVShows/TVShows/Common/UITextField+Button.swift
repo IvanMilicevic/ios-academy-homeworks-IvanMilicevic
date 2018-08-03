@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Spring
 
 extension UITextField {
     
@@ -36,6 +37,26 @@ extension UITextField {
         animation.toValue = CGPoint(x: self.center.x+4, y: self.center.y)
         
         self.layer.add(animation, forKey: "position")
+        setBottomBorderRed()
     }
     
+    func setCornerRadius(cornerRadius: CGFloat) {
+        self.layer.cornerRadius = cornerRadius
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.height+5))
+        self.leftViewMode = .always
+    }
+    
+}
+
+extension SpringButton {
+    
+    func doAnimation() {
+        self.force = CGFloat(1)
+        self.duration = CGFloat(1)
+        self.animation = Spring.AnimationPreset.Swing.rawValue
+        self.curve = Spring.AnimationCurve.EaseIn.rawValue
+        self.animate()
+    }
 }

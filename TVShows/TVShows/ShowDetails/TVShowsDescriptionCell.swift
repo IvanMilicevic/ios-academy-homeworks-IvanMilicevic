@@ -15,21 +15,22 @@ class TVShowsDescriptionCell: UITableViewCell {
     @IBOutlet weak var showDescription: UITextView!
     @IBOutlet weak var numberOfEpisodes: UILabel!
     
+    
     // MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle=UITableViewCellSelectionStyle.none
-        // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyle.none
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        //TODO find default image
+
         showTitle.text = nil
         showDescription.text = nil
         numberOfEpisodes.text = "0"
     }
 
+    
     // MARK: - Functions
     func configure(with item: ShowDetails, count: Int) {
         showTitle.text = item.title

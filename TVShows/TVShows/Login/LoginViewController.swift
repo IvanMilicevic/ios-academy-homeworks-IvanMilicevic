@@ -38,24 +38,12 @@ class LoginViewController: UIViewController {
     private var user: User?
     private var loginData: LoginData?
     
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.setDefaultMaskType(.black)
-        loginButton.layer.cornerRadius = loginCornerRadius
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name:NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name:NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-
-        emailTextField.setBottomBorderDefault()
-        passwordTextField.setBottomBorderDefault()
+        configure()
         checkIfUserLoggedIn()
     }
     
@@ -76,20 +64,13 @@ class LoginViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
         rememberState = !rememberState
-        
-        rememberMeButton.force = CGFloat(1)
-        rememberMeButton.duration = CGFloat(1)
-        rememberMeButton.animation = Spring.AnimationPreset.Swing.rawValue
-        rememberMeButton.curve = Spring.AnimationCurve.EaseIn.rawValue
-        
-        rememberMeButton.animate()
+        rememberMeButton.doAnimation()
         
         if rememberState {
             rememberMeButton.setImage(UIImage(named: "ic-checkbox-filled"), for: .normal)
         } else {
             rememberMeButton.setImage(UIImage(named: "ic-checkbox-empty"), for: .normal)
         }
-
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -145,8 +126,8 @@ class LoginViewController: UIViewController {
     }
     
     
-    // MARK: - objc functions
-    @objc func keyboardWillShow(notification:NSNotification){
+    // MARK: - @objc functions
+    @objc func keyboardWillShow(notification: NSNotification) {
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -157,23 +138,40 @@ class LoginViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
     
-    @objc func keyboardWillHide(notification:NSNotification){
+    @objc func keyboardWillHide(notification: NSNotification) {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
     
+    
     // MARK: - Private functions
+    private func configure() {
+        SVProgressHUD.setDefaultMaskType(.black)
+        loginButton.layer.cornerRadius = loginCornerRadius
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+        
+        emailTextField.setBottomBorderDefault()
+        passwordTextField.setBottomBorderDefault()
+    }
+    
     private func isLoginOk(email: String, password : String) -> Bool {
-        var loginIsOk = true;
+        var loginIsOk = true
         if email.isEmpty {
-            emailTextField.setBottomBorderRed()
             emailTextField.shake()
             loginIsOk = false
         } else {
             emailTextField.setBottomBorderDefault()
         }
         if password.isEmpty {
-            passwordTextField.setBottomBorderRed()
             passwordTextField.shake()
             loginIsOk = false
         } else {
@@ -209,7 +207,7 @@ class LoginViewController: UIViewController {
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_Home")
                     as! HomeViewController
-                    viewController.loginData = self.loginData
+                    viewController.configure(loginData: loginData)
 
                     if (self.rememberState){
                         self.storeDataForLoggingIn(email: email, password: password)
@@ -217,31 +215,27 @@ class LoginViewController: UIViewController {
                     
                     self.navigationController?.pushViewController(viewController, animated: animate)
                 case .failure(let error):
-                    let alertController = UIAlertController(title: "Login Problem",
-                                                            message: "Wrong username or password",
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel){
-                        (action:UIAlertAction) in
-                        SwiftyLog.warning("Problem with logging in occured: \(error.localizedDescription)")
-                    })
-                    self.present(alertController, animated: true, completion: nil)
+                    switch response.response?.statusCode {
+                    case 401:
+                        Util.alert(target: self, title: "Login Problem", message: "Wrong email or password", error: error)
+                    case nil:
+                        Util.alert(target: self, title: "Login Problem", message: error.localizedDescription, error: error)
+                    default:
+                        Util.alert(target: self, title: "Login Problem", message: "Something went wrong", error: error)
+                    }
+                    
                 }
             }
     }
     
     private func prepareTextFields() {
-        emailTextField.text=nil
-        passwordTextField.text=nil
+        emailTextField.text = nil
+        passwordTextField.text = nil
     }
     
     private func checkIfUserLoggedIn() {
         if UserDefaults.standard.bool(forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue) == true {
-            let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
-            guard
-                let email = keychain[TVShowsKeyChain.email.rawValue],
-                let password = keychain[TVShowsKeyChain.password.rawValue]
-                else { return }
-            
+            let(email,password) = KeycChainService.getEmailAndPassword()
             loginUserWith(email: email,
                           password: password,
                           animate: false)
@@ -250,10 +244,7 @@ class LoginViewController: UIViewController {
     
     private func storeDataForLoggingIn(email: String, password: String) {
         UserDefaults.standard.set(true, forKey: TVShowsUserDefaultsKeys.loggedIn.rawValue)
-        
-        let keychain = Keychain(service: TVShowsKeyChain.service.rawValue)
-        keychain[TVShowsKeyChain.email.rawValue] = email
-        keychain[TVShowsKeyChain.password.rawValue] = password
+        KeycChainService.storeEmailAndPassword(email: email, password: password)
     }
     
     private func prepareForAnimation() {
@@ -263,13 +254,13 @@ class LoginViewController: UIViewController {
         passwordTextFieldLeadingConstraint.constant -= view.bounds.width
         passwordTextFieldTrailingConstraint.constant += view.bounds.width
         
-        loginImageView.alpha=0
-        rememberMeButton.alpha=0
-        loginButton.alpha=0
-        rememberMeButton.alpha=0
-        rememberMeLabel.alpha=0
-        orLabel.alpha=0
-        createAnAccountButton.alpha=0
+        loginImageView.alpha = 0
+        rememberMeButton.alpha = 0
+        loginButton.alpha = 0
+        rememberMeButton.alpha = 0
+        rememberMeLabel.alpha = 0
+        orLabel.alpha = 0
+        createAnAccountButton.alpha = 0
     }
     
     private func animate () {
@@ -304,13 +295,13 @@ class LoginViewController: UIViewController {
                        animations: { [weak self] in
                         guard let `self` = self else { return }
                         
-                        self.loginImageView.alpha=1
-                        self.rememberMeButton.alpha=1
-                        self.rememberMeLabel.alpha=1
-                        self.loginButton.alpha=1
-                        self.rememberMeButton.alpha=1
-                        self.orLabel.alpha=1
-                        self.createAnAccountButton.alpha=1
+                        self.loginImageView.alpha = 1
+                        self.rememberMeButton.alpha = 1
+                        self.rememberMeLabel.alpha = 1
+                        self.loginButton.alpha = 1
+                        self.rememberMeButton.alpha = 1
+                        self.orLabel.alpha = 1
+                        self.createAnAccountButton.alpha = 1
                         
                         self.view.layoutIfNeeded()
             }, completion: nil)

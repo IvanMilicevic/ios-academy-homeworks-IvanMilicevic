@@ -33,11 +33,13 @@ class ShowDetailsViewController: UIViewController {
     private var showID: String!
     private var showDetails: ShowDetails?
     private var episodesArray: [ShowEpisode] = []
+    private let refresher = UIRefreshControl()
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpRefresheControl()
         fetchShowDetails()
     }
     
@@ -46,41 +48,54 @@ class ShowDetailsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func configure(id: String, login: LoginData) {
-        loginData =  login
-        showID = id
-    }
-    
     // MARK: - IBActions
     @IBAction func navigateBack(_ sender: Any) {
         animate(button: navigateBackButton)
         navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func addNewEpisode(_ sender: Any) {
         animate(button: addNewEpisodeButton)
         let storyboard = UIStoryboard(name: "AddNewEpisode", bundle: nil)
         let addEpViewController = storyboard.instantiateViewController(withIdentifier: "ViewController_AddNewEpisode")
             as! AddNewEpisodeViewController
         
-        addEpViewController.showID = showID
-        addEpViewController.loginData = loginData
-        addEpViewController.delegate = self
+        addEpViewController.configure(id: showID, login: loginData, delegate: self)
         
         let navigationController = UINavigationController.init(rootViewController: addEpViewController)
         present(navigationController, animated: true, completion: nil)
     }
     
-    // MARK: - Private Functions
+    
+    // MARK: - Functions
+    func configure(id: String, login: LoginData) {
+        loginData =  login
+        showID = id
+    }
+    
+    
+    // MARK: - @objc functions
+    @objc func updateTableView() {
+        fetchShowEpisodes()
+        let delay = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: delay) { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.refresher.endRefreshing()
+        }
+    }
+    
+    
+    // MARK: - Private functions
     private func fetchShowDetails () {
         guard
-            let token=loginData?.token
+            let token = loginData?.token
             else {
                 return
         }
         let headers = ["Authorization": token]
         
         SVProgressHUD.show()
-        
         Alamofire
             .request("https://api.infinum.academy/api/shows/\(showID!)",
                      method: .get,
@@ -93,15 +108,21 @@ class ShowDetailsViewController: UIViewController {
             
                 switch response.result {
                     case .success(let details):
-                        self.showDetails=details
+                        self.showDetails = details
                         SwiftyLog.info("Show Details fetched - \(details)")
                         self.fetchShowEpisodes()
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching show details went wrong - \(error)")
-                        self.callAlertControler(error: error)
+                        self.alert(error: error)
                 }
         }
+    }
+    
+    private func setUpRefresheControl() {
+        refresher.tintColor = UIColorFromRGB(rgbValue: 0xff758c)
+        refresher.addTarget(self, action: #selector(updateTableView), for: .valueChanged)
+        showDetailsTableView.refreshControl = refresher
     }
     
     private func fetchShowEpisodes () {
@@ -132,19 +153,18 @@ class ShowDetailsViewController: UIViewController {
                     case .failure(let error):
                         SVProgressHUD.dismiss()
                         SwiftyLog.error("Fetching episodes went wrong - \(error)")
-                        self.callAlertControler(error: error)
+                        self.alert(error: error)
                 }
         }
         
     }
     
-    private func callAlertControler (error: Error) {
+    private func alert (error: Error) {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel){ [weak self]
             (action:UIAlertAction) in
-            
             guard let `self` = self else { return }
             
             self.navigationController?.popViewController(animated: true)
@@ -187,13 +207,12 @@ class ShowDetailsViewController: UIViewController {
             UIView.animate(withDuration: 0.25,
                            delay: Double(delayCounter) * 0.02,
                            options: .curveEaseInOut,
-                           animations: { cell.transform=CGAffineTransform.identity },
+                           animations: { cell.transform = CGAffineTransform.identity },
                            completion: nil)
             delayCounter += 1
         }
-        
     }
-
+    
 }
 
 extension ShowDetailsViewController: UITableViewDataSource {
@@ -215,13 +234,15 @@ extension ShowDetailsViewController: UITableViewDataSource {
                     for: indexPath
                 ) as! TVShowsImageCell
                 cell.configure(with: showDetails, auth: loginData)
+                cell.selectionStyle = .none
                 return cell
             case 1:
                 let cell = showDetailsTableView.dequeueReusableCell(
                     withIdentifier: "TVShowsDescriptionCell",
                     for: indexPath
                 ) as! TVShowsDescriptionCell
-            
+                cell.selectionStyle = .none
+                
                 if showDetails != nil {
                     cell.configure(with: showDetails!, count: episodesArray.count )
                     return cell
@@ -236,12 +257,25 @@ extension ShowDetailsViewController: UITableViewDataSource {
                 cell.configure(with: episodesArray[indexPath.row-2])
                 return cell
         }
-
     }
     
 }
 
 extension ShowDetailsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 || indexPath.row == 1{
+            return
+        }
+        let storyboard = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController_EpisodeDetails")
+            as! EpisodeDetailsViewController
+        
+        
+        viewController.configure(id: episodesArray[indexPath.row-2].id, login: loginData)
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     
 }
 
